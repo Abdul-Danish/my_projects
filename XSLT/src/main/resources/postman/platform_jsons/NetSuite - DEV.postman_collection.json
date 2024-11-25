@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "71fd42f1-2b37-42f2-bf2d-aaa21683b812",
+		"name": "NetSuite - DEV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "getSalesOrder",
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "realm",
+							"value": "{{ACCOUNT_ID}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "{{TOKEN_SECRET}}",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "{{TOKEN_ID}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{CONSUMER_SECRET}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{CONSUMER_KEY}}",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{ACCOUNT_ID}}.suitetalk.api.netsuite.com/rest/platform/v1/metadata-catalog/record/salesorder",
+					"protocol": "https",
+					"host": [
+						"{{ACCOUNT_ID}}",
+						"suitetalk",
+						"api",
+						"netsuite",
+						"com"
+					],
+					"path": [
+						"rest",
+						"platform",
+						"v1",
+						"metadata-catalog",
+						"record",
+						"salesorder"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "ACCOUNT_ID",
+			"value": "4903012_SB1"
+		},
+		{
+			"key": "CONSUMER_KEY",
+			"value": ""
+		},
+		{
+			"key": "CONSUMER_SECRET",
+			"value": ""
+		},
+		{
+			"key": "TOKEN_ID",
+			"value": "ce7964f673c33593cbc626dbd9f94cb027a3f4d689ba33c4c1ec0e370f59d691"
+		},
+		{
+			"key": "TOKEN_SECRET",
+			"value": "b0f96338905d5b1ce1efa3bb59f06c123aaf92d83274e78928036851edf382fa"
+		}
+	]
+}

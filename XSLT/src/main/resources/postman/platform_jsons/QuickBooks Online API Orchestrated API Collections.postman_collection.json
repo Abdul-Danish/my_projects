@@ -1,0 +1,1880 @@
+{
+	"info": {
+		"_postman_id": "0d2a959b-ca9c-4833-8a87-9efcf2b58811",
+		"name": "QuickBooks Online API Orchestrated API Collections",
+		"description": "This collection contains 5 Orchestrated samples of common QBO use cases.\n\nCreate Receipt - This orchestration contains the following flow of calls.  1. Create a customer 2.  Create an item  3. Create a reciept for the transaction between the customer and the item.\n\nCreate Payment - This orchestration contains the following flow of calls.  1. Create a customer 2.  Create an item  3. Create an invoice for a transaction between the customer and the item.  4. Create payment for the amount owed on invoice\n\nCreate an Expense - This orchestration contains the following flow of calls.  1. Create a bank account 2. Create an expense account 3. Create a purchase expense linked to the bank account\n\nCreate an Invoice - This orchestration contains the following flow of calls.  1. Create a customer 2.  Create an item  3. Create an invoice for a transaction between the customer and the item.\n\nPay Bills - This orchestration contains the following flow of calls.  1. Create an account 2.  Create a vendor  3. Create an bill for a vendor and the account created  4. Create a payment for the bill",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "Create a BillPayment against a Vendor's Bill",
+			"item": [
+				{
+					"name": "Bill-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        BillId = jsonData.Bill.Id;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Bill Created BillID is ' + BillId);",
+									"    ",
+									"    postman.setGlobalVariable(\"BillId\", BillId);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Line\":[\n        {\n            \"Id\":\"1\",\n            \"Amount\": 200.00,\n            \"DetailType\":\"AccountBasedExpenseLineDetail\",\n            \"AccountBasedExpenseLineDetail\":\n            {\n                \"AccountRef\":\n                {\n                    \"value\":\"{{AccountId}}\"\n                }\n            }\n        } \n    ],\n    \"VendorRef\":\n    {\n        \"value\":\"{{VendorId}}\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/bill?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"bill"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create a bill\nContent-Type:application/json\nMethod - POST"
+					},
+					"response": []
+				},
+				{
+					"name": "CC Account-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        AccountId = jsonData.Account.Id;",
+									"        AccountName = jsonData.Account.Name",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Account Created AccountID is ' + AccountId + ' AccountName is ' + AccountName);",
+									"    ",
+									"    postman.setGlobalVariable(\"CCAccountId\", AccountId);",
+									"    postman.setGlobalVariable(\"CCAccountName\", AccountName);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"CreditCardAccount - {{$guid}}\",\n    \"SubAccount\": false,\n    \"FullyQualifiedName\": \"Mastercard\",\n    \"Active\": true,\n    \"Classification\": \"Liability\",\n    \"AccountType\": \"Credit Card\",\n    \"AccountSubType\": \"CreditCard\",\n    \"CurrentBalance\": 100.00,\n    \"CurrentBalanceWithSubAccounts\": 100.00,\n    \"domain\": \"QBO\",\n    \"sparse\": false\n  }"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/account?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"account"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create a new Check Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Vendor-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        VendorId = jsonData.Vendor.Id;",
+									"        VendorName = jsonData.Vendor.DisplayName;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log(\"New Vendor has been created, VendorID is \" + VendorId + \" and the VendorName is \"+ VendorName);",
+									"    ",
+									"    postman.setGlobalVariable(\"VendorId\", VendorId);",
+									"    postman.setGlobalVariable(\"VendorName\", VendorName);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DisplayName\": \"VendorName - {{$guid}}\"\n}\n"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/vendor?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"vendor"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create a vendor object\nMethod : POST\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "BillPayment-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        BillPaymentId = jsonData.BillPayment.Id;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New BillPayment Created BillPaymentID is ' + BillPaymentId);",
+									"    ",
+									"    postman.setGlobalVariable(\"BillPaymentId\", BillPaymentId);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"VendorRef\": {\n      \"value\": \"{{VendorId}}\",\n      \"name\": \"{{VendorName}}\"\n  },\n        \"PayType\": \"CreditCard\",\n        \"CreditCardPayment\": {\n          \"CCAccountRef\": {\n            \"value\": \"{{CCAccountId}}\",\n            \"name\": \"{{CCAccountName}}\"\n          }\n        },\n  \"TotalAmt\": 100.00,\n  \"PrivateNote\": \"Acct. 1JK90\",\n  \"Line\": [\n    {\n      \"Amount\": 100.00,\n      \"LinkedTxn\": [\n        {\n          \"TxnId\": \"{{BillId}}\",\n          \"TxnType\": \"Bill\"\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/billpayment?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"billpayment"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create a BillPayment against a pre-created bill\nContent-Type:application/json\nMethod - POST"
+					},
+					"response": []
+				},
+				{
+					"name": "Account-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        AccountId = jsonData.Account.Id;",
+									"        AccountName = jsonData.Account.Name",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Account Created AccountID is ' + AccountId + ' AccountName is ' + AccountName);",
+									"    ",
+									"    postman.setGlobalVariable(\"AccountId\", AccountId);",
+									"    postman.setGlobalVariable(\"AccountName\", AccountName);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"AccountType\": \"Expense\",\n  \"Name\": \"ExpenseAccount - {{$guid}}\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/account?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"account"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create a new Account"
+					},
+					"response": []
+				}
+			],
+			"description": "Pay Bills - This orchestration contains the following flow of calls.  1. Create an account 2.  Create a vendor  3. Create an bill for a vendor and the account created  4. Create a payment for the bill"
+		},
+		{
+			"name": "Create a ReceivePayment against a Customer's Invoice",
+			"item": [
+				{
+					"name": "Invoice-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    try {",
+									"        InvoiceId = jsonData.Invoice.Id;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Invoice Created InvoiceID is ' + InvoiceId);",
+									"    ",
+									"    postman.setGlobalVariable(\"InvoiceId\", InvoiceId);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Line\": [\n    {\n      \"Amount\": 100.00,\n      \"DetailType\": \"SalesItemLineDetail\",\n      \"SalesItemLineDetail\": {\n        \"ItemRef\": {\n          \"value\": \"{{ItemId}}\",\n          \"name\": \"{{ItemName}}\"\n        },\n        \"Qty\": 1\n      }\n    }\n  ],\n  \"CustomerRef\": {\n    \"value\": \"{{CustomerId}}\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/invoice?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"invoice"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "POST: Create an Invoice"
+					},
+					"response": []
+				},
+				{
+					"name": "Customer-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"",
+									"  try {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    CustomerId = jsonData.Customer.Id;",
+									"    CustomerName = jsonData.Customer.DisplayName;",
+									"  } catch (e) {",
+									"    console.log(e);",
+									"  }",
+									"",
+									"  console.log('New Customer Created CustomerId is ' + CustomerId + \" the new customer name is \" + CustomerName);",
+									"",
+									"  postman.setGlobalVariable(\"CustomerId\", CustomerId);",
+									"  postman.setGlobalVariable(\"CustomerName\", CustomerName);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DisplayName\": \"CustomerName - {{$guid}}\"\n}\n"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/customer?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"customer"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create a customer\nMethod : POST"
+					},
+					"response": []
+				},
+				{
+					"name": "Item-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        ItemId = jsonData.Item.Id;",
+									"        ItemName = jsonData.Item.Name;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log(\"New Item has been created, ItemID is \" + ItemId + \" and the ItemName is \"+ ItemName);",
+									"    ",
+									"    postman.setGlobalVariable(\"ItemId\", ItemId);",
+									"    postman.setGlobalVariable(\"ItemName\", ItemName);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Name\": \"SerivceItem - {{$guid}}\",\n  \"IncomeAccountRef\": {\n    \"value\": \"1\",\n    \"name\": \"Services\"\n  },\n  \"Type\": \"Service\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/item?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"item"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "POST: Create an Item"
+					},
+					"response": []
+				},
+				{
+					"name": "Payment-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    try {",
+									"        PaymentId = jsonData.Payment.Id;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Payment Created PaymentId is ' + PaymentId);",
+									"    ",
+									"    postman.setGlobalVariable(\"PaymentId\", PaymentId);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"CustomerRef\":\n    {\n        \"value\": \"{{CustomerId}}\",\n        \"name\": \"{{CustomerName}}\"\n    },\n    \"TotalAmt\": 100.00,\n    \"Line\": [\n    {\n        \"Amount\": 100.00,\n        \"LinkedTxn\": [\n        {\n            \"TxnId\": \"{{InvoiceId}}\",\n            \"TxnType\": \"Invoice\"\n        }]\n    }]\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/payment?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"payment"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create an payment object\nMethod : POST\n"
+					},
+					"response": []
+				}
+			],
+			"description": "Create Payment - This orchestration contains the following flow of calls.  1. Create a customer 2.  Create an item  3. Create an invoice for a transaction between the customer and the item.  4. Create payment for the amount owed on invoice"
+		},
+		{
+			"name": "Create a SalesReceipt for a Customer",
+			"item": [
+				{
+					"name": "Item-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        ItemId = jsonData.Item.Id;",
+									"        ItemName = jsonData.Item.Name;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log(\"New Item has been created, ItemID is \" + ItemId + \" and the ItemName is \"+ ItemName);",
+									"    ",
+									"    postman.setGlobalVariable(\"ItemId\", ItemId);",
+									"    postman.setGlobalVariable(\"ItemName\", ItemName);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Name\": \"ServiceItem - {{$guid}}\",\n  \"IncomeAccountRef\": {\n    \"value\": \"1\",\n    \"name\": \"Services\"\n  },\n  \"Type\": \"Service\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/item?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"item"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reciept-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        SalesReceiptId = jsonData.SalesReceipt.Id;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Sales Receipt create, SalesReceiptId is ' + SalesReceiptId);",
+									"    ",
+									"    postman.setGlobalVariable(\"SalesReceiptId\", SalesReceiptId);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"Line\": [\n          {\n            \"Id\": \"1\",\n            \"LineNum\": 1,\n            \"Description\": \"Sold item\",\n            \"Amount\": 1000,\n            \"DetailType\": \"SalesItemLineDetail\",\n            \"SalesItemLineDetail\": {\n              \"ItemRef\": {\n                \"value\": \"{{ItemId}}\",\n                \"name\": \"{{ItemName}}\"\n              },\n              \"UnitPrice\": 1000,\n              \"Qty\": 1,\n              \"TaxCodeRef\": {\n                \"value\": \"NON\"\n              }\n            }\n          },\n          {\n            \"Amount\": 1000,\n            \"DetailType\": \"SubTotalLineDetail\",\n            \"SubTotalLineDetail\": {}\n          }\n        ],\n        \"CustomerRef\": {\n          \"value\": \"{{CustomerId}}\",\n          \"name\": \"{{CustomerDisplayName}}\"\n        }\n      }"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/salesreceipt?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"salesreceipt"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        CustomerId = jsonData.Customer.Id;",
+									"        CustomerDisplayName = jsonData.Customer.DisplayName",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Customer Created CustomerID is ' + CustomerId);",
+									"    ",
+									"    postman.setGlobalVariable(\"CustomerId\", CustomerId);",
+									"    postman.setGlobalVariable(\"CustomerDisplayName\", CustomerDisplayName);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DisplayName\": \"CustomerName - {{$guid}}\"\n}\n"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/customer?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"customer"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Create Receipt - This orchestration contains the following flow of calls.  1. Create a customer 2.  Create an item  3. Create a reciept for the transaction between the customer and the item."
+		},
+		{
+			"name": "Create a Time-Activity for an Employee",
+			"item": [
+				{
+					"name": "TimeActivity-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"",
+									"  try {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    TimeActivityId = jsonData.TimeActivity.Id;",
+									"    HourlyRate = jsonData.TimeActivity.HourlyRate;",
+									"    HoursWorked = jsonData.TimeActivity.Hours;",
+									"    ItemRef = jsonData.TimeActivity.ItemRef;",
+									"    Amount = HourlyRate * HoursWorked;",
+									"  } catch (e) {",
+									"    console.log(e);",
+									"  }",
+									"",
+									"  console.log('New TimeActivity Created TimeActivityID is ' + TimeActivityId);",
+									"",
+									"  postman.setGlobalVariable(\"TimeActivityId\", TimeActivityId);",
+									"  postman.setGlobalVariable(\"HourlyRate\", HourlyRate);",
+									"  postman.setGlobalVariable(\"HoursWorked\", HoursWorked);",
+									"  postman.setGlobalVariable(\"Amount\", Amount);",
+									"  postman.setGlobalVariable(\"ItemRefValue\", ItemRef.value);",
+									"  postman.setGlobalVariable(\"ItemRefName\", ItemRef.name);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"NameOf\": \"Employee\",\n    \"EmployeeRef\": {\n        \"value\": \"{{EmployeeId}}\",\n        \"name\": \"{{EmployeeName}}\"\n    },\n    \"BillableStatus\": \"Billable\",\n    \"HourlyRate\": \"20\",\n    \"CustomerRef\": {\n    \t\"value\": \"{{CustomerId}}\"\n    \t},\n    \"Hours\": 3\n}\n"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/timeactivity?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"timeactivity"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Employee-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"",
+									"  try {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    EmployeeId = jsonData.Employee.Id;",
+									"    EmployeeName = jsonData.Employee.DisplayName;",
+									"  } catch (e) {",
+									"    console.log(e);",
+									"  }",
+									"",
+									"  console.log('New Customer Created EmployeeId is ' + EmployeeId + \" the new customer name is \" + EmployeeName);",
+									"",
+									"  postman.setGlobalVariable(\"EmployeeId\", EmployeeId);",
+									"  postman.setGlobalVariable(\"EmployeeName\", EmployeeName);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"GivenName\": \"GivenName - {{$timestamp}}\",\n  \"FamilyName\": \"FamilyName - {{$timestamp}}\"\n}\n"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/employee?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"employee"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"",
+									"  try {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    CustomerId = jsonData.Customer.Id;",
+									"    CustomerName = jsonData.Customer.DisplayName;",
+									"  } catch (e) {",
+									"    console.log(e);",
+									"  }",
+									"",
+									"  console.log('New Customer Created CustomerId is ' + CustomerId + \" the new customer name is \" + CustomerName);",
+									"",
+									"  postman.setGlobalVariable(\"CustomerId\", CustomerId);",
+									"  postman.setGlobalVariable(\"CustomerName\", CustomerName);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DisplayName\": \"CustomerName - {{$guid}}\"\n}\n"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/customer?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"customer"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create a customer\nMethod : POST"
+					},
+					"response": []
+				},
+				{
+					"name": "Invoice-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    try {",
+									"        InvoiceId = jsonData.Invoice.Id;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Invoice Created InvoiceID is ' + InvoiceId);",
+									"    ",
+									"    postman.setGlobalVariable(\"InvoiceId\", InvoiceId);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"LinkedTxn\": [{\n            \"TxnId\": \"{{TimeActivityId}}\",\n            \"TxnType\": \"TimeActivity\"\n        }],\n   \"Line\": [\n     {\n       \"Id\": \"1\",\n       \"LineNum\": 1,\n       \"Description\": \"An employee has worked 3 hours for a customer at an hourly rate of 20\",\n       \"Amount\": \"{{Amount}}\",\n       \"DetailType\": \"SalesItemLineDetail\",\n       \"SalesItemLineDetail\": {\n         \"ItemRef\": {\n           \"value\": \"{{ItemRefValue}}\",\n           \"name\": \"{{ItemRefName}}\"\n         },\n         \"UnitPrice\": \"{{HourlyRate}}\",\n         \"Qty\": \"{{HoursWorked}}\"\n       }\n     },\n     {\n       \"DetailType\": \"SubTotalLineDetail\",\n       \"SubTotalLineDetail\": {}\n     }\n   ],\n  \"CustomerRef\": {\n    \"value\": \"{{CustomerId}}\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/invoice?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"invoice"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "POST: Create an Invoice for a TimeActivity.  In this scenario the hours worked, hourly rate, time activity id are all passed from the TimeActivity Create call.\n\nOne note to make, in this particular sandbox company, no tax has been set up.  If tax has been enabled, please include the following in the request:\n\n\"TxnTaxDetail\": {\n     \"TotalTax\": 0,\n     \"TaxLine\": [\n       {\n         \"Amount\": 0,\n         \"DetailType\": \"TaxLineDetail\",\n         \"TaxLineDetail\": {\n           \"TaxRateRef\": {\n             \"value\": \"2\"\n           },\n           \"PercentBased\": true,\n           \"TaxPercent\": 0,\n           \"NetAmountTaxable\": 160.0\n         }\n       }\n    }"
+					},
+					"response": []
+				}
+			],
+			"description": "Create a TimeActivity - This orchestration contains the following flow of calls.  1. Create an employee 2.  Create a customer for whom the employee will work for  3. Create a Time Activity which indicates the that the employee worked for the customer and how many hours and the hourly rate of the employee.  4. Create an Invoice for a TimeActivity.  In this scenario the hours worked, hourly rate, time activity id are all passed from the TimeActivity Create call.\n\nOne note to make, in this particular sandbox company, no tax has been set up.  If tax has been enabled, please include the following in the request:\n\n\"TxnTaxDetail\": {\n     \"TotalTax\": 0,\n     \"TaxLine\": [\n       {\n         \"Amount\": 0,\n         \"DetailType\": \"TaxLineDetail\",\n         \"TaxLineDetail\": {\n           \"TaxRateRef\": {\n             \"value\": \"2\"\n           },\n           \"PercentBased\": true,\n           \"TaxPercent\": 0,\n           \"NetAmountTaxable\": 160.0\n         }\n       }\n    }"
+		},
+		{
+			"name": "Create an Expense for a Vendor",
+			"item": [
+				{
+					"name": "Account-Create Expense",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        AccountId = jsonData.Account.Id;",
+									"        AccountName = jsonData.Account.Name;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Account Created AccountID is ' + AccountId + ' AccountName is ' + AccountName);",
+									"    ",
+									"    postman.setGlobalVariable(\"AccountId\", AccountId);",
+									"    postman.setGlobalVariable(\"AccountName\", AccountName);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"AccountType\": \"Expense\",\n  \"Name\": \"ExpenseAccount - {{$guid}}\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/account?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"account"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create a new Expense Account"
+					},
+					"response": []
+				},
+				{
+					"name": "Purchase-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        PurchaseId = jsonData.Purchase.Id;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Purchase Created PurchaseId is ' + PurchaseId);",
+									"    ",
+									"    postman.setGlobalVariable(\"PurchaseId\", PurchaseId);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"AccountRef\": {\n    \"value\": \"{{BankAccountId}}\",\n    \"name\": \"{{BankAccountName}}\"\n  },\n  \"PaymentType\": \"CreditCard\",\n  \"Line\": [\n    {\n      \"Amount\": 10.00,\n      \"DetailType\": \"AccountBasedExpenseLineDetail\",\n      \"AccountBasedExpenseLineDetail\": {\n       \"AccountRef\": {\n          \"name\": \"{{AccountName}}\",\n          \"value\": \"{{AccountId}}\"\n        }\n      }\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/purchase?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"purchase"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create a puchase object\nMethod : POST\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Account-Create Bank",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        BankAccountId = jsonData.Account.Id;",
+									"        BankAccountName = jsonData.Account.Name;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Bank Account Created BankAccountID is ' + BankAccountId + ' BankAccountName is ' + BankAccountName);",
+									"    ",
+									"    postman.setGlobalVariable(\"BankAccountId\", BankAccountId);",
+									"    postman.setGlobalVariable(\"BankAccountName\", BankAccountName);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"AccountType\": \"Bank\",\n  \"Name\": \"BankAccount - {{$guid}}\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/account?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"account"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create a new Bank Account"
+					},
+					"response": []
+				}
+			],
+			"description": "Create an Expense - This orchestration contains the following flow of calls.  1. Create a bank account 2. Create an expense account 3. Create a purchase expense linked to the bank account"
+		},
+		{
+			"name": "Create an Invoice for a Customer",
+			"item": [
+				{
+					"name": "Customer-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        CustomerId = jsonData.Customer.Id;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Customer Created CustomerID is ' + CustomerId);",
+									"    ",
+									"    postman.setGlobalVariable(\"CustomerId\", CustomerId);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DisplayName\": \"CustomerName - {{$guid}}\"\n}\n"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/customer?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"customer"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        ItemId = jsonData.Item.Id;",
+									"        ItemName = jsonData.Item.Name;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log(\"New Item has been created, ItemID is \" + ItemId + \" and the ItemName is \"+ ItemName);",
+									"    ",
+									"    postman.setGlobalVariable(\"ItemId\", ItemId);",
+									"    postman.setGlobalVariable(\"ItemName\", ItemName);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Name\": \"{{$guid}}\",\n  \"IncomeAccountRef\": {\n    \"value\": \"1\",\n    \"name\": \"Services\"\n  },\n  \"Type\": \"Service\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/item?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"item"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invoice-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    try {",
+									"        InvoiceId = jsonData.Invoice.Id;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Invoice Created InvoiceID is ' + InvoiceId);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbov3-postman-collection2"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Line\": [\n    {\n      \"Amount\": 100.00,\n      \"DetailType\": \"SalesItemLineDetail\",\n      \"SalesItemLineDetail\": {\n        \"ItemRef\": {\n          \"value\": \"{{ItemId}}\",\n          \"name\": \"{{ItemName}}\"\n        },\n        \"Qty\": 1\n      }\n    }\n  ],\n  \"CustomerRef\": {\n    \"value\": \"{{CustomerId}}\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/invoice?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"invoice"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Create an Invoice - This orchestration contains the following flow of calls.  \n\n1. Create a customer \n2. Create an item  \n3. Create an invoice for a transaction between the customer and the item."
+		}
+	]
+}

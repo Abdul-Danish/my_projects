@@ -1,0 +1,446 @@
+{
+	"info": {
+		"_postman_id": "b1908091-dbec-4cf4-b643-e5229a7e5255",
+		"name": "ProtechBMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "GetSitesByLocation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer tHMhfpLi3tlUoiWGkD-j1ElnSLab8SCxxnJaHytHm8Q6DFg-l0YwOuFTfFQkgA9leq3zn2prPxXY2jyk5y9Gtkcl8hV3TTZ4uf8ADiInxy0cThWdWkZPr95ULfosfnoV9AJ6pEaGOWrisJEGfhNTgaCzzJOSkB7BoScEf43U6U0b4zG0t3CnytqCbaCmRvESzdczp2nMu7eEQxI8-d-KZqPEw4sOxX-d2Z3b3pOQMPsvfc2JQDb61Zxw2EzEaE8Egk-1LAWo0hy1vd2mG7IVJw_vXR_cRzUqMS7kUjzVkt3FXfPItMMSoUWQuppO6KuDp0TRoPjO0mtIdkL3_lr8wVKAvMO-QVPFB7_45xDpjzA6H5E7zldcdfk3rMagQov3aeQEAJZgmdh8PeNfVsnRA9Yr85AnZ4kTH60CdhO2WXK6y3l3ZvY8-3ZGyTYxqlu4rTgtBf4bRhUYzq127o18Y3BbC0KNNz_UiFvNI1bFhwqvA2IBozVznnwlRI_xVZ2mGyZaUnXfGYSIOKwT2UN5tgUGQfYBh8ICKpVYpuyJUBBGxxgL74nmK2vWDpqZxhOxt8wnw_fLbORwKhcrprmx4t82kS9yQ5sv6FFCuWgJOEQ"
+					}
+				],
+				"url": {
+					"raw": "http://www.protechbms.com/api/GetSitesByLocation?CustomerID=AmcorpMLMY&CityId=10040",
+					"protocol": "http",
+					"host": [
+						"www",
+						"protechbms",
+						"com"
+					],
+					"path": [
+						"api",
+						"GetSitesByLocation"
+					],
+					"query": [
+						{
+							"key": "CustomerID",
+							"value": "AmcorpMLMY"
+						},
+						{
+							"key": "CityId",
+							"value": "10040"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetStationSystemsByLocation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetMetersByLocation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetMetersByLocation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.protechbms.com/api/GetCustomerInstalledMeters?CustomerId=AmcorpMLMY&CommunicationId=1960000002",
+					"protocol": "http",
+					"host": [
+						"www",
+						"protechbms",
+						"com"
+					],
+					"path": [
+						"api",
+						"GetCustomerInstalledMeters"
+					],
+					"query": [
+						{
+							"key": "CustomerId",
+							"value": "AmcorpMLMY"
+						},
+						{
+							"key": "CommunicationId",
+							"value": "1960000002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLocationGroupsBySite",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSensorsDataByLocation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSensorsDataByLocation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.protechbms.com/api/GetCurrentXCData?CustomerID=AmcorpMLMY&CommunicationId=1960000002",
+					"protocol": "http",
+					"host": [
+						"www",
+						"protechbms",
+						"com"
+					],
+					"path": [
+						"api",
+						"GetCurrentXCData"
+					],
+					"query": [
+						{
+							"key": "CustomerID",
+							"value": "AmcorpMLMY"
+						},
+						{
+							"key": "CommunicationId",
+							"value": "1960000002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLocationGroupsBySite",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.protechbms.com/api/GetLocationGroupsBySite?CustomerID=AmcorpMLMY&CommunicationId=1960000002&SystemId=2",
+					"protocol": "http",
+					"host": [
+						"www",
+						"protechbms",
+						"com"
+					],
+					"path": [
+						"api",
+						"GetLocationGroupsBySite"
+					],
+					"query": [
+						{
+							"key": "CustomerID",
+							"value": "AmcorpMLMY"
+						},
+						{
+							"key": "CommunicationId",
+							"value": "1960000002"
+						},
+						{
+							"key": "SystemId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetStationSystemsByLocation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.protechbms.com/api/Get_StationSystemsByInstalledMeters?CustomerID=AmcorpMLMY&CommunicationId=1960000002",
+					"protocol": "http",
+					"host": [
+						"www",
+						"protechbms",
+						"com"
+					],
+					"path": [
+						"api",
+						"Get_StationSystemsByInstalledMeters"
+					],
+					"query": [
+						{
+							"key": "CustomerID",
+							"value": "AmcorpMLMY"
+						},
+						{
+							"key": "CommunicationId",
+							"value": "1960000002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLocationsByLocationGroup",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLocationsByLocationGroup",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.protechbms.com/api/GetLocationsBySite?CustomerID=AmcorpMLMY&CommunicationId=1960000002&LocationGroupId=45&SystemId=2",
+					"protocol": "http",
+					"host": [
+						"www",
+						"protechbms",
+						"com"
+					],
+					"path": [
+						"api",
+						"GetLocationsBySite"
+					],
+					"query": [
+						{
+							"key": "CustomerID",
+							"value": "AmcorpMLMY"
+						},
+						{
+							"key": "CommunicationId",
+							"value": "1960000002"
+						},
+						{
+							"key": "LocationGroupId",
+							"value": "45"
+						},
+						{
+							"key": "SystemId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUtilitiesByLocation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUtilitiesByLocation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.protechbms.com/api/GetUtilitiesByLocation?CustomerID=AmcorpMLMY&CommunicationId=1960000002&LocationGroupId=45&LocationId=89&SystemId=2",
+					"protocol": "http",
+					"host": [
+						"www",
+						"protechbms",
+						"com"
+					],
+					"path": [
+						"api",
+						"GetUtilitiesByLocation"
+					],
+					"query": [
+						{
+							"key": "CustomerID",
+							"value": "AmcorpMLMY"
+						},
+						{
+							"key": "CommunicationId",
+							"value": "1960000002"
+						},
+						{
+							"key": "LocationGroupId",
+							"value": "45"
+						},
+						{
+							"key": "LocationId",
+							"value": "89"
+						},
+						{
+							"key": "SystemId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "amcorpdemo",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "amcorpdemo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://www.protechbms.com/token",
+					"protocol": "http",
+					"host": [
+						"www",
+						"protechbms",
+						"com"
+					],
+					"path": [
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer QeCCrs2D_qOGiqToYo1Fm_uL7h7vg8x5rOxnSHWFFGBcHRijHeTIY37f3G2M6c6cCUVho6cIsuCR4fi5-j2rlh4Tzb-D-4W9886eZIw7XGAyGI_vT42s1elckg_LD8iID-J3W6APNE2ngNb2rkN81v4F6MGIHDAH5X_2HbiypnmK5ZWot3bkBP-I5tMx1jGuNvbgtTSK0N0K64PWjl8XLFQLdHpnIK-03dYXn0oIMjfwp4mg3uGqj4_fY-zRySWaMhYqOKiu0pkkYtiDerhWfqTyv1opwCB7jadhVAO8WeWLdwpc-Kum8d-K6xUm04oDvFmXD8yp_Q73EyjsiXwiSC_rn2wHeq6vNyvtwrKmS2MNYwO0omP_mipmAfu0HmVXitHXIVOTGrO3iNsbDadIFFpXc7wgMuDM3kTJKV0QGQcZhuL60as0WXRUohUz4NvTXwekxKtqnYTEtEhq1nQnV87ZHlLa0zRQUEvgNi0mTIUGqwf4nAzUEsrOGngxK3j2vSCOELOc-PGaFWEf9XPpWJQiZ--beT4gS-1Sa2ZchROQjP1dAZ5wqmrYrHWdlvfbz5nnT8YRCyHxvkPzUEF3zDQ4e1_JDKWt-Uo8hPbeueY"
+					}
+				],
+				"url": {
+					"raw": "http://www.protechbms.com/api/authenticate",
+					"protocol": "http",
+					"host": [
+						"www",
+						"protechbms",
+						"com"
+					],
+					"path": [
+						"api",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "web",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

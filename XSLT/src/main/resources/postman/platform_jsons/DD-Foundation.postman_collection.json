@@ -1,0 +1,793 @@
+{
+	"info": {
+		"_postman_id": "cfec7cd7-f432-4f7c-821e-db11aa116939",
+		"name": "DD-Foundation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "getToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"setAuthToken\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    if(jsonData.token) {",
+									"       pm.collectionVariables.set(\"AUTH_TOKEN\", jsonData.token); ",
+									"       console.log(pm.collectionVariables.get(\"AUTH_TOKEN\"))",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"username\": \"aleem@digitaldots.ai\", \"password\": \"password\" }"
+						},
+						"url": {
+							"raw": "{{HOST_FOUNDATION}}/api/auth/login",
+							"host": [
+								"{{HOST_FOUNDATION}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRoles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_FOUNDATION}}/api/auth/roles",
+							"host": [
+								"{{HOST_FOUNDATION}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_FOUNDATION}}/api/users",
+							"host": [
+								"{{HOST_FOUNDATION}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProfile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_FOUNDATION}}/api/users/profile",
+							"host": [
+								"{{HOST_FOUNDATION}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getResources",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_FOUNDATION}}/api/resources",
+							"host": [
+								"{{HOST_FOUNDATION}}"
+							],
+							"path": [
+								"api",
+								"resources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refreshToken",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"refreshToken\":\"96ab253a-8744-4764-b0e1-5f1f9a2e65d6\"}"
+						},
+						"url": {
+							"raw": "{{HOST_FOUNDATION}}/api/auth/refresh",
+							"host": [
+								"{{HOST_FOUNDATION}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "solutions",
+			"item": [
+				{
+					"name": "getSolutions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_FOUNDATION}}/api/solutions",
+							"host": [
+								"{{HOST_FOUNDATION}}"
+							],
+							"path": [
+								"api",
+								"solutions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createSolution",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Patterns\",\n    \"description\": \"Template Patterns\",\n    \"template\": {\n        \"name\": \"pattern\",\n        \"description\": \"Template Patterns\"\n    },\n    \"status\": \"NEW\",\n    \"type\": \"INTEGRATION\",\n    \"config\": {\n        \"properties\": { \"deployment\": { \"isCloud\": true, \"targetCloud\": \"AWS\" }, \"solution\": { \"deployment\": \"LEAN\" }, \"workflow\": { \"AUDITING\": true, \"SECURED\": false } }\n    },\n    \"tags\": [ \"pattern\", \"template\" ],\n    \"workflows\": [],\n    \"metrics\": { \"process\": { \"active\": 0, \"paused\": 0 }, \"executions\": { \"pending\": 0, \"completed\": 0 }, \"health\": { \"status\": \"23\" } }\n}"
+						},
+						"url": {
+							"raw": "{{HOST_FOUNDATION}}/api/solutions",
+							"host": [
+								"{{HOST_FOUNDATION}}"
+							],
+							"path": [
+								"api",
+								"solutions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSolution",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Customer Experience\",\n    \"description\": \"Social media solutions\",\n    \"template\": {\n        \"name\": \"social\",\n        \"description\": \"Social Media\"\n    },\n    \"status\": \"NEW\",\n    \"type\": \"INTEGRATION\",\n    \"config\": {\n        \"properties\": { \"deployment\": { \"isCloud\": true, \"targetCloud\": \"AWS\" }, \"solution\": { \"deployment\": \"LEAN\" }, \"workflow\": { \"AUDITING\": true, \"SECURED\": false } }\n    },\n    \"tags\": [ \"publish\", \"emotional\", \"analysis\", \"brand\", \"marketing\", \"campaign\", \"intelligence\" ],\n    \"workflows\": [],\n    \"metrics\": { \"process\": { \"active\": 0, \"paused\": 0 }, \"executions\": { \"pending\": 0, \"completed\": 0 }, \"health\": { \"status\": \"23\" } }\n}"
+						},
+						"url": {
+							"raw": "{{HOST_FOUNDATION}}/api/solutions",
+							"host": [
+								"{{HOST_FOUNDATION}}"
+							],
+							"path": [
+								"api",
+								"solutions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSolution",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Customer Experience\",\n    \"description\": \"Social media solutions\",\n    \"template\": {\n        \"name\": \"social\",\n        \"description\": \"Social Media\"\n    },\n    \"status\": \"NEW\",\n    \"type\": \"INTEGRATION\",\n    \"config\": {\n        \"properties\": { \"deployment\": { \"isCloud\": true, \"targetCloud\": \"AWS\" }, \"solution\": { \"deployment\": \"LEAN\" }, \"workflow\": { \"AUDITING\": true, \"SECURED\": false } }\n    },\n    \"tags\": [ \"publish\", \"emotional\", \"analysis\", \"brand\", \"marketing\", \"campaign\", \"intelligence\" ],\n    \"workflows\": [],\n    \"metrics\": { \"process\": { \"active\": 0, \"paused\": 0 }, \"executions\": { \"pending\": 0, \"completed\": 0 }, \"health\": { \"status\": \"23\" } }\n}"
+						},
+						"url": {
+							"raw": "{{HOST_FOUNDATION}}/api/solutions/5e6c920f04bc1e000455a272",
+							"host": [
+								"{{HOST_FOUNDATION}}"
+							],
+							"path": [
+								"api",
+								"solutions",
+								"5e6c920f04bc1e000455a272"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHistory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_FOUNDATION}}/api/solutions/5e86cda7fa9a11adc0b15ad5/history",
+							"host": [
+								"{{HOST_FOUNDATION}}"
+							],
+							"path": [
+								"api",
+								"solutions",
+								"5e86cda7fa9a11adc0b15ad5",
+								"history"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "workflows",
+			"item": [
+				{
+					"name": "getWorkflow",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_SOLUTION}}/api/solutions/608faa06010bab40fbc24a57/workflows",
+							"host": [
+								"{{HOST_SOLUTION}}"
+							],
+							"path": [
+								"api",
+								"solutions",
+								"608faa06010bab40fbc24a57",
+								"workflows"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getConnector",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_SOLUTION}}/api/solutions/5f44120f57571b135992c651/connectors/5f7d9d190811cb517e08716a",
+							"host": [
+								"{{HOST_SOLUTION}}"
+							],
+							"path": [
+								"api",
+								"solutions",
+								"5f44120f57571b135992c651",
+								"connectors",
+								"5f7d9d190811cb517e08716a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteWorkflow",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_SOLUTION}}/api/workflows/5e57bba2cc9ef00004093e0f",
+							"host": [
+								"{{HOST_SOLUTION}}"
+							],
+							"path": [
+								"api",
+								"workflows",
+								"5e57bba2cc9ef00004093e0f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Decisions",
+			"item": [
+				{
+					"name": "getDecisions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_SOLUTION}}/api/decisions?solutionId=5e8daf95a32f940004e813bf",
+							"host": [
+								"{{HOST_SOLUTION}}"
+							],
+							"path": [
+								"api",
+								"decisions"
+							],
+							"query": [
+								{
+									"key": "solutionId",
+									"value": "5e8daf95a32f940004e813bf"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listRules",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "solutions Copy",
+			"item": [
+				{
+					"name": "getClassifiers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://classifers.bever.digitaldots.ai/classify?classifier_labels=eConsult,Medication%20List,Full%20Encounter,PSP%20Information%20Collection%20Form&s3_path=ocr/json/FullEncounter_f4359556b2ef49199822be19c508948f.json\n",
+							"protocol": "https",
+							"host": [
+								"classifers",
+								"bever",
+								"digitaldots",
+								"ai"
+							],
+							"path": [
+								"classify"
+							],
+							"query": [
+								{
+									"key": "classifier_labels",
+									"value": "eConsult,Medication%20List,Full%20Encounter,PSP%20Information%20Collection%20Form"
+								},
+								{
+									"key": "s3_path",
+									"value": "ocr/json/FullEncounter_f4359556b2ef49199822be19c508948f.json\n"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createApplication",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"solutionId\": \"5e29a39412dc2f00048c01a5\",\n    \"name\": \"Inventory Optimization App\",\n    \"description\": \"Application for Inventory Optimization\",\n    \"status\": \"NEW\",\n    \"config\": {\n        \"properties\": {  }\n    },\n    \"tags\": [ \"inventory\", \"optimization\" ],\n    \"version\": \"1.0\",\n    \"modifiedBy\": \"alateefi@digitaldots.io\",\n    \"modifiedDate\": \"2020-03-23T12:24:36.134Z\"\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_HOST}}/api/applications",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"api",
+								"applications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateApplication",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Customer Experience\",\n    \"description\": \"Social media solutions\",\n    \"template\": {\n        \"name\": \"social\",\n        \"description\": \"Social Media\"\n    },\n    \"status\": \"NEW\",\n    \"type\": \"INTEGRATION\",\n    \"config\": {\n        \"properties\": { \"deployment\": { \"isCloud\": true, \"targetCloud\": \"AWS\" }, \"solution\": { \"deployment\": \"LEAN\" }, \"workflow\": { \"AUDITING\": true, \"SECURED\": false } }\n    },\n    \"tags\": [ \"publish\", \"emotional\", \"analysis\", \"brand\", \"marketing\", \"campaign\", \"intelligence\" ],\n    \"workflows\": [],\n    \"metrics\": { \"process\": { \"active\": 0, \"paused\": 0 }, \"executions\": { \"pending\": 0, \"completed\": 0 }, \"health\": { \"status\": \"23\" } }\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_HOST}}/api/applications",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"api",
+								"applications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteApplication",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Customer Experience\",\n    \"description\": \"Social media solutions\",\n    \"template\": {\n        \"name\": \"social\",\n        \"description\": \"Social Media\"\n    },\n    \"status\": \"NEW\",\n    \"type\": \"INTEGRATION\",\n    \"config\": {\n        \"properties\": { \"deployment\": { \"isCloud\": true, \"targetCloud\": \"AWS\" }, \"solution\": { \"deployment\": \"LEAN\" }, \"workflow\": { \"AUDITING\": true, \"SECURED\": false } }\n    },\n    \"tags\": [ \"publish\", \"emotional\", \"analysis\", \"brand\", \"marketing\", \"campaign\", \"intelligence\" ],\n    \"workflows\": [],\n    \"metrics\": { \"process\": { \"active\": 0, \"paused\": 0 }, \"executions\": { \"pending\": 0, \"completed\": 0 }, \"health\": { \"status\": \"23\" } }\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_HOST}}/api/applications/5e43939a835a8c56e17499fa",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"api",
+								"applications",
+								"5e43939a835a8c56e17499fa"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "forms",
+			"item": [
+				{
+					"name": "getForms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_SOLUTION}}/api/forms?solutionId=5e8daf95a32f940004e813bf&solutionId2=5e8daf95a32f940004e813bf",
+							"host": [
+								"{{HOST_SOLUTION}}"
+							],
+							"path": [
+								"api",
+								"forms"
+							],
+							"query": [
+								{
+									"key": "applicationId",
+									"value": "5e78dd97ae4f1b00043e2fde",
+									"disabled": true
+								},
+								{
+									"key": "solutionId",
+									"value": "5e8daf95a32f940004e813bf"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createForm",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Customer Experience\",\n    \"description\": \"Social media solutions\",\n    \"template\": {\n        \"name\": \"social\",\n        \"description\": \"Social Media\"\n    },\n    \"status\": \"NEW\",\n    \"type\": \"INTEGRATION\",\n    \"config\": {\n        \"properties\": { \"deployment\": { \"isCloud\": true, \"targetCloud\": \"AWS\" }, \"solution\": { \"deployment\": \"LEAN\" }, \"workflow\": { \"AUDITING\": true, \"SECURED\": false } }\n    },\n    \"tags\": [ \"publish\", \"emotional\", \"analysis\", \"brand\", \"marketing\", \"campaign\", \"intelligence\" ],\n    \"workflows\": [],\n    \"metrics\": { \"process\": { \"active\": 0, \"paused\": 0 }, \"executions\": { \"pending\": 0, \"completed\": 0 }, \"health\": { \"status\": \"23\" } }\n}"
+						},
+						"url": {
+							"raw": "{{HOST_SOLUTION}}/api/forms?key1=val1",
+							"host": [
+								"{{HOST_SOLUTION}}"
+							],
+							"path": [
+								"api",
+								"forms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateForm",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Customer Experience\",\n    \"description\": \"Social media solutions\",\n    \"template\": {\n        \"name\": \"social\",\n        \"description\": \"Social Media\"\n    },\n    \"status\": \"NEW\",\n    \"type\": \"INTEGRATION\",\n    \"config\": {\n        \"properties\": { \"deployment\": { \"isCloud\": true, \"targetCloud\": \"AWS\" }, \"solution\": { \"deployment\": \"LEAN\" }, \"workflow\": { \"AUDITING\": true, \"SECURED\": false } }\n    },\n    \"tags\": [ \"publish\", \"emotional\", \"analysis\", \"brand\", \"marketing\", \"campaign\", \"intelligence\" ],\n    \"workflows\": [],\n    \"metrics\": { \"process\": { \"active\": 0, \"paused\": 0 }, \"executions\": { \"pending\": 0, \"completed\": 0 }, \"health\": { \"status\": \"23\" } }\n}"
+						},
+						"url": {
+							"raw": "{{HOST_SOLUTION}}/api/forms",
+							"host": [
+								"{{HOST_SOLUTION}}"
+							],
+							"path": [
+								"api",
+								"forms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteForm",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Customer Experience\",\n    \"description\": \"Social media solutions\",\n    \"template\": {\n        \"name\": \"social\",\n        \"description\": \"Social Media\"\n    },\n    \"status\": \"NEW\",\n    \"type\": \"INTEGRATION\",\n    \"config\": {\n        \"properties\": { \"deployment\": { \"isCloud\": true, \"targetCloud\": \"AWS\" }, \"solution\": { \"deployment\": \"LEAN\" }, \"workflow\": { \"AUDITING\": true, \"SECURED\": false } }\n    },\n    \"tags\": [ \"publish\", \"emotional\", \"analysis\", \"brand\", \"marketing\", \"campaign\", \"intelligence\" ],\n    \"workflows\": [],\n    \"metrics\": { \"process\": { \"active\": 0, \"paused\": 0 }, \"executions\": { \"pending\": 0, \"completed\": 0 }, \"health\": { \"status\": \"23\" } }\n}"
+						},
+						"url": {
+							"raw": "{{HOST_SOLUTION}}/api/forms/5e43939a835a8c56e17499fa",
+							"host": [
+								"{{HOST_SOLUTION}}"
+							],
+							"path": [
+								"api",
+								"forms",
+								"5e43939a835a8c56e17499fa"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "subscription",
+			"item": [
+				{
+					"name": "Send Notifications",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"setAuthToken\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    if(jsonData.token) {",
+									"       pm.collectionVariables.set(\"AUTH_TOKEN\", jsonData.token); ",
+									"       console.log(pm.collectionVariables.get(\"AUTH_TOKEN\"))",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"notification\": {\n        \"title\": \"Topic Notification - 3\",\n        \"body\": \"Sent from Postman via api/notifications\"\n    },\n    \"to\": \"{{TOPIC_NAME_EVENT}}\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST_FOUNDATION}}/api/notifications",
+							"host": [
+								"{{HOST_FOUNDATION}}"
+							],
+							"path": [
+								"api",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscribe to Topic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "store-api",
+			"item": [
+				{
+					"name": "getTemplates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_STORE}}/api/templates?category=Model",
+							"host": [
+								"{{HOST_STORE}}"
+							],
+							"path": [
+								"api",
+								"templates"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Model"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{AUTH_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST_FOUNDATION",
+			"value": "http://localhost:8040"
+		},
+		{
+			"key": "HOST_SOLUTION",
+			"value": "http://localhost:8050"
+		},
+		{
+			"key": "HOST_STORE",
+			"value": "http://localhost:8060"
+		},
+		{
+			"key": "HOST_ENGINE",
+			"value": "http://localhost:8070"
+		},
+		{
+			"key": "AUTH_TOKEN",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJmaXJzdE5hbWUiOiJBYmR1bCIsImxhc3ROYW1lIjoiQWxlZW0iLCJzdWIiOiJhbGVlbUBkaWdpdGFsZG90cy5haSIsImZpcnN0VGltZUxvZ2luIjpmYWxzZSwicm9sZXMiOlsiQWRtaW4iXSwiaWQiOiI2MDFjZjM4NDU5NzM5NjE4YmU4MDU5Y2MiLCJhdmF0YXIiOm51bGwsImV4cCI6MTYxMjU4NzM3MSwiaWF0IjoxNjEyNTU4NTcxfQ.6x5kcshgk4nboY9ZUOR210BlO9i6d8SeZj-B0rr3qfOmFu0Twyx-vXyLOx5mCWZ-Vrfd41rC9tL9VktS1tacMA"
+		},
+		{
+			"key": "TOPIC_NAME_EVENT",
+			"value": "events"
+		}
+	]
+}

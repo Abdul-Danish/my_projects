@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "bcb2c3b7-a518-4d72-a4a0-951a24fbcf47",
+		"name": "Cerner_Sandbox",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "App_IntegrationLab",
+			"item": [
+				{
+					"name": "Cerner Token URL",
+					"item": [
+						{
+							"name": "Cerner_Token_Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"Access_Token_CernerSandbox\", pm.response.json().access_token)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "bb7daf37-34a2-4411-bf66-b76e56b6088a",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "k4zzZ-NjZkPEEt9eljWHiFULmgvTwxbB",
+											"type": "string"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic $(echo -n $SYSTEM_ACCOUNT_CLIENT_ID:$SYSTEM_ACCOUNT_CLIENT_SECRET | base64)",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										},
+										{
+											"key": "scope",
+											"value": "system/Person.write system/Patient.read system/Patient.write system/Person.read system/Account.read system/Account.write",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://authorization.cerner.com/tenants/ec2458f2-1e24-41c8-b71b-0e701af7583d/protocols/oauth2/profiles/smart-v1/token",
+									"protocol": "https",
+									"host": [
+										"authorization",
+										"cerner",
+										"com"
+									],
+									"path": [
+										"tenants",
+										"ec2458f2-1e24-41c8-b71b-0e701af7583d",
+										"protocols",
+										"oauth2",
+										"profiles",
+										"smart-v1",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cerner FHIR End-Point",
+					"item": [
+						{
+							"name": "Cerner_FHIR_EndPoint",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{Access_Token_CernerSandbox}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/fhir+json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic Q29uc3VtZXJLZXklM0RiYjdkYWYzNy0zNGEyLTQ0MTEtYmY2Ni1iNzZlNTZiNjA4OGElMjZFeHBpcmVzT24lM0QxNjQ3NTEyODk2JTI2SE1BQ1NlY3JldHMlM0RkTUpqWG10VlZDeWQ5U0JGWG16clhWRmloYTcwSUtJQXc5YWh6SE5CNDJIenQtSUZTeWNYLWJqUE5BZWo1TVlSblNtXy01MXBaNTFwRW0xbTZ6TkF2dTFMY0xjeXJiSGZoXzNvaEtyS3AzNUhsdDYyUTNmOU5kVXBncG1sNW5HVkFTeEZlY3FSVGZMZ1lFa3BxeU4xSEElMjUzRCUyNTNEJTI2S2V5c1ZlcnNpb24lM0Q5Mjc0YjRlYy02ZDg4LTRkYmQtODNlMS0wYTUwMzg1NGYxYTAlMjZSU0FTSEExJTNERTNLMlNiNEY2a192dXRvSE1OYmVEdldBS3hXdlBPcmRqTFFWSER5Zy1LdEdBVDdkYlRrWjFtOGVLdWJkOVFwZml5LU9uNVpMLUozWDJVdmVJVExkbGJubHFzMnRpUU9vZVFRQlp0SWVsaTVsNkNCcGJxUHVRdzNlUU83S2FyY3JKWURxVURqNXdYa3dlSzBoel9sLXVxeEN2NGQyaWZ6QlJJSlRPdVJ0M3l4a0k5dEQ5TkJXaUhuanpXU3BpS3FHcVk2aW1QTTFLZHJTVEF0YWdXa3l5NUxFYks2T3dFeWEtLWM5YlB4M0pWak5sWXFaQlpSSTdycVRocUpNUmlSNHU0b01UR2dqSEZmSzc0ZWd4Z0NjRnIzZGJRNE9BUDlrYVBPckw5MjR0Tkc5cm1mOWRQRTlUUkZUc0FoSk1vd0wwWjN5d1RUR2p2Y18wa19DR1hrVmZ3JTI1M0QlMjUzRA==",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://fhir-ehr-code.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d/Person/1",
+									"protocol": "https",
+									"host": [
+										"fhir-ehr-code",
+										"cerner",
+										"com"
+									],
+									"path": [
+										"r4",
+										"ec2458f2-1e24-41c8-b71b-0e701af7583d",
+										"Person",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cerner_FHIR_EndPoint Create Patient",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{Access_Token_CernerSandbox}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/fhir+json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic Q29uc3VtZXJLZXklM0RiYjdkYWYzNy0zNGEyLTQ0MTEtYmY2Ni1iNzZlNTZiNjA4OGElMjZFeHBpcmVzT24lM0QxNjQ3NTEyODk2JTI2SE1BQ1NlY3JldHMlM0RkTUpqWG10VlZDeWQ5U0JGWG16clhWRmloYTcwSUtJQXc5YWh6SE5CNDJIenQtSUZTeWNYLWJqUE5BZWo1TVlSblNtXy01MXBaNTFwRW0xbTZ6TkF2dTFMY0xjeXJiSGZoXzNvaEtyS3AzNUhsdDYyUTNmOU5kVXBncG1sNW5HVkFTeEZlY3FSVGZMZ1lFa3BxeU4xSEElMjUzRCUyNTNEJTI2S2V5c1ZlcnNpb24lM0Q5Mjc0YjRlYy02ZDg4LTRkYmQtODNlMS0wYTUwMzg1NGYxYTAlMjZSU0FTSEExJTNERTNLMlNiNEY2a192dXRvSE1OYmVEdldBS3hXdlBPcmRqTFFWSER5Zy1LdEdBVDdkYlRrWjFtOGVLdWJkOVFwZml5LU9uNVpMLUozWDJVdmVJVExkbGJubHFzMnRpUU9vZVFRQlp0SWVsaTVsNkNCcGJxUHVRdzNlUU83S2FyY3JKWURxVURqNXdYa3dlSzBoel9sLXVxeEN2NGQyaWZ6QlJJSlRPdVJ0M3l4a0k5dEQ5TkJXaUhuanpXU3BpS3FHcVk2aW1QTTFLZHJTVEF0YWdXa3l5NUxFYks2T3dFeWEtLWM5YlB4M0pWak5sWXFaQlpSSTdycVRocUpNUmlSNHU0b01UR2dqSEZmSzc0ZWd4Z0NjRnIzZGJRNE9BUDlrYVBPckw5MjR0Tkc5cm1mOWRQRTlUUkZUc0FoSk1vd0wwWjN5d1RUR2p2Y18wa19DR1hrVmZ3JTI1M0QlMjUzRA==",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"resourceType\": \"Patient\",\n  \"extension\": [\n    {\n      \"url\": \"http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex\",\n      \"valueCode\": \"M\"\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/us/core/StructureDefinition/us-core-race\",\n      \"extension\": [\n        {\n          \"url\": \"ombCategory\",\n          \"valueCoding\": {\n            \"system\": \"urn:oid:2.16.840.1.113883.6.238\",\n            \"code\": \"2028-9\",\n            \"display\": \"Asian\"\n          }\n        },\n        {\n          \"url\": \"detailed\",\n          \"valueCoding\": {\n            \"system\": \"urn:oid:2.16.840.1.113883.6.238\",\n            \"code\": \"2039-6\",\n            \"display\": \"Japanese\"\n          }\n        }\n      ]\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity\",\n      \"extension\": [\n        {\n          \"url\": \"ombCategory\",\n          \"valueCoding\": {\n            \"system\": \"urn:oid:2.16.840.1.113883.6.238\",\n            \"code\": \"2186-5\",\n            \"display\": \"Non Hispanic or Latino\"\n          }\n        }\n      ]\n    },\n    {\n      \"url\": \"https://fhir-ehr.cerner.com/r4/StructureDefinition/communication-preference\",\n      \"extension\": [\n        {\n          \"extension\": [\n            {\n              \"valueCodeableConcept\": {\n                \"coding\": [\n                  {\n                    \"system\": \"https://fhir.cerner.com/ec2458f2-1e24-41c8-b71b-0e701af7583d/codeSet/4640016\",\n                    \"code\": \"485602703\",\n                    \"display\": \"Appointment Reminder\",\n                    \"userSelected\": false\n                  }\n                ],\n                \"text\": \"Appointment Reminder\"\n              },\n              \"url\": \"communication-type\"\n            },\n            {\n              \"valueCodeableConcept\": {\n                \"coding\": [\n                  {\n                    \"system\": \"https://fhir.cerner.com/ec2458f2-1e24-41c8-b71b-0e701af7583d/codeSet/23042\",\n                    \"code\": \"4054467\",\n                    \"display\": \"Phone\",\n                    \"userSelected\": false\n                  }\n                ]\n              },\n              \"url\": \"contact-method\"\n            },\n            {\n              \"valueCodeableConcept\": {\n                \"coding\": [\n                  {\n                    \"system\": \"https://fhir.cerner.com/ec2458f2-1e24-41c8-b71b-0e701af7583d/codeSet/43\",\n                    \"code\": \"163\",\n                    \"display\": \"Business\",\n                    \"userSelected\": false\n                  }\n                ],\n                \"text\": \"Home\"\n              },\n              \"url\": \"contact-type\"\n            }\n          ],\n          \"verified\": \"2019-12-26T15:41:52.000Z\"\n        }\n      ]\n    }\n  ],\n  \"identifier\": [\n    {\n      \"assigner\": {\n        \"reference\": \"Organization/675844\"\n      }\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"use\": \"official\",\n      \"family\": \"Wolf\",\n      \"given\": [\n        \"Person\",\n        \"Name\"\n      ],\n      \"period\": {\n        \"start\": \"2010-05-17T14:54:31.000Z\"\n      }\n    },\n    {\n      \"use\": \"usual\",\n      \"given\": [\n        \"Bigby\"\n      ],\n      \"period\": {\n        \"start\": \"2012-05-22T15:45:50.000Z\"\n      }\n    }\n  ],\n  \"telecom\": [\n    {\n      \"system\": \"phone\",\n      \"value\": \"8168229121\",\n      \"use\": \"home\",\n      \"id\": \"CI-PH-29811920-0\",\n      \"extension\": [\n        {\n          \"valueString\": \"12345\",\n          \"url\": \"http://hl7.org/fhir/StructureDefinition/contactpoint-extension\"\n        }\n      ],\n      \"period\": {\n        \"start\": \"2012-05-17T15:33:18.000Z\"\n      }\n    }\n  ],\n  \"gender\": \"male\",\n  \"birthDate\": \"1990-09-15\",\n  \"address\": [\n    {\n      \"use\": \"home\",\n      \"line\": [\n        \"121212 Metcalf Drive\",\n        \"Apartment 403\"\n      ],\n      \"city\": \"Kansas City\",\n      \"district\": \"Jackson\",\n      \"state\": \"KS\",\n      \"postalCode\": \"64199\",\n      \"country\": \"United States of America\",\n      \"period\": {\n        \"start\": \"2012-05-17T15:33:18.000Z\"\n      }\n    }\n  ],\n  \"maritalStatus\": {\n    \"coding\": [\n      {\n        \"system\": \"http://terminology.hl7.org/CodeSystem/v3-NullFlavor\",\n        \"code\": \"UNK\",\n        \"display\": \"Unknown\"\n      }\n    ],\n    \"text\": \"Unknown\"\n  },\n  \"communication\": [\n    {\n      \"language\": {\n        \"coding\": [\n          {\n            \"system\": \"urn:ietf:bcp:47\",\n            \"code\": \"en\",\n            \"display\": \"English\"\n          }\n        ],\n        \"text\": \"English\"\n      },\n      \"preferred\": true\n    }\n  ],\n  \"generalPractitioner\": [\n    {\n      \"reference\": \"Practitioner/4122622\"\n    }\n  ]\n}"
+								},
+								"url": {
+									"raw": "https://fhir-ehr-code.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d/Patient",
+									"protocol": "https",
+									"host": [
+										"fhir-ehr-code",
+										"cerner",
+										"com"
+									],
+									"path": [
+										"r4",
+										"ec2458f2-1e24-41c8-b71b-0e701af7583d",
+										"Patient"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cerner ZZ Open FHIR Endpoint",
+					"item": [
+						{
+							"name": "Cerner_Open_URL",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://fhir-open.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d/Patient?_id=1",
+									"protocol": "https",
+									"host": [
+										"fhir-open",
+										"cerner",
+										"com"
+									],
+									"path": [
+										"r4",
+										"ec2458f2-1e24-41c8-b71b-0e701af7583d",
+										"Patient"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cerner_Open_URL Create",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/fhir+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"resourceType\": \"Patient\",\n    \"identifier\": [\n        {\n            \"assigner\": {\n                \"reference\": \"Organization/675844\"\n            },\n            \"system\": \"urn:oid:1.1.1.1.1.1\",\n            \"value\": \"Cerner123\"\n        }\n    ],\n    \"active\": true,\n    \"name\": [\n        {\n            \"use\": \"official\",\n            \"family\": \"Singh\",\n            \"given\": [\n                \"Abhishek\",\n                \"Kumar\"\n            ],\n            \"period\": {\n                \"start\": \"2010-05-17T14:54:31.000Z\"\n            }\n        },\n        {\n            \"use\": \"usual\",\n            \"given\": [\n                \"Bigby\"\n            ],\n            \"period\": {\n                \"start\": \"2012-05-22T15:45:50.000Z\"\n            }\n        }\n    ],\n    \"telecom\": [\n        {\n            \"system\": \"phone\",\n            \"value\": \"8168229121\",\n            \"use\": \"home\"\n        }\n    ],\n    \"gender\": \"male\",\n    \"birthDate\": \"1990-09-15\",\n    \"address\": [\n        {\n            \"use\": \"home\",\n            \"line\": [\n                \"121212 Metcalf Drive\",\n                \"Apartment 403\"\n            ],\n            \"city\": \"Kansas City\",\n            \"district\": \"Jackson\",\n            \"state\": \"KS\",\n            \"postalCode\": \"64199\",\n            \"country\": \"United States of America\",\n            \"period\": {\n                \"start\": \"2012-05-17T15:33:18.000Z\"\n            }\n        }\n    ],\n    \"maritalStatus\": {\n        \"coding\": [\n            {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-NullFlavor\",\n                \"code\": \"UNK\",\n                \"display\": \"Unknown\"\n            }\n        ],\n        \"text\": \"Unknown\"\n    },\n    \"communication\": [\n        {\n            \"language\": {\n                \"coding\": [\n                    {\n                        \"system\": \"urn:ietf:bcp:47\",\n                        \"code\": \"en\",\n                        \"display\": \"English\"\n                    }\n                ],\n                \"text\": \"English\"\n            },\n            \"preferred\": true\n        }\n    ],\n    \"generalPractitioner\": [\n        {\n            \"reference\": \"Practitioner/4122622\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "https://fhir-open.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d/Patient",
+									"protocol": "https",
+									"host": [
+										"fhir-open",
+										"cerner",
+										"com"
+									],
+									"path": [
+										"r4",
+										"ec2458f2-1e24-41c8-b71b-0e701af7583d",
+										"Patient"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

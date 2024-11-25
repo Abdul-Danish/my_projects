@@ -1,0 +1,1042 @@
+{
+	"info": {
+		"_postman_id": "cc9b3381-07a4-4e46-bac3-160b5c59e50e",
+		"name": "DD-Camunda-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "Process Definitions",
+			"item": [
+				{
+					"name": "definitions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-definition?latest=true",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"process-definition"
+							],
+							"query": [
+								{
+									"key": "latest",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "definitions/statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-definition/statistics",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"process-definition",
+								"statistics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "definitions/{id}statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-definition/invoice:2:96018dce-2c97-11eb-b381-f2693e7a1b30/statistics",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"process-definition",
+								"invoice:2:96018dce-2c97-11eb-b381-f2693e7a1b30",
+								"statistics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "definitions/key/{processId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-definition/key/invoice",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"process-definition",
+								"key",
+								"invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "definitions/key/{processId} Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-definition/key/invoice/statistics",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"process-definition",
+								"key",
+								"invoice",
+								"statistics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "definitions/key/{processId} StartFormVariables",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-definition/key/invoice/form-variables",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"process-definition",
+								"key",
+								"invoice",
+								"form-variables"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Process Instance",
+			"item": [
+				{
+					"name": "process-instance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-instance",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"process-instance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "process-instance/{key}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-instance?processDefinitionKey=invoice",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"process-instance"
+							],
+							"query": [
+								{
+									"key": "processDefinitionKey",
+									"value": "invoice"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "process-instance/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-instance/96c94a26-2c97-11eb-b381-f2693e7a1b30",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"process-instance",
+								"96c94a26-2c97-11eb-b381-f2693e7a1b30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/process-instance/{id}/variables",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-instance/968e63f4-2c97-11eb-b381-f2693e7a1b30/variables",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"process-instance",
+								"968e63f4-2c97-11eb-b381-f2693e7a1b30",
+								"variables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/process-instance/{id}/activity-instances",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-instance/96c94a26-2c97-11eb-b381-f2693e7a1b30/activity-instances",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"process-instance",
+								"96c94a26-2c97-11eb-b381-f2693e7a1b30",
+								"activity-instances"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "/filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/filter?resourceType=Task&itemCount=true",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "resourceType",
+									"value": "Task"
+								},
+								{
+									"key": "itemCount",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/filter/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/filter/962e9173-2c97-11eb-b381-f2693e7a1b30",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"filter",
+								"962e9173-2c97-11eb-b381-f2693e7a1b30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/task",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/task/count?processDefinitionKey=invoice",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"task",
+								"count"
+							],
+							"query": [
+								{
+									"key": "processDefinitionKey",
+									"value": "invoice"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/task/count",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/task/count",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"{{ENGINE_NAME}}",
+								"task",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/task/{id}/form",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/default/task/96c81198-2c97-11eb-b381-f2693e7a1b30/form",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"default",
+								"task",
+								"96c81198-2c97-11eb-b381-f2693e7a1b30",
+								"form"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/task/{id}/rendered-form",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/default/task/963e6f23-2c97-11eb-b381-f2693e7a1b30/rendered-form",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"default",
+								"task",
+								"963e6f23-2c97-11eb-b381-f2693e7a1b30",
+								"rendered-form"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/task/{id}/form-variables",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_HOST}}/engine/default/task/96308d52-2c97-11eb-b381-f2693e7a1b30/form-variables",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"path": [
+								"engine",
+								"default",
+								"task",
+								"96308d52-2c97-11eb-b381-f2693e7a1b30",
+								"form-variables"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Engine Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"setEngineName\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.length) {",
+							"       pm.collectionVariables.set(\"ENGINE_NAME\", jsonData[0].name); ",
+							"       console.log(pm.collectionVariables.get(\"ENGINE_NAME\"))",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=8B109B5F4C68B3B34D50259D54F0F80A; XSRF-TOKEN=2AC1AA5BD060EC5B040ABA5E5D3A63D6",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "2AC1AA5BD060EC5B040ABA5E5D3A63D6",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "demo",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "demo",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generic ANY",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-definition/statistics?rootIncidents=true",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"process-definition",
+						"statistics"
+					],
+					"query": [
+						{
+							"key": "rootIncidents",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authorization",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/authorization",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"authorization"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Batch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/batch",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"batch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Case Definition",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/case-definition",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"case-definition"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Case Execution",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/case-execution",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"case-execution"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Case Instance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/case-instance",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"case-instance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Decision Definition",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/decision-definition",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"decision-definition"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Decision Requirements Definition",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/decision-requirements-definition",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"decision-requirements-definition"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deployment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/deployment",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"deployment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Execution",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/execution",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"execution"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "External Task",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/external-task",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"external-task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Group",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/group",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"group"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "History - Activity Instance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/history/activity-instance",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"history",
+						"activity-instance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "History - Task",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/history/task",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"history",
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Identity - Group",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/identity/groups?userId=demo",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"identity",
+						"groups"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "demo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Incident",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/incident",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"incident"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Job",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/job",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"job"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Job Definition",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/job-definition",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"job-definition"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/message",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Metrics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/metrics",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"metrics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modification - Execute",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/modification/execute",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"modification",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Process Definition",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-definition",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"process-definition"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Process Instance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/process-instance",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"process-instance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tenant",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/tenant",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"tenant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/user",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Variable Instance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/engine/{{ENGINE_NAME}}/variable-instance",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"engine",
+						"{{ENGINE_NAME}}",
+						"variable-instance"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "password",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "aleem",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SERVER_HOST",
+			"value": "http://camunda.digitaldots.io:8080/engine-rest"
+		},
+		{
+			"key": "ENGINE_NAME",
+			"value": "default"
+		}
+	]
+}

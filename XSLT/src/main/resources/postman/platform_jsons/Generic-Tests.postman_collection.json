@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "415bd655-726b-44db-ae5f-dfdbd4a3f9fc",
+		"name": "Generic-Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/Users/aleem/Downloads/Consultation-ITEST.pdf"
+					}
+				},
+				"url": {
+					"raw": "https://dd-model-datasets.s3.us-west-2.amazonaws.com/datasets/5f44120f57571b135992c651/da1l6e4e2m084278562/v/1.0/ra1l6e3e9m375051413_1_0.zip?response-content-disposition=datasets/5f44120f57571b135992c651/da1l6e4e2m084278562/v/1.0/ra1l6e3e9m375051413_1_0.zip&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220113T143120Z&X-Amz-SignedHeaders=host&X-Amz-Expires=360000&X-Amz-Credential=AKIARCMMX7FAN3KF2TEO/20220113/us-west-2/s3/aws4_request&X-Amz-Signature=8b3de25c8b96ff7587e448e4c7a30c0934c1c46019d7b877db9bcd8d6a63399c",
+					"protocol": "https",
+					"host": [
+						"dd-model-datasets",
+						"s3",
+						"us-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"datasets",
+						"5f44120f57571b135992c651",
+						"da1l6e4e2m084278562",
+						"v",
+						"1.0",
+						"ra1l6e3e9m375051413_1_0.zip"
+					],
+					"query": [
+						{
+							"key": "response-content-disposition",
+							"value": "datasets/5f44120f57571b135992c651/da1l6e4e2m084278562/v/1.0/ra1l6e3e9m375051413_1_0.zip"
+						},
+						{
+							"key": "X-Amz-Algorithm",
+							"value": "AWS4-HMAC-SHA256"
+						},
+						{
+							"key": "X-Amz-Date",
+							"value": "20220113T143120Z"
+						},
+						{
+							"key": "X-Amz-SignedHeaders",
+							"value": "host"
+						},
+						{
+							"key": "X-Amz-Expires",
+							"value": "360000"
+						},
+						{
+							"key": "X-Amz-Credential",
+							"value": "AKIARCMMX7FAN3KF2TEO/20220113/us-west-2/s3/aws4_request"
+						},
+						{
+							"key": "X-Amz-Signature",
+							"value": "8b3de25c8b96ff7587e448e4c7a30c0934c1c46019d7b877db9bcd8d6a63399c"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

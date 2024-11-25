@@ -1,0 +1,3024 @@
+{
+	"info": {
+		"_postman_id": "44e9666c-5ac4-4dd8-b489-cd2a61ebf555",
+		"name": "Yodlee API Comprehensive",
+		"description": "[register]: https://developer.yodlee.com/user/register\n[dashboard]: https://developer.yodlee.com/api-dashboard\n\nFor a step-by-step tutorial introduction to Yodlee APIs and FastLink, see the [Quickstart Guide](https://developer.yodlee.com/vqs).\n\n# Overview\nThis Postman collection is for developers who \n* have already used the Getting Started collection \n* are aware of basics of Yodlee APIs, and \n* are ready to test all the APIs.\n\nYou can find the documentation of all Yodlee API calls <a href=\"https://developer.yodlee.com/apidocs/index.php\">here.</a><br>\n\nWe recommend you read our <a href=\"https://developer.yodlee.com/Yodlee_API/docs/v1_1/Data_Model\">Data Model</a> to understand the entities supported by Yodlee, and the fields you should expect as part of API responses.\n\n# Integration Steps\nOur <a href=\"https://developer.yodlee.com/getting_started_in_sandbox\">Getting Started Guide</a> will help you to technically utilize the API. Our <a href=\"https://developer.yodlee.com/Yodlee_API/docs/v1_1/API_Flow\">API Flow</a> will help you implement API requests in efficient way. All API calls have error codes decoded on <a href=\"https://developer.yodlee.com/Yodlee_API/docs/v1_1/API_Error_Codes\">this page</a>.\n\n# Linking financial data\nYodlee provides the FastLink tool for linking accounts.\nLearn about FastLink 4.0 [here](https://developer.yodlee.com/docs/fastlink/4.0/landing)\n\nTo link an account to work with this guide in Sandbox, you may run FastLink via [Codepen](https://codepen.io/team/yodlee-dev-ex/pen/zYrQrzJ?editors=0010).\nYou will need to create and copy over an auth token, and set the FastLink URL.\n\n<b>Using dummy data</b>\nThe Yodlee Sandbox allows you to access realistic dummy account data.\nYou must upgrade to Launch or higher to use actual accounts.\n\nTo link a dummy account, run FastLink.\nChoose \"Dag Site\" for the provider.\nUse \"YodTest.site16441.2\" for the username and \"site16441.2\" for the password.\n\n# Best Practices\n<a href=\"https://developer.yodlee.com/Yodlee_API/docs/v1_1/Best_Practices\">Best practices</a> to integrate our API effectively in your system.<br>\n\n# Postman variables used in API calls\nAll calls use certain Postman variables. Here is the list of all of them:<br><br>\n<b>{{host}}</b> The url for your environment. For sandbox environment, this should be <i>https://sandbox.api.yodlee.com/ysl</i><br>\n**{{clientId}}** - Copy/paste your `clientId` from your [dashboard][dashboard].<br>\n**{{secret}}** - Copy/paste your `secret` from your [dashboard][dashboard].<br>\n<b>{{loginName}}</b> This is the loginName of a registered User. “User” always means “end-user” on the Yodlee platform.  Users are your customers using your Yodlee-platform-based app. If you are using Sandbox environment, please use one of the 5 pre-registered test users.<br>",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "# Initial Setup & Token Generator",
+			"item": [
+				{
+					"name": "Generate Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Call validation\", function () {",
+									"    pm.expect(pm.variables.get('url')).to.match(/^https:\\/\\/[a-zA-Z.]+.yodlee.com\\/ysl$/, \"Please check your `url` setting ends with `yodlee.com/ysl`\");",
+									"",
+									"    pm.expect(pm.variables.get('userName')).to.not.match(/^[a-z0-9-]+_ADMIN$/, \"Do you really want the admin user?\");",
+									"",
+									"    pm.expect(response.errorMessage).to.be.an(\"undefined\", \"Unexpected error: \" + response.errorMessage);",
+									"});",
+									"",
+									"pm.test(\"Request succeeded\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"response.token && postman.setEnvironmentVariable(\"token\", response.token.accessToken); "
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"type": "text"
+							},
+							{
+								"key": "loginName",
+								"value": "{{userName}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "clientId",
+									"value": "{{clientId}}",
+									"type": "text"
+								},
+								{
+									"key": "secret",
+									"value": "{{secret}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}auth/token",
+							"host": [
+								"{{host}}auth"
+							],
+							"path": [
+								"token"
+							]
+						},
+						"description": "This step calls the auth endpoint and saves a token for you.\nCall it for the first time before you start and whenever your token expires.\nNote: Please update your clientId, secret, and userName in the environment section before you make this API call."
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register User*",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\":{\r\n        \"loginName\":\"Create Unique loginName\",\r\n        \"email\":\"ironman@marvel.com\",\r\n        \"preferences\":{\r\n            \"currency\":\"USD\",\r\n            \"timeZone\":\"PST\",\r\n            \"dateFormat\":\"MM/dd/yyyy\",\r\n            \"locale\":\"en_US\"\r\n        }\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/user/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						},
+						"description": "The register user service is used to register a user in Yodlee.\r\n\r\nThe loginName cannot include spaces and must be between 3 and 150 characters.\r\n\r\nlocale passed must be one of the supported locales for the customer. \r\n\r\nCurrency provided in the input will be respected in the derived services and the amount fields in the response will be provided in the preferred currency.\r\n\r\n\r\nNote: If you are using sandbox environment, you won't be able to test this API."
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/user",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get user details service is used to get the user profile information and the application preferences set at the time of user registration."
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\":{\r\n        \"email\":\"ironman@avengers.com\",\r\n        \"name\":{\r\n            \"first\":\"Apoorv\",\r\n            \"middle\":\"XYZ\",\r\n            \"last\":\"ABC\"\r\n        },\r\n        \"address\":{\r\n            \"address1\":\"200\",\r\n            \"address2\":\"200\",\r\n            \"state\":\"CA\",\r\n            \"city\":\"Salinas\",\r\n            \"zip\":\"93901\",\r\n            \"country\":\"US\"\r\n        },\r\n        \"preferences\":{\r\n            \"currency\":\"USD\",\r\n            \"timeZone\":\"PST\",\r\n            \"dateFormat\":\"MM/dd/yyyy\",\r\n            \"locale\":\"en_US\"\r\n        }\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/user",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe update user details service is used to update user details like name, address, currency preference, etc. You cannot update the username.\r\n\r\nCurrency provided in the input will be respected in the derived services and the amount fields in the response will be provided in the preferred currency.\r\n\r\nThe HTTP response code is 204 (Success without content)."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User*",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/user/unregister",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"unregister"
+							]
+						},
+						"description": "The delete user service is used to delete or unregister a user from Yodlee. \r\n\r\nOnce deleted, the information related to the users cannot be retrieved. \r\n\r\nThe HTTP response code is 204 (Success without content)."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Providers",
+			"item": [
+				{
+					"name": "Get Providers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/providers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"providers"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "pge",
+									"description": "name in minimum 1 character or routing number",
+									"disabled": true
+								},
+								{
+									"key": "priority",
+									"value": "",
+									"description": "search priority",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "",
+									"description": "skip (Min 0) - this is not applicable along with 'name' parameter",
+									"disabled": true
+								},
+								{
+									"key": "top",
+									"value": "",
+									"description": "top (Max 500) - this is not applicable along with 'name' parameter\t",
+									"disabled": true
+								},
+								{
+									"key": "dataset$filter",
+									"value": "",
+									"description": "expression to filter the providers by dataset(s) or dataset attribute(s)-  the default value will be the dataset or dataset attibutes enabled for the customer",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get provider service is used to get all the providers that are enabled, search a provider service by name or routing number and get popular sites of a region. \r\n\r\nThe valid values for priority are: \r\n\r\n   1. cobrand: Returns providers enabled for the cobrand (Default priority)\r\n \r\n   2. popular: Returns providers popular among users of the customer\r\n\r\nDatasets, attributes, and containers that are enabled for the customer alone will be returned in the response. Input for the dataset$filter should adhere to the following expression:\r\n\r\n<dataset.name>[<attribute.name>.container[<container> OR <container>] OR <attribute.name>.container[<container>]] OR <dataset.name>[<attribute.name> OR <attribute.name>]\r\n\r\ndataset$filter value examples:\r\n\r\nACCT_PROFILE[FULL_ACCT_NUMBER.container[bank OR investment OR creditCard]]\r\n\r\nACCT_PROFILE[FULL_ACCT_NUMBER.container[bank]]\r\n\r\nBASIC_AGG_DATA[ACCOUNT_DETAILS.container[bank OR investment] OR HOLDINGS.container[bank]] OR ACCT_PROFILE[FULL_ACCT_NUMBER.container[bank]]\r\n\r\nBASIC_AGG_DATA\r\n\r\nBASIC_AGG_DATA OR ACCT_PROFILE\r\n\r\nBASIC_AGG_DATA [ ACCOUNT_DETAILS OR HOLDINGS ]\r\n\r\nBASIC_AGG_DATA [ ACCOUNT_DETAILS] OR DOCUMENT\r\n\r\nNote: \r\n1. When this service is invoked without any filters, the service performs slowly and takes a few minutes to return data in the response.\r\n\r\n2. The recommendation is to use this service with filters when used in a flow involving user interactions."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Providers Count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment.",
+								"key": "Api-Version",
+								"value": "1.1"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/providers/count",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"providers",
+								"count"
+							],
+							"query": [
+								{
+									"key": "priority",
+									"value": "",
+									"description": "search priority",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "",
+									"description": "skip (Min 0) - this is not applicable along with 'name' parameter",
+									"disabled": true
+								},
+								{
+									"key": "top",
+									"value": "",
+									"description": "top (Max 500) - this is not applicable along with 'name' parameter\t",
+									"disabled": true
+								},
+								{
+									"key": "dataset$filter",
+									"value": "",
+									"description": "expression to filter the providers by dataset(s) or dataset attribute(s)-  the default value will be the dataset or dataset attibutes enabled for the customer",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Implementation Notes:\nThe count service provides the total number of providers that get returned in the GET /providers depending on the input parameters passed.\nIf you are implementing pagination for providers, call this endpoint before calling GET /providers to know the number of providers that are returned for the input parameters passed.\nThe functionality of the input parameters remains the same as that of the GET /providers endpoint."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Provider Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/providers/16441",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"providers",
+								"16441"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get provider detail service is used to get detailed information including the login form for a provider.\r\n\r\nThe response is a provider object that includes information such as name of the provider, provider's base URL, a list of containers supported by the provider, the login form details of the provider, etc.\r\n\r\nOnly enabled datasets, attributes and containers gets returned in the response."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Add Manual Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"account\": {\r\n         \"accountType\": \"BROKERAGE_CASH\",\r\n         \"accountName\": \"BNP Account\",\r\n         \"nickname\": \"Flood Cash\",\r\n         \"accountNumber\": \"1233\",\r\n         \"balance\":{\r\n            \"amount\": 133769,\r\n            \"currency\": \"USD\"\r\n           },\r\n         \"includeInNetWorth\": \"TRUE\",\r\n         \"memo\": \"This is an investment account\"\r\n      }\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/accounts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"accounts"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe add account service is used to add manual accounts.\r\n\r\nThe response of add account service includes the account name, account number and Yodlee generated account id.\r\n\r\nAll manual accounts added will be included as part of networth calculation by default.\r\n\r\nAdd manual account support is available for bank, card, investment, insurance, loan and bills container only."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/accounts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"accounts"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "",
+									"description": "ACTIVE/INACTIVE/TO_BE_CLOSED/CLOSED",
+									"disabled": true
+								},
+								{
+									"key": "container",
+									"value": "",
+									"description": "bank/creditCard/investment/insurance/loan/reward/bill/realEstate/otherAssets/otherLiabilities\t",
+									"disabled": true
+								},
+								{
+									"key": "providerAccountId",
+									"value": "",
+									"description": "providerAccountId",
+									"disabled": true
+								},
+								{
+									"key": "accountId",
+									"value": "",
+									"description": "comma separated accountIds",
+									"disabled": true
+								},
+								{
+									"key": "accountReconType",
+									"value": "",
+									"description": "UNRECONCILED (Default value), RECONCILED\t",
+									"disabled": true
+								},
+								{
+									"key": "include",
+									"value": "",
+									"description": "profile, holder, fullAccountNumber",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get accounts service provides information about accounts added by the user.\r\n\r\nBy default, this service returns information for active and to be closed accounts.\r\n\r\naccountReconType and reconInfo are relevant for investment accounts,provided the reconciliation feature is turned on.\r\n\r\naccountReconType input parameter will be ignored when container value passed is other than \"INVESTMENT\"."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/accounts/123?container=bank",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"accounts",
+								"123"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "",
+									"description": "profile, holder, fullAccountNumber\t",
+									"disabled": true
+								},
+								{
+									"key": "container",
+									"value": "bank"
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get account details service provides detailed information of an account.\r\n\r\n* Please use the accountId and container as received from GET /accounts API's response."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Historical Balances",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/accounts/historicalBalances",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"accounts",
+								"historicalBalances"
+							],
+							"query": [
+								{
+									"key": "includeCF",
+									"value": "",
+									"description": "consider carry forward logic for missing balances",
+									"disabled": true
+								},
+								{
+									"key": "fromDate",
+									"value": "",
+									"description": "from date for balance retrieval (YYYY-MM-DD)",
+									"disabled": true
+								},
+								{
+									"key": "toDate",
+									"value": "",
+									"description": "to date for balance retrieval (YYYY-MM-DD)",
+									"disabled": true
+								},
+								{
+									"key": "interval",
+									"value": "",
+									"description": "d-daily, w-weekly or m-monthly\t",
+									"disabled": true
+								},
+								{
+									"key": "accountReconType",
+									"value": "",
+									"description": "UNRECONCILED (Default value), RECONCILED\t",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "",
+									"description": "skip (Min 0)",
+									"disabled": true
+								},
+								{
+									"key": "top",
+									"value": "",
+									"description": "top (Max 500)",
+									"disabled": true
+								},
+								{
+									"key": "accountId",
+									"value": "",
+									"description": "\n",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe historical balances service is used to retrieve the historical balances for an account or a user.\r\n\r\nHistorical balances are daily (D), weekly (W), and monthly (M). \r\n\r\nThe interval input should be passed as D, W, and M to retrieve the desired historical balances. The default interval is daily (D). \r\n\r\nWhen no account id is provided, historical balances of the accounts that are active, to be closed, and closed are provided in the response. \r\n\r\nIf the fromDate and toDate are not passed, the last 90 days of data will be provided. \r\n\r\nThe fromDate and toDate should be passed in the YYYY-MM-DD format. \r\n\r\nThe date field in the response denotes the date for which the balance is requested.\r\n\r\nincludeCF needs to be sent as true if the customer wants to return carried forward balances for a date when the data is not available. \r\n\r\nasofDate field in the response denotes the date as of which the balance was updated for that account.\r\n\r\nWhen there is no balance available for a requested date and if includeCF is sent as true, the previous date for which the balance is available is provided in the response. When there is no previous balance available, no data will be sent. \r\n\r\naccountReconType input parameter is relevant for investment accounts, provided the reconciliation feature is turned on.\r\n\r\naccountReconType input parameter will be ignored when accountId(s) are passed."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"account\": {\r\n\t\t\"nickname\": \"Flood Cash\",\r\n\t\t\"accountStatus\": \"ACTIVE\",\r\n\t\t\"includeInNetWorth\": \"TRUE\",\r\n\t\t\"memo\": \"Personal Account\"\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/accounts/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"accounts",
+								""
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe update account service is used to update manual and aggregated accounts.\r\n\r\nThe HTTP response code is 204 (Success without content).\r\n\r\nUpdate manual account support is available for bank, card, investment, insurance, loan and bills container only."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/accounts/1234",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"accounts",
+								"1234"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe delete account service allows an account to be deleted.\r\n\r\nThis service does not return a response. The HTTP response code is 204 (Success with no content)."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Get Transactions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/transactions?fromDate=2013-01-01",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "fromDate",
+									"value": "2013-01-01"
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe Transaction service is used to get a list of transactions for a user.\r\n\r\nBy default, this service returns the last 30 days of transactions from today's date.\r\n\r\nThe search is performed on these attributes: original, consumer, and simple descriptions.\r\n\r\nValues for categoryId parameter can be fetched from get transaction category list service.\r\n\r\nThe categoryId is used to filter transactions based on system-defined category as well as user-defined category.\r\n\r\nUser-defined categoryIds should be provided in the filter with the prefix \"U\". E.g. U10002 \r\n\r\nThe skip and top parameters are useful for paginating transactions (i.e., to fetch small transaction payloads for performance reasons)\r\n\r\nDouble quotes in the merchant name will be prefixed by backslashes (\\) in the response, e.g. Toys \\\"R\\\" Us.\r\n\r\nNote 1: Category input is deprecated and replaced with categoryId. \r\n\r\nNote 2: TDE is made available for bank and card accounts and for the US market only.The address field in the response is available only when the TDE key is turned on. \r\n\r\naccountReconType input parameter is relevant for investment accounts, provided the reconciliation feature is turned on."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Transaction",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"transaction\":{\r\n\t\t\"container\":\"bank\",\r\n\t\t\"categoryId\": 32,\r\n\t\t\"categorySource\":\"SYSTEM\",\r\n\t\t\"description\":{\r\n\t\t\t\"consumer\":\"Electronic Purchases\"\r\n\t\t},\r\n\t\t\"memo\":\"acsd\"\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/transactions/123",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"123"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe update transaction service is used to update the categoryName,description, memo for a transaction.\r\n\r\nThe HTTP response code is 204 (Success without content)."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transactions Count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/transactions/count?fromDate=2013-01-01",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"count"
+							],
+							"query": [
+								{
+									"key": "container",
+									"value": "",
+									"description": "bank/creditCard/investment/insurance/loan",
+									"disabled": true
+								},
+								{
+									"key": "baseType",
+									"value": "",
+									"description": "DEBIT/CREDIT",
+									"disabled": true
+								},
+								{
+									"key": "keyword",
+									"value": "",
+									"description": "transaction search text",
+									"disabled": true
+								},
+								{
+									"key": "accountId",
+									"value": "",
+									"description": "comma separated accountIds",
+									"disabled": true
+								},
+								{
+									"key": "fromDate",
+									"value": "2013-01-01",
+									"description": "transaction from date (YYYY-MM-DD)"
+								},
+								{
+									"key": "toDate",
+									"value": "",
+									"description": "transaction end date (YYYY-MM-DD)",
+									"disabled": true
+								},
+								{
+									"key": "categoryId",
+									"value": "",
+									"description": "comma separated categoryIds\t",
+									"disabled": true
+								},
+								{
+									"key": "highLevelCategoryId",
+									"value": "",
+									"description": "comma separated highLevelCategoryIds",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": " ",
+									"description": "transaction type (SELL,SWEEP, etc.)\t",
+									"disabled": true
+								},
+								{
+									"key": "categoryType",
+									"value": "",
+									"description": "transaction category type (UNCATEGORIZE, INCOME, TRANSFER, EXPENSE or DEFERRED_COMPENSATION)\t",
+									"disabled": true
+								},
+								{
+									"key": "accountReconType",
+									"value": "",
+									"description": "UNRECONCILED (Default value), RECONCILED\t",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe count service provides the total number of transactions of a particular user.\r\n\r\naccountReconType input parameter is relevant for investment accounts, provided the reconciliation feature is turned on.\r\n\r\naccountReconType input parameter will be ignored when container value passed is other than \"INVESTMENT\".\r\n\r\naccountReconType input parameter will be ignored when accountId(s) are passed."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\t\"categoryName\": \"My Expense\",\r\n\t\t\"parentCategoryId\": 25 \r\n\t}"
+						},
+						"url": {
+							"raw": "{{host}}/transactions/categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"categories"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe create transaction categories service is used to create user-defined categories for a system-defined category.\r\n\r\nThe parentCategoryId is the system-defined category id.This can be retrieved using get transaction categories service.\r\n\r\nThe categoryName can accept minimum of 1, maximum of 50 alphanumeric or special characters.\r\n\r\nThe HTTP response code is 201 (Created successfully)."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction Category List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/transactions/categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"categories"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe categories service returns the list of available transaction categories.\r\n\r\nHigh level category is returned in the response only if it is opted by the customer.\r\n\r\nWhen invoked by passing the cobrand session, this service returns the supported transaction categories at the cobrand level. \r\n\r\nWhen invoked by passing the cobrand session and the user session, this service returns the transaction categories along with user-defined categories.\r\n\r\nDouble quotes in the user-defined category name will be prefixed by backslashes (\\) in the response, e.g. Toys \\\"R\\\" Us.\r\n\r\nSource and id are the primary attributes of the category entity."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"id\":2,\r\n\t\"source\":\"SYSTEM\",\r\n\t\"categoryName\":\"TruckExpenses\" \r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/transactions/categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"categories"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe update transaction categories service is used to update the transaction category name for a high level category, a system-defined category and a user-defined category.\r\n\r\nThe renamed category can be set back to the original name by passing an empty string for categoryName.\r\n\r\nThe categoryName can accept minimum of 1, maximum of 50 alphanumeric or special characters.\r\n\r\nThe HTTP response code is 204 (Success without content)."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/transactions/categories/123",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"categories",
+								"123"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe delete transaction categories service is used to delete the given user-defined category.\r\n\r\nThe HTTP response code is 204 (Success without content)."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Transaction Categorization Rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/transactions/categories/rules?ruleParam={\n\t\"rule\" : {\n\t\t\"categoryId\" : 2,\n\t\t\"priority\" : 1,\n\t\t\"source\" : \"SYSTEM\",\n\t\t\"ruleClause\" : [\n\t\t\t{\"field\" : \"description\", \"operation\" : \"stringContains\", \"value\" : \"gift\"},\n\t\t\t{\"field\" : \"amount\", \"operation\" : \"numberGreaterThan\", \"value\" : \"100\"}\n\t\t]\n\t}\n}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"categories",
+								"rules"
+							],
+							"query": [
+								{
+									"key": "ruleParam",
+									"value": "{\n\t\"rule\" : {\n\t\t\"categoryId\" : 2,\n\t\t\"priority\" : 1,\n\t\t\"source\" : \"SYSTEM\",\n\t\t\"ruleClause\" : [\n\t\t\t{\"field\" : \"description\", \"operation\" : \"stringContains\", \"value\" : \"gift\"},\n\t\t\t{\"field\" : \"amount\", \"operation\" : \"numberGreaterThan\", \"value\" : \"100\"}\n\t\t]\n\t}\n}",
+									"description": "rules (JSON format) to categorize the transactions"
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe create transaction categorization rule service is used to create a categorization rule for both system-defined category as well as user-defined category.\r\n\r\nruleParam is a JSON input that contains the following fields:\r\n\r\n categoryId - This field is mandatory and numeric\r\n \r\n priority - This field is optional and numeric.Priority decides the order in which the rule gets applied on transactions.\r\n \r\n ruleClause - This field is mandatory and should contain at least one rule\r\n \r\n field - The value can be description or amount\r\n \r\n   If the field value is description then,\r\n   \r\n     1. operation - value can be stringEquals or stringContains\r\n     \r\n     2. value - value should be min of 3 and max of 50 characters\r\n     \r\n   If the field value is amount then, \r\n   \r\n     1. operation - value can be numberEquals, numberLessThan, numberLessThanEquals, numberGreaterThan or numberGreaterThanEquals\r\n     \r\n     2. value - min value 0 and a max value of 99999999999.99 is allowed\r\n         \r\nThe HTTP response code is 201 (Created Successfully)."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction Categorization Rules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/transactions/categories/rules",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"categories",
+								"rules"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get transaction categorization rule service is used to get all the categorization rules."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Transaction Categorization Rules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"rule\":{\r\n        \"categoryId\":3,\r\n        \"priority\":1,\r\n        \"source\":\"SYSTEM\",\r\n        \"ruleClause\":[\r\n            {\r\n                \"field\":\"description\",\r\n                \"operation\":\"stringContains\",\r\n                \"value\":\"gift\"\r\n            },\r\n            {\r\n                \"field\":\"amount\",\r\n                \"operation\":\"numberGreaterThan\",\r\n                \"value\":98\r\n            }\r\n        ]\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/transactions/categories/rules/123",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"categories",
+								"rules",
+								"123"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe update transaction categorization rule service is used to update a categorization rule for both system-defined category as well as user-defined category.\r\n\r\nruleParam JSON input should be as explained in the create transaction categorization rule service.\r\n\r\nThe HTTP response code is 204 (Success without content)."
+					},
+					"response": []
+				},
+				{
+					"name": "Run Transaction Categorization Rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/transactions/categories/rules/123?action=run",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"categories",
+								"rules",
+								"123"
+							],
+							"query": [
+								{
+									"key": "ruleId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "action",
+									"value": "run"
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe run transaction categorization rule service is used to run a rule on transactions, to categorize the transactions.\r\n\r\nThe HTTP response code is 204 (Success with no content)."
+					},
+					"response": []
+				},
+				{
+					"name": "Run All Transaction Categorization Rules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/transactions/categories/rules?action=run",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"categories",
+								"rules"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "run"
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe run all transaction categorization rule service runs all the transaction categorization rules defined by the user to categorize the transactions.\r\n\r\nThe HTTP response code is 204 (Success without content)."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Transaction Categorization Rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/transactions/categories/rules/123",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"categories",
+								"rules",
+								"123"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe delete transaction categorization rule service is used to delete the given user-defined transaction categorization rule for both system-defined category as well as user-defined category.\r\n\r\nThis will delete all the corresponding rule clauses associated with the rule.\r\n\r\nThe HTTP response code is 204 (Success without content)."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Provider Accounts",
+			"item": [
+				{
+					"name": "Add Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"loginForm\": {\r\n\t\t\"id\": 16103,\r\n\t\t\"forgetPasswordURL\": \"http://64.14.28.129/dag/index.do\",\r\n\t\t\"formType\": \"login\",\r\n\t\t\"row\": [{\r\n\t\t\t\t\"id\": 150862,\r\n\t\t\t\t\"label\": \"Catalog\",\r\n\t\t\t\t\"form\": \"0001\",\r\n\t\t\t\t\"fieldRowChoice\": \"0001\",\r\n\t\t\t\t\"field\": [{\r\n\t\t\t\t\t\"id\": 65499,\r\n\t\t\t\t\t\"name\": \"LOGIN\",\r\n\t\t\t\t\t\"type\": \"text\",\r\n\t\t\t\t\t\"value\": \"<encrypted Value here>\",\r\n\t\t\t\t\t\"isOptional\": false,\r\n\t\t\t\t\t\"valueEditable\": true\r\n\t\t\t\t}]\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"id\": 150863,\r\n\t\t\t\t\"label\": \"Password\",\r\n\t\t\t\t\"form\": \"0001\",\r\n\t\t\t\t\"fieldRowChoice\": \"0002\",\r\n\t\t\t\t\"field\": [{\r\n\t\t\t\t\t\"id\": 65500,\r\n\t\t\t\t\t\"name\": \"PASSWORD\",\r\n\t\t\t\t\t\"type\": \"password\",\r\n\t\t\t\t\t\"value\": \"<encrypted Value here>\",\r\n\t\t\t\t\t\"isOptional\": false,\r\n\t\t\t\t\t\"valueEditable\": true\r\n\t\t\t\t}]\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/providerAccounts?providerId=16441",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"providerAccounts"
+							],
+							"query": [
+								{
+									"key": "providerId",
+									"value": "16441"
+								}
+							]
+						},
+						"description": "The add account service is used to link the user's account with the provider site in the Yodlee system. Providers that require multifactor authentication or open banking are also supported by this service. The response includes the Yodlee generated ID (providerAccountId) of the account along with the refresh information.\r\n\r\nOpen Banking Implementation Notes:\r\nThe add account service can be used to create the field entity with the authParameters provided in the get provider details service. Populate the field entity with the values received from the open banking site and pass it to this service.\r\n\r\nCredential-based Implementation Notes:\r\n1. The loginForm or the field array are the objects under the provider object are obtained from the get provider details service response.\r\n2. The credentials provided by the user should be embedded in the loginForm or field array object.\r\n3. While testing the PKI feature, encrypt the credentials using the encryption utility.\r\n4. The data to be retrieved from the provider site can be passed using datasetName or dataset. If datasetName is passed, all the attributes that are implicitly configured for the dataset will be retrieved.\r\n5. If the customer has not subscribed to the REFRESH event webhooks notification for accounts that require multifactor authentication (MFA), the get providerAccount service has to be called continuously till the login form (supported types are token, question & answer, and captcha) is returned in the response.\r\n6. The update account service should be called to post the MFA information to continue adding the account.\r\n\r\nGeneric Implementation Notes:\r\n1. The get provider account details service has to be polled continuously till the account addition status is FAILED or PARTIAL_SUCCESS or SUCCESS\r\n2. Refer to the add account flow chart for implementation.\r\n3. The get provider account details has webhooks support. If the customer has subscribed to the REFRESH event notification and has invoked this service to add an account, relevant notifications will be sent to the customer.\r\n4. A dataset may depend on another dataset for retrieval, so the response will include the requested datasets and the dependent datasets.\r\nIt is necessary to check all the dataset additional statuses returned in the response, as the provider account status is drawn from the dataset additional statuses.\r\n5. Pass linkedProviderAccountId in the input to link a user’s credential-based providerAccount with the open banking providerAccount. Ensure that the credential-based providerAccount belongs to the same institution.\r\n6. The content type has to be passed as application/json in the body parameter."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Provider Accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/providerAccounts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"providerAccounts"
+							]
+						},
+						"description": "The get provider accounts service is used to return all the provider accounts added by the user. This includes the failed and successfully added provider accounts."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Provider Account Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/providerAccounts/123",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"providerAccounts",
+								"123"
+							]
+						},
+						"description": "The get provider account details service is used to learn the status of adding accounts and updating accounts.\r\nThis service has to be called continuously to know the progress level of the triggered process. This service also provides the MFA information requested by the provider site.\r\nWhen include=credentials,questions is passed as input, the service returns the credentials (non-password values) and questions stored in the Yodlee system for that provider account.\r\nNote: The password and answer fields are not returned in the response."
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Profile Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/providerAccounts/profile?providerAccountId=123",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"providerAccounts",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "providerAccountId",
+									"value": "123"
+								}
+							]
+						},
+						"description": "The get provider accounts profile service is used to return the user profile details that are associated to the provider account."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/providerAccounts?providerAccountIds=123",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"providerAccounts"
+							],
+							"query": [
+								{
+									"key": "providerAccountIds",
+									"value": "123"
+								}
+							]
+						},
+						"description": "Credential-based Implementation Notes:\r\nThe update account API is used to:\r\n• Retrieve the latest information for accounts that belong to one providerAccount from the provider site. You must allow at least 15 min between requests.\r\n• Update account credentials when the user has changed the authentication information at the provider site.\r\n• Post MFA information for the MFA-enabled provider accounts during add and update accounts.\r\n• Retrieve the latest information of all the eligible accounts that belong to the user.\r\n\r\nEdit Credentials - Notes:\r\n• If credentials have to be updated in the Yodlee system, one of the following should be provided:\r\n        ◦ LoginForm\r\n        ◦ Field array\r\n• LoginForm or the field array, can be obtained from the GET providerAccounts/{providerAccountId}?include=credentials API response.\r\n• The credentials provided by the user should be embedded in the loginForm or field array object before you pass to this API.\r\n\r\nPosting MFA Info - Notes:\r\n1. You might receive the MFA request details to be presented to the end user in the GET providerAccounts/{providerAccount} API during polling or through REFRESH webhooks notificaiton.\r\n2. After receiving the inputs from your user:\r\n    a.Embed the MFA information provided by the user in the loginForm or field array object.\r\n    b.Pass one of the following objects as input to this API:\r\n        • LoginForm\r\n        • Field array\r\n\r\nPoints to consider:\r\n• Data to be retrieved from the provider site can be overridden using datasetName or dataset. If you do pass datasetName, all the datasets that are implicitly configured for the dataset will be retrieved. This action is allowed for edit credentials and single provider account refresh flows only.\r\n• Encrypt the credentials and MFA information using the public key.\r\n• While testing the PKI feature in sandbox environment, encrypt the password credentials and answers to the MFA questions using the encryption tool.\r\n\r\n--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\r\nOpen Banking (OB)-based Authentication - Notes:\r\nThe update account API is used to:\r\n• Retrieve the latest information for accounts from the provider site.\r\n• Update the renewed consent for an existing provider account.\r\n• Retrieve the latest information for all the eligible accounts that belong to the user.\r\n\r\nYodlee recommendations:\r\n• Create the field entity with the authParameters provided in the get provider details API.\r\n• Populate the field entity with the values received from the OB site and pass it to this API.\r\n\r\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\r\nUpdate All Eligible Accounts - Notes:\r\n• This API will trigger a refresh for all the eligible provider accounts(both OB and credential-based accounts).\r\n• This API will not refresh closed, inactive, or UAR accounts, or accounts with refreshes in-progress or recently refreshed non-OB accounts.\r\n• No parameters should be passed to this API to trigger this action.\r\n• Do not call this API often. Our recommendation is to call this only at the time the user logs in to your app because it can hamper other API calls performance.\r\n• The response only contains information for accounts that were refreshed. If no accounts are eligible for refresh, no response is returned.\r\n\r\n-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\r\nWhat follows are common to both OB and credential-based authentication implementations:\r\n• Check the status of the providerAccount before invoking this API. Do not call this API to trigger any action on a providerAccount when an action is already in progress for the providerAccount.\r\n• If the customer has subscribed to the REFRESH event notification and invoked this API, relevant notifications will be sent to the customer.\r\n• A dataset may depend on another dataset for retrieval, so the response will include the requested and dependent datasets.\r\n• Check all the dataset additional statuses returned in the response because the provider account status is drawn from the dataset additional statuses.\r\n• Updating preferences using this API will trigger refreshes.\r\n• Pass linkedProviderAccountId in the input to link a user’s credential-based providerAccount with the OB providerAccount or viceversa. Ensure that the both the providerAccounts belong to the same institution.\r\n• The content type has to be passed as application/json for the body parameter"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Preferences",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment.",
+								"key": "Api-Version",
+								"value": "1.1"
+							},
+							{
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment.",
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"preferences\":{\r\n  \"isDataExtractsEnabled\":true,\r\n  \"isAutoRefreshEnabled\":true\r\n }\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/providerAccounts/{providerAccountId}/preferences",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"providerAccounts",
+								"{providerAccountId}",
+								"preferences"
+							]
+						},
+						"description": "This endpoint is used to update preferences like data extracts and auto refreshes without triggering refresh for the providerAccount.\r\nSetting isDataExtractsEnabled to false will not trigger data extracts notification and dataExtracts/events will not reflect any data change that is happening for the providerAccount.\r\nModified data will not be provided in the dataExtracts/userData endpoint.\r\nSetting isAutoRefreshEnabled to false will not trigger auto refreshes for the provider account."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Provider Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/providerAccounts/123",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"providerAccounts",
+								"123"
+							]
+						},
+						"description": "The delete provider account service is used to delete a provider account from the Yodlee system. This service also deletes the accounts that are created in the Yodlee system for that provider account. \r\n\r\nThis service does not return a response. The HTTP response code is 204 (Success with no content)."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Statements",
+			"item": [
+				{
+					"name": "Get Statements",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/statements",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"statements"
+							],
+							"query": [
+								{
+									"key": "container",
+									"value": "",
+									"description": "creditCard/loan/bill/insurance\t",
+									"disabled": true
+								},
+								{
+									"key": "accountId",
+									"value": "",
+									"description": "account id",
+									"disabled": true
+								},
+								{
+									"key": "isLatest",
+									"value": "",
+									"description": "is latest (true/false)\t",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "",
+									"description": "ACTIVE/TO_BE_CLOSED/CLOSED",
+									"disabled": true
+								},
+								{
+									"key": "fromDate",
+									"value": "",
+									"description": "from date for statement retrieval (YYYY-MM-DD)\t",
+									"disabled": true
+								}
+							]
+						},
+						"description": "The statements service is used to get the list of statement related information.\r\nBy default, all the latest statements of active and to be closed accounts are retrieved for the user.\r\nCertain sites do not have both a statement date and a due date. When a fromDate is passed as an\r\ninput, all the statements that have the due date on or after the passed date are retrieved.\r\nFor sites that do not have the due date, statements that have the statement date\r\non or after the passed date are retrieved.\r\nThe default value of \"isLatest\" is true. To retrieve historical statements isLatest needs to be set to false."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Derived",
+			"item": [
+				{
+					"name": "Get Holding Summary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/derived/holdingSummary",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"derived",
+								"holdingSummary"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "",
+									"description": "details",
+									"disabled": true
+								},
+								{
+									"key": "classificationType",
+									"value": "",
+									"description": "e.g. country, sector, etc.\t",
+									"disabled": true
+								},
+								{
+									"key": "accoutReconType",
+									"value": "",
+									"description": "UNRECONCILED (Default value), RECONCILED\t",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get holding summary service is used to get the summary of asset classifications for the user.\r\n\r\nBy default, accounts with status as ACTIVE and TO BE CLOSED will be considered.\r\n\r\nIf the include parameter value is passed as details then a summary with holdings and account information is returned.\r\n\r\naccountReconType input parameter is relevant for investment accounts, provided the reconciliation feature is turned on."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction Summary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/derived/transactionSummary?groupBy=CATEGORY&categoryType=INCOME",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"derived",
+								"transactionSummary"
+							],
+							"query": [
+								{
+									"key": "accountId",
+									"value": "",
+									"description": "account id",
+									"disabled": true
+								},
+								{
+									"key": "groupBy",
+									"value": "CATEGORY",
+									"description": "CATEGORY_TYPE, HIGH_LEVEL_CATEGORY or CATEGORY\t"
+								},
+								{
+									"key": "categoryId",
+									"value": "",
+									"description": "comma separated categoryIds",
+									"disabled": true
+								},
+								{
+									"key": "fromDate",
+									"value": "",
+									"description": "YYYY-MM-DD format",
+									"disabled": true
+								},
+								{
+									"key": "toDate",
+									"value": "",
+									"description": "YYYY-MM-DD format",
+									"disabled": true
+								},
+								{
+									"key": "interval",
+									"value": "",
+									"description": "D-daily, W-weekly, M-mothly or Y-yearly\t",
+									"disabled": true
+								},
+								{
+									"key": "include",
+									"value": "",
+									"description": "details",
+									"disabled": true
+								},
+								{
+									"key": "includeUserCategory",
+									"value": "",
+									"description": "TRUE/FALSE",
+									"disabled": true
+								},
+								{
+									"key": "categoryType",
+									"value": "INCOME"
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe transaction summary service provides the summary values of transactions for the given date range by category type, high-level categories, or system-defined categories.\r\n\r\nYodlee has the transaction data stored for a day, month, year and week per category as per the availability of user's data. If the include parameter value is passed as details, then summary details will be returned depending on the interval passed-monthly is the default.\r\n\r\nNotes:\r\n1.\tDetails can be requested for only one system-defined category\r\n2.\tDates will not be respected for monthly, yearly, and weekly details\r\n3.\tWhen monthly details are requested, only the fromDate and toDate month will be respected\r\n4.\tWhen yearly details are requested, only the fromDate and toDate year will be respected\r\n5.\tFor weekly data points, details will be provided for every Sunday date available within the fromDate and toDate"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Networth Summary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/derived/networth?interval=D",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"derived",
+								"networth"
+							],
+							"query": [
+								{
+									"key": "accountId",
+									"value": "",
+									"description": "account id",
+									"disabled": true
+								},
+								{
+									"key": "fromDate",
+									"value": "",
+									"description": "YYYY-MM-DD format",
+									"disabled": true
+								},
+								{
+									"key": "toDate",
+									"value": "",
+									"description": "YYYY-MM-DD format",
+									"disabled": true
+								},
+								{
+									"key": "interval",
+									"value": "D",
+									"description": "D-daily, W-weekly, M-mothly or Y-yearly\t"
+								},
+								{
+									"key": "include",
+									"value": "",
+									"description": "details",
+									"disabled": true
+								},
+								{
+									"key": "accountReconType",
+									"value": "",
+									"description": "UNRECONCILED (Default value), RECONCILED\t",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "",
+									"description": "skip (min 0)",
+									"disabled": true
+								},
+								{
+									"key": "top",
+									"value": "",
+									"description": "top(max 500)\t",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get networth service is used to get the networth for the user.\r\n\r\nIf the include parameter value is passed as details then networth with historical balances is returned. \r\n\r\naccountReconType input parameter is relevant for investment accounts, provided the reconciliation feature is turned on.\r\n\r\naccountReconType input parameter will be ignored when accountId(s) are passed."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Holdings",
+			"item": [
+				{
+					"name": "Get Holdings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/holdings",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"holdings"
+							],
+							"query": [
+								{
+									"key": "accountId",
+									"value": "",
+									"description": "account id",
+									"disabled": true
+								},
+								{
+									"key": "providerAccountId",
+									"value": "",
+									"description": "providerAccountId",
+									"disabled": true
+								},
+								{
+									"key": "include",
+									"value": "",
+									"description": "assetClassification",
+									"disabled": true
+								},
+								{
+									"key": "assetClassification.classificationType",
+									"value": "",
+									"description": "e.g. country, sector, etc.",
+									"disabled": true
+								},
+								{
+									"key": "accountReconType",
+									"value": "",
+									"description": "UNRECONCILED (Default value), RECONCILED\t",
+									"disabled": true
+								},
+								{
+									"key": "classificationValue",
+									"value": "",
+									"description": "e.g. US\t",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get holdings service is used to get the list of holdings of a user.\r\n\r\nSupported holding types can be employeeStockOption, moneyMarketFund, bond, etc. and is obtained using get holding type list service. \r\n\r\nAsset classifications for the holdings need to be requested through the \"include\" parameter.\r\n\r\nAsset classification information for holdings are not available by default, as it is a premium feature.\r\n\r\naccountReconType input parameter is relevant for investment accounts, provided the reconciliation feature is turned on."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Holding Type List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/holdings/holdingTypeList",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"holdings",
+								"holdingTypeList"
+							]
+						},
+						"description": "Implementation Notes:\r\nThe get holding types list service is used to get the supported holding types.\r\n\r\nThe response includes different holding types such as future, moneyMarketFund, stock, etc.\r\n\r\nThis service should be invoked by passing cobrand session only and returns the supported holding types.\r\n\r\nProviding a user session parameter causes an error."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Asset Classification List*",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/holdings/assetClassificationList",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"holdings",
+								"assetClassificationList"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\n*This API requires enablement of Asset Classification.\r\nThe get asset classifications list service is used to get the supported asset classifications. \r\n\r\nThe response includes different classification types like assetClass, country, sector, style, etc., and the values corresponding to each type.\r\n\r\nThis service should be invoked by passing cobrand session only and returns the supported asset classification.\r\n\r\nProviding a user session parameter causes an error."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Security Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/holdings/securities?holdingId={holdingId}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"holdings",
+								"securities"
+							],
+							"query": [
+								{
+									"key": "holdingId",
+									"value": "{holdingId}",
+									"description": "comma separated holdingId"
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get security details service is used to get all the security information for the holdings."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Data Extracts*",
+			"item": [
+				{
+					"name": "Get User Data*",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/dataExtracts/userData?loginName={{loginName}}&fromDate=2019-04-21T10:18:44Z&toDate=2019-04-21T10:19:44Z",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"dataExtracts",
+								"userData"
+							],
+							"query": [
+								{
+									"key": "loginName",
+									"value": "{{loginName}}"
+								},
+								{
+									"key": "fromDate",
+									"value": "2019-04-21T10:18:44Z"
+								},
+								{
+									"key": "toDate",
+									"value": "2019-04-21T10:19:44Z"
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get user data service is used to get a user's modified data for a particular period of time for accounts, transactions, holdings, and provider account information.\r\n\r\nCobrand session only has to be passed to invoke this service. The time difference between fromDate and toDate fields cannot be more than 60 minutes.\r\n\r\nRefer to dataExtracts page for more information.<br>\r\n\r\nNote: If you are using sandbox environment, you won't be able to test this feature."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Events*",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/dataExtracts/events?eventName=DATA_UPDATES&fromDate=2019-04-21T10:18:44Z&toDate=2019-04-21T10:19:44Z",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"dataExtracts",
+								"events"
+							],
+							"query": [
+								{
+									"key": "eventName",
+									"value": "DATA_UPDATES"
+								},
+								{
+									"key": "fromDate",
+									"value": "2019-04-21T10:18:44Z"
+								},
+								{
+									"key": "toDate",
+									"value": "2019-04-21T10:19:44Z"
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get extracts events service is used to learn about occurrences of data extract related events. This service currently supports only the DATA_UPDATES event.\r\n\r\nPassing the event name as DATA_UPDATES provides information about users for whom data has been modified in the system for the specified time range. To learn more, please refer to the dataExtracts page.\r\n\r\nThe fromDate or the toDate parameters value cannot be less than 7 days. The time difference between these fields cannot be more than 60 minutes.\r\n\r\nNote: If you are using sandbox environment, you won't be able to test this feature."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Documents*",
+			"item": [
+				{
+					"name": "Get Documents*",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/documents",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"documents"
+							],
+							"query": [
+								{
+									"key": "docType",
+									"value": "",
+									"description": "accepts only one of the following valid document types: STMT, TAX, and EBILL.",
+									"disabled": true
+								},
+								{
+									"key": "keyword",
+									"value": "",
+									"description": "the string used to search a document by its name",
+									"disabled": true
+								},
+								{
+									"key": "providerAccountId",
+									"value": "",
+									"description": "the unique identifier of the provider accounts. If a providerAccountId is not provided, then retrieves documents for all providerAccountIds for the consumer.",
+									"disabled": true
+								},
+								{
+									"key": "accountId",
+									"value": "37274604",
+									"description": "the unique identifier of an account. Retrieve documents for a given accountId",
+									"disabled": true
+								},
+								{
+									"key": "fromDate",
+									"value": "",
+									"description": "the date from which documents have to be retrieved",
+									"disabled": true
+								},
+								{
+									"key": "toDate",
+									"value": "",
+									"description": "the date to which documents have to be retrieved",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get documents service allows customers to search or retrieve metadata related to documents. The API returns the document as per the input parameters passed. If no date range is provided then all downloaded documents will be retrieved. Details of deleted documents or documents associated to closed providerAccount will not be returned. \r\n\r\nMetadata related to documents can be searched or retrieved only if the document related dataset attributes are subscribed."
+					},
+					"response": []
+				},
+				{
+					"name": "Download A Document*",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"url": {
+							"raw": "{{host}}/documents/{documentId}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"documents",
+								"{documentId}"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe get document details service allows consumers to download a document. The document is provided in base64.\r\n\r\nDocuments can be downloaded only if the document related dataset attributes are subscribed."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Document*",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/documents/{documentId}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"documents",
+								"{documentId}"
+							]
+						},
+						"description": "Implementation Notes:\r\n\r\nThe delete document service allows the consumer to delete a document. The deleted document will not be returned in the get documents API. The HTTP response code is 204 (success without content).\r\n\r\nDocuments can be deleted only if the document related dataset attributes are subscribed."
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Auth*",
+			"item": [
+				{
+					"name": "Delete Token",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/auth/token",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"token"
+							]
+						},
+						"description": "This endpoint revokes the token passed in the Authorization header for API Key based authentication.\r\nThis service does not return a response. The HTTP response code is 204 (Success with no content)."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete API Key*",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/auth/apiKey/{key}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"apiKey",
+								"{key}"
+							]
+						},
+						"description": "This endpoint allows an existing API key to be deleted.\r\nYou can use one of the following authorization methods to access this API:\r\n\r\n    1. cobsession\r\n    2. JWT token\r\n\r\nNotes:\r\nThis service is not available in developer sandbox environment and will be made available\r\nfor testing in your dedicated environment."
+					},
+					"response": []
+				},
+				{
+					"name": "Get API Key*",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/auth/apiKey",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"apiKey"
+							]
+						},
+						"description": "This endpoint provides the list of API keys that exist for a customer.\r\nYou can use one of the following authorization methods to access this API:\r\n\r\n    1. cobsession\r\n    2. JWT token\r\n\r\nNotes:\r\nThis service is not available in developer sandbox environment and will be made available for testing in your dedicated environment."
+					},
+					"response": []
+				},
+				{
+					"name": "Generate API Key*",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Api-Version",
+								"type": "text",
+								"value": "1.1"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"publicKey\": \"-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOlbKz02FHz+Zekjim1rYosdKeuXteOLbH4vuKIHQhwIDAQAB-----END PUBLIC KEY-----\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{host}}/auth/apiKey",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"apiKey"
+							]
+						},
+						"description": "This endpoint is used to generate an API key. The RSA public key you provide should be in 2048 bit PKCS#8 encoded format.\r\nA public key is a mandatory input for generating the API key. The public key should be a unique key. The apiKeyId you get in\r\nthe response is what you should use to generate the JWT token. You can use one of the following authorization methods to access\r\nthis API:\r\n\r\n    1. cobsession\r\n    2. JWT token\r\n\r\nAlternatively, you can use base 64 encoded cobrandLogin and cobrandPassword in the Authorization header (Format: Authorization: Basic )\r\n\r\nNote:\r\nThis service is not available in developer sandbox environment and will be made available for testing in your dedicated environment.\r\nThe content type has to be passed as application/json for the body parameter."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Verification*",
+			"item": [
+				{
+					"name": "Initiate Matching Service and Challenge Deposit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment."
+							},
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"verification\": {\r\n    \"accountId\": 1111,\r\n    \"verificationType\": \"MATCHING\"\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/verification",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"verification"
+							]
+						},
+						"description": "Implementation Notes\r\n\r\nThe post verification service is used to initiate the matching service (MS) and the challenge deposit account verification (CDV) process to verify account ownership.\r\nThe MS and CDV process can verify ownership of only bank accounts (i.e., checking and savings).\r\nThe MS verification can be initiated only for an already aggregated account or a providerAccount.\r\nThe prerequisite for the MS verification process is to request the ACCT_PROFILE dataset with the HOLDER_NAME attribute.\r\nIn the MS verification process, a string-match of the account holder name with the registered user name is performed instantaneously. You can contact the Yodlee CustomerCare to configure the full name or only the last name match.\r\nOnce the CDV process is initiated Yodlee will post the microtransaction (i.e., credit and debit) in the user's account. The CDV process takes 2 to 3 days to complete as it requires the user to provide the microtransaction details.\r\nThe CDV process is currently supported only in the United States.\r\nThe verificationId in the response can be used to track the verification request.\r\n\r\nNotes:\r\nThis endpoint cannot be used to test the CDV functionality in the developer sandbox or test environment. You will need a money transmitter license to implement the CDV functionality and also require the Yodlee Professional Services team's assistance to set up a dedicated environment."
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Challenge Deposit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment.",
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment.",
+								"key": "Api-Version",
+								"value": "1.1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"verification\": {\r\n    \"verificationType\": \"CHALLENGE_DEPOSIT\",\r\n    \"accountId\": 9999,\r\n    \"providerAccountId\": 1231,\r\n    \"transaction\": [\r\n    {\r\n      \"amount\": {\r\n        \"amount\": 0.68,\r\n        \"currency\": \"USD\"\r\n      },\r\n      \"baseType\": \"CREDIT\"\r\n    },\r\n    {\r\n      \"amount\": {\r\n        \"amount\": 0.21,\r\n        \"currency\": \"USD\"\r\n      },\r\n      \"baseType\": \"CREDIT\"\r\n    },\r\n    {\r\n      \"amount\": {\r\n        \"amount\": 0.94,\r\n        \"currency\": \"USD\"\r\n      },\r\n      \"baseType\": \"DEBIT\"\r\n    }\r\n    ]\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/verification",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"verification"
+							]
+						},
+						"description": "Implementation Notes\r\n\r\nThe put verification service is used to complete the challenge deposit verification (CDV) process.\r\nThis service is used only by the customer of CDV flow.\r\nIn the CDV process, the user-provided microtransaction details (i.e., credit and debit) is matched against the microtransactions posted by Yodlee. For a successful verification of the account's ownership both the microtransaction details should match.\r\nThe CDV process is currently supported only in the United States.\r\n\r\nNotes:\r\nThis endpoint cannot be used to test the CDV functionality in the developer sandbox or test environment. You will need a money transmitter license to implement the CDV functionality and also require the Yodlee Professional Services team's assistance to set up a dedicated environment."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Verification Status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Content-Type has to be application/json for all requests and irrespective of the environment.",
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"description": "Api-Version has to be 1.1 for all requests and irrespective of the environment.",
+								"key": "Api-Version",
+								"value": "1.1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/verification?providerAccountId=123&accountId=123&verificationType=",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"verification"
+							],
+							"query": [
+								{
+									"key": "providerAccountId",
+									"value": "123"
+								},
+								{
+									"key": "accountId",
+									"value": "123"
+								},
+								{
+									"key": "verificationType",
+									"value": ""
+								}
+							]
+						},
+						"description": "Implementation Notes\r\n\r\nThe get verification status service is used to retrieve the verification status of all accounts for which the matching service (MS) or challenge deposit account verification (CDV) process has been initiated.\r\nFor the MS process, the account details object returns the aggregated information of the verified accounts.\r\nFor the CDV process, the account details object returns the user provided account information."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consents (Applicable for UK only)*",
+			"item": [
+				{
+					"name": "Generate Consent*",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"providerId\": 24016,\r\n        \"applicationName\": \"OptionalValue\",\r\n        \"dataset\": [{\r\n                \"name\": \"ACCT_PROFILE\",\r\n                \"attribute\": [{\r\n                        \"name\": \"FULL_ACCT_NUMBER\",\r\n                        \"container\": [\"bank\"]\r\n                },\r\n                {\r\n                        \"name\": \"BANK_TRANSFER_CODE\",\r\n                        \"container\": [\"bank\"]\r\n                },\r\n                {\r\n                        \"name\": \"HOLDER_NAME\",\r\n                        \"container\": [\"bank\"]\r\n                }]\r\n        }]\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/consents",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"consents"
+							]
+						},
+						"description": "The generate consent service is used to post all the consent information and permissions associated to a provider. The scope provided in the response is based on the providerId and the datasets provided in the input. If no dataset value is provided, the datasets that are configured for the customer will be considered. The configured dataset can be overridden by providing the dataset as an input. If no applicationName is provided in the input, the default applicationName will be considered."
+					},
+					"response": []
+				},
+				{
+					"name": "Put Consent*",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"scopeId\":[ \r\n   \"ACCOUNT_DETAILS\", \r\n   \"ACCOUNT_TRANSACTIONS\" \r\n  ] \r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/consents/{consentId}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"consents",
+								"{consentId}"
+							]
+						},
+						"description": "The update consent service is used to capture the user acceptance of the consent presented to him or her. The service returns the authorization-redirect URL that should be used to display to the user the bank’s authentication interface."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Consent*",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"type": "text",
+								"value": "1.1"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"scopeId\":[ \r\n   \"ACCOUNT_DETAILS\", \r\n   \"ACCOUNT_TRANSACTIONS\" \r\n  ] \r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/consents?consentIds=123&providerAccountIds=456",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"consents"
+							],
+							"query": [
+								{
+									"key": "consentIds",
+									"value": "123"
+								},
+								{
+									"key": "providerAccountIds",
+									"value": "456"
+								}
+							]
+						},
+						"description": "The get consent service is used to retrieve all the consents submitted to Yodlee. The service can be used to build a manage consent interface or a consent dashboard to implement the renew and revoke consent flows."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Institutions (Applicable for UK only)*",
+			"item": [
+				{
+					"name": "Get Institutions*",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "1.1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/institutions?priority=&name=dag&dataset$filter=&providerId=",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"institutions"
+							],
+							"query": [
+								{
+									"key": "priority",
+									"value": ""
+								},
+								{
+									"key": "name",
+									"value": "dag"
+								},
+								{
+									"key": "dataset$filter",
+									"value": ""
+								},
+								{
+									"key": "providerId",
+									"value": ""
+								}
+							]
+						},
+						"description": "Providers are classified into credential-based aggregation and Open Banking (OB) providers. The get institutions service helps identifying credential and related OB sites in a financial institution. The service searches for an institution regardless of the authentication types associated to the providers. The get institutions service is used to retrieve institutions that are enabled for the customer, search an institution by its name or routing number, and retrieve popular institution for a region. Searching for an institution using a routing number is applicable only to the USA and Canada regions.\r\nThe valid values for priority are: \r\n   1. search: Returns institutions that are enabled for the cobrand or customer (default value for priority).The name field is mandatory when the priority value is set as search.\r\n   2. popular: Returns institutions that are popular among users of the customer.\r\n\r\nOnly the datasets, attributes, and containers that are enabled for the customer will be returned in the response.\r\nInput for the dataset$filter should adhere to the following expression:\r\n<dataset.name>[<attribute.name>.container[<container> OR <container>] OR <attribute.name>.container[<container>]] \r\nOR <dataset.name>[<attribute.name> OR <attribute.name>]\r\ndataset$filter value examples:\r\nACCT_PROFILE[FULL_ACCT_NUMBER.container[bank OR investment OR creditCard]]\r\nACCT_PROFILE[FULL_ACCT_NUMBER.container[bank]]\r\nBASIC_AGG_DATA[ACCOUNT_DETAILS.container[bank OR investment] OR HOLDINGS.container[bank]] OR ACCT_PROFILE[FULL_ACCT_NUMBER.container[bank]]\r\nBASIC_AGG_DATA\r\nBASIC_AGG_DATA OR ACCT_PROFILE\r\nBASIC_AGG_DATA [ ACCOUNT_DETAILS OR HOLDINGS ]\r\nBASIC_AGG_DATA [ ACCOUNT_DETAILS] OR DOCUMENT \r\nBASIC_AGG_DATA [ BASIC_ACCOUNT_INFO OR ACCOUNT_DETAILS ] \r\n\r\nNote: \r\n1. The get institutions service can only be invoked with the priority value set as popular or search. If no value is set, search will be considered by default, in which case the name field becomes mandatory to pass.\r\n2. In a product flow involving user interaction, Yodlee recommends invoking this service with filters.\r\nWithout filters, the service may perform slowly as it takes a few minutes to return data in the response.\r\n3. The response includes comma separated provider IDs that are associated with the institution."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 401\", function () {",
+					"    pm.response.to.have.status(401);",
+					"    var navigator = {}; //fake a navigator object for the lib",
+					"var window = {}; //fake a window object for the lib",
+					"eval(pm.globals.get(\"jsrsasign-js\")); //import jsrsasign lib",
+					"",
+					"var jws = new KJUR.jws.JWS();",
+					"var payload = {};",
+					"var header =  {};",
+					"var token;",
+					"",
+					"var issuerId = pm.environment.get(\"issuerId\");",
+					"var privateKey = pm.environment.get(\"privateKey\");",
+					"var loginName = pm.environment.get(\"loginName\");",
+					"",
+					"var seconds =  Math.floor(Date.now() / 1000);//(new Date).getTime();",
+					"",
+					"payload.iss = issuerId;",
+					"payload.iat = seconds;",
+					"payload.exp = seconds + 900;",
+					"payload.sub = loginName;",
+					"",
+					"console.log(\"payload.iat\" + payload.iat);",
+					"console.log(\"payload.exp\" + payload.exp);",
+					"console.log(\"Payload: \"+ JSON.stringify(payload));",
+					"",
+					"",
+					"header.alg = \"RS512\";",
+					"header.typ = \"JWT\";",
+					"",
+					"    try {",
+					"      pKey = KEYUTIL.getKey(privateKey);",
+					"      token = KJUR.jws.JWS.sign(\"RS512\", JSON.stringify(header), JSON.stringify(payload), pKey);",
+					"      console.log(\"Generated Token: \", token);",
+					"      pm.environment.set(\"token\",token);",
+					"} catch (ex) {",
+					"      console.log(\"Error: \" + ex);",
+					"    }",
+					"});"
+				]
+			}
+		}
+	]
+}

@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "8e037a15-c5c7-487b-b0f3-de4a2777048c",
+		"name": "Del_ME",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24524204"
+	},
+	"item": [
+		{
+			"name": "Get Pet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/pet/{petId}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"pet",
+						"{petId}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

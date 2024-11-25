@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "fb5bfc1e-3c51-4453-af19-4cc13fa38866",
+		"name": "OpenL-Tablets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "/admin/services",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVICE_HOST}}/admin/services",
+					"host": [
+						"{{SERVICE_HOST}}"
+					],
+					"path": [
+						"admin",
+						"services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/repo/projects",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVICE_HOST}}/history",
+					"host": [
+						"{{SERVICE_HOST}}"
+					],
+					"path": [
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/admin//services/{serviceName}/methods/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVICE_HOST}}/admin/services/Example3-AutoPolicyCalculation/methods/",
+					"host": [
+						"{{SERVICE_HOST}}"
+					],
+					"path": [
+						"admin",
+						"services",
+						"Example3-AutoPolicyCalculation",
+						"methods",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/admin//services/{serviceName}/errors/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVICE_HOST}}/admin/services/openl_rules_1611086393653_openl_rules_1611086393653/errors/",
+					"host": [
+						"{{SERVICE_HOST}}"
+					],
+					"path": [
+						"admin",
+						"services",
+						"openl_rules_1611086393653_openl_rules_1611086393653",
+						"errors",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/admin//services/{serviceName}/MANIFEST.MF",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVICE_HOST}}/admin/services/openl_rules_1611086393653_openl_rules_1611086393653/MANIFEST.MF",
+					"host": [
+						"{{SERVICE_HOST}}"
+					],
+					"path": [
+						"admin",
+						"services",
+						"openl_rules_1611086393653_openl_rules_1611086393653",
+						"MANIFEST.MF"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/ui/info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVICE_HOST}}/admin/ui/info",
+					"host": [
+						"{{SERVICE_HOST}}"
+					],
+					"path": [
+						"admin",
+						"ui",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/admin/info/sys.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVICE_HOST}}/admin/info/sys.json",
+					"host": [
+						"{{SERVICE_HOST}}"
+					],
+					"path": [
+						"admin",
+						"info",
+						"sys.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/admin/info/openl.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVICE_HOST}}/admin/info/openl.json",
+					"host": [
+						"{{SERVICE_HOST}}"
+					],
+					"path": [
+						"admin",
+						"info",
+						"openl.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deploy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/Users/aleem/Downloads/Aleem1-AutoPolicyCalculation/Archive.zip"
+					}
+				},
+				"url": {
+					"raw": "{{SERVICE_HOST}}/admin/deploy",
+					"host": [
+						"{{SERVICE_HOST}}"
+					],
+					"path": [
+						"admin",
+						"deploy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Rule",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{SERVICE_HOST}}/admin/delete/openl_rules_1611095516274_openl_rules_1611095516274",
+					"host": [
+						"{{SERVICE_HOST}}"
+					],
+					"path": [
+						"admin",
+						"delete",
+						"openl_rules_1611095516274_openl_rules_1611095516274"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SERVICE_HOST",
+			"value": "http://localhost:8080/openlrules"
+		},
+		{
+			"key": "BEVER_HOST",
+			"value": "https://rules-api.bever.digitaldots.ai"
+		},
+		{
+			"key": "ENTERPRISE_HOST",
+			"value": "https://rules-api.enterprise.digitaldots.ai"
+		},
+		{
+			"key": "LOCAL_HOST",
+			"value": "http://localhost:8080/openlrules"
+		}
+	]
+}
