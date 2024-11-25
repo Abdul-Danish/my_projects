@@ -1,0 +1,6 @@
+/home/digitaldots/Documents/DigitalDots/spring-vault/src/main/java/com/secret/repository/SecretsRepository.java
+/home/digitaldots/Documents/DigitalDots/spring-vault/src/main/java/com/secret/controller/SecretsController.java
+/home/digitaldots/Documents/DigitalDots/spring-vault/src/main/java/com/secret/SpringVaultApplication.java
+/home/digitaldots/Documents/DigitalDots/spring-vault/src/main/java/com/secret/model/Credentials.java
+/home/digitaldots/Documents/DigitalDots/spring-vault/src/main/java/com/secret/config/VaultConfig.java
+/home/digitaldots/Documents/DigitalDots/spring-vault/src/main/java/com/secret/service/SecretsService.java

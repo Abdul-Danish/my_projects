@@ -1,0 +1,15 @@
+server:
+   port: 3040
+spring:
+   application:
+     name: spring-vault
+   cloud:
+     vault:
+       scheme: http
+       token: "root"
+       host: 127.0.0.1
+       port: 8200
+       kv: # v0.10 of vault, comes with kv enabled. so this must needs to be set true
+         enabled: true
+   profiles:
+     active: mysql

@@ -1,0 +1,65 @@
+curl --location --request POST 'http://localhost:8181/v1/data/auth/user/authorized' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "input": {
+        "principal": "admin",
+        "authorities": ["ROLE_admin:read:0001"],
+        "uri": "/admin/0001",
+        "headers": {
+            "Accept": "application/json"
+        }
+    }
+}'
+
+
+
+
+## API to request access token
+
+curl --request POST \
+  --url 'https://dev-ru75shw6v5e3ddlq.us.auth0.com/oauth/token' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data grant_type=client_credentials \
+  --data 'client_id=q4YXJs9Vx0UI7Roovc13DKk6DrL1zW62' \
+  --data client_secret=Zk3VnhBBpew0XdLCDq0o1RrW1dHAM3DPDWgECp_GDY6EHI2_LTof4mzJM9KDA7aO \
+  --data audience=http://localhost:8080/admin
+
+
+curl --request POST \
+  --url https://dev-ru75shw6v5e3ddlq.us.auth0.com/oauth/token \
+  --header 'content-type: application/json' \
+  --data '{"client_id":"q4YXJs9Vx0UI7Roovc13DKk6DrL1zW62","client_secret":"Zk3VnhBBpew0XdLCDq0o1RrW1dHAM3DPDWgECp_GDY6EHI2_LTof4mzJM9KDA7aO","audience":"http://localhost:8080/authorize","grant_type":"client_credentials"}'
+
+
+## Access resource
+
+curl --location --request GET 'http://localhost:8080/admin/0001' \
+		--header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImZVM0hXOTdsTFpqMHBTUmtvQ285TCJ9.eyJpc3MiOiJodHRwczovL2Rldi1ydTc1c2h3NnY1ZTNkZGxxLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJxNFlYSnM5VngwVUk3Um9vdmMxM0RLazZEckwxelc2MkBjbGllbnRzIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2FkbWluIiwiaWF0IjoxNjgxOTkwNzQxLCJleHAiOjE2ODIwNzcxNDEsImF6cCI6InE0WVhKczlWeDBVSTdSb292YzEzREtrNkRyTDF6VzYyIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIiwicGVybWlzc2lvbnMiOltdfQ.SP4EzRth_bnqnlpJE5y6iZspvAqSq_oUyOerkqankITLkwCAYCeqU5nQrQzYvNiqaX5T9W8PU-zgHw1cOtv7TgrBXvsuuaXjBAUUdz7gY-3dXN6wcFU0SuPAorrF-ibwbbRHbW-UnOQfCRocg_kr1VG-TeLKFkVMx4qWcQhp73shYazZlRaZurZI9_6nNQQ_dLsMuE_L69Or7FjxMj-J3umn6CRHn9eATXdMjzXTkiPnDu2UM2BH4P06qripM5mxjZnsyag3O3r5FnxfXTMG-GQkWd44ncroaBW0-3q6xOzvmMmaU4nlExQ--74rwz2dWzyDkEzy1RFaSrdSyXuxzw'
+		
+		
+		
+		--header 'authorities: ROLE_admin' \
+		--header 'principle: ADMIN'
+
+
+## Get Code
+
+
+https://dev-ru75shw6v5e3ddlq.us.auth0.com/authorize?response_type=code&
+client_id=Q8m4oFmOsTEYMi2APfGKH6zOGyO4f6d2&
+redirect_uri=http://localhost:8080/login/oauth2/code/auth0&
+scope=openid%20profile%20email&
+audience=http://localhost:8080/admin&
+state=abc
+
+
+
+# token endpoint 
+curl --request POST \
+  --url 'https://dev-ru75shw6v5e3ddlq.us.auth0.com/oauth/token' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'grant_type=authorization_code' \
+  --data 'client_id=Q8m4oFmOsTEYMi2APfGKH6zOGyO4f6d2' \
+  --data 'code=kpwxEvTpw50QtkFYDqnwFDGW7FAS7wwNSGac-BO_vW96H' \
+  --data 'redirect_uri=http://localhost:8080/login/oauth2/code/auth0' \
+  --data 'client_secret=ase3X1M2UBHxN0FW__tgabliwz8KeqprjM2c_N041vDQcSHh4qIYGvCuQAVt9Cz7'

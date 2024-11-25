@@ -1,0 +1,6 @@
+com/secret/config/VaultConfig.class
+com/secret/service/SecretsService.class
+com/secret/model/Credentials.class
+com/secret/repository/SecretsRepository.class
+com/secret/SpringVaultApplication.class
+com/secret/controller/SecretsController.class
