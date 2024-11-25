@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-voting-app-deployment
+  labels:
+    name: test-voting-app-deployment
+    app: demo-voting-app
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: voting-app-deployment
+
+  template:
+    metadata:
+      labels:
+        app: voting-app-deployment
+
+    spec: 
+      containers:
+      - name: voting-app
+        image: danishdd/voting-app:latest
+        ports:
+          - containerPort: 80
+        env:
+          - name: MONGO_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: mongo-config
+                key: host
+
+          - name: MONGO_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: mongo-config
+                key: port
+
+          - name: MONGO_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: mongo-config
+                key: database
+        
+      - name: voting-app-2
+        image: danishdd/voting-app:v1
+        ports:
+          - containerPort: 90
+        env:
+          - name: MONGO_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: mongo-config
+                key: host
+
+          - name: MONGO_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: mongo-config
+                key: port
+
+          - name: MONGO_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: mongo-config
+                key: database
