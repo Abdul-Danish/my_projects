@@ -1,0 +1,47 @@
+
+-- Import Flow: (url: http://localhost:8040/api/v1/imports/system/solutions)
+
+(EventType: Create_Solution, CreateEvent: Import)
+
+- (Solution Controller) (POST: /solutionId/import) -> importSolution(SolutionId, solImportDto (Template File)) 
+
+- (SolutionService) After initializing exportId to solutionId and file to minio file location-> create(solution, "import" (Create Event)) 
+
+- (SolutionService) updating current user to owner, Initializing headers and sending to kafka topic -> "topic.environment"
+
+- (Environment Listener) Checking action -> updateSolution(solution, status, message, createEvent)
+
+- (Environment Listener) checks for error message and forwards to kafak topic -> "topic.solution"
+
+- (Event Listener) setting solution to Active -> launchImport(solution)
+
+- (Solution Service) forwards to kafka topic with import mode as 'CREATE' -> "topic.import.batch.launch"
+
+- (Solution Listner) Import/Export launch
+
+
+
+
+-- Import Solution from exported solution (Uri: http://localhost:8040/api/v1/imports/667d152627ae5b74a0e64247 (exportId)/solutions)
+
+- 
+
+
+-- Export Process:
+
+(Before Launch):
+
+- generating File Path with random Id
+
+(After Launch):
+
+- Step-1: 
+
+
+
+
+"SRO" solution for testing cloning changes of solution 
+
+"DRS Solution Clone Test" solution for testing cloning changes of solution (Not Working)
+
+
