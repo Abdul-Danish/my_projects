@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo-pod
+  labels:
+    name: mongo-pod
+    app: demo-voting-app
+
+spec:
+  containers:
+    - name: mongo
+      image: mongo
+      ports:
+        - containerPort: 27017
+      env:
+        - name: ME_CONFIG_MONGODB_URL
+          value: mongodb://localhost:27017/?authSource=admin&retryWrites=false
+
+      #   - name: MONGO_INITDB_ROOT_USERNAME
+      #     value: root
+      #   - name: MONGO_INITDB_ROOT_PASSWORD
+      #     value: password
+    
