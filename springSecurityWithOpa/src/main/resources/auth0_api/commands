@@ -1,0 +1,58 @@
+# Get Application Access Token
+
+curl --request POST \
+  --url 'https://dev-ppd0304kne431apu.us.auth0.com/oauth/token' \
+  --header 'content-type: application/json' \
+  --data '{"grant_type":"client_credentials","client_id":"NzaEcNtQbZ5Zo2Xd27AHI0B8jt37s0Wi","client_secret":"SRzej5atqeR0snVaKMRPSH3L7hyK1Emv0D1Il_fkR2N0wV5i8WhZzz1hN9NX9CIy","audience":"https://dev-ppd0304kne431apu.us.auth0.com/api/v2/"}'
+
+
+curl --request POST \
+  --url 'https://dev-ppd0304kne431apu.us.auth0.com/oauth/token' \
+  --header 'content-type: application/json' \
+  --data '{"grant_type":"client_credentials","client_id":"NzaEcNtQbZ5Zo2Xd27AHI0B8jt37s0Wi","client_secret":"SRzej5atqeR0snVaKMRPSH3L7hyK1Emv0D1Il_fkR2N0wV5i8WhZzz1hN9NX9CIy","audience":"/auth0/foundation"}'
+
+ 
+# Command to get AUTHORIZATION_CODE from Auth0
+
+curl --request POST \
+	--url 'https://dev-ru75shw6v5e3ddlq.us.auth0.com/authorize?response_type=code' \
+	--data 'client_id=Q8m4oFmOsTEYMi2APfGKH6zOGyO4f6d2' \
+	--data 'audience=http://localhost:8080/authorize' \ 
+	--data 'redirect_uri=http://localhost:8080/callback' \
+	--data 'scope=openid%20profile%20email' \
+	--data 'state=xyzABC123'
+
+
+https://dev-ru75shw6v5e3ddlq.us.auth0.com/authorize?response_type=code&client_id=Q8m4oFmOsTEYMi2APfGKH6zOGyO4f6d2&audience=http://localhost:8080/authorize&redirect_uri=http://localhost:8080/callback&scope=openid%20profile%20email&state=xyzABC123 | grep -o 'code=[^&]*' | awk -F= '{print $2}'
+
+
+
+# Command to extract AUTHORIZATION_CODE from the response
+
+curl --location --request GET 'https://dev-ppd0304kne431apu.us.auth0.com/authorize?response_type=code&client_id=NzaEcNtQbZ5Zo2Xd27AHI0B8jt37s0Wi&redirect_uri=http://localhost:8080/login/oauth2/code/auth0&scope=openid%20profile&state=abc' | grep -o 'code=[^&]*' | awk -F= '{print $2}'
+
+
+# Get User Access Token
+
+# curl --request POST \
+#   --url 'https://dev-ppd0304kne431apu.us.auth0.com/oauth/token' \
+#   --header 'content-type: application/x-www-form-urlencoded' \
+#   --data 'grant_type=authorization_code&client_id=NzaEcNtQbZ5Zo2Xd27AHI0B8jt37s0Wi&client_secret=SRzej5atqeR0snVaKMRPSH3L7hyK1Emv0D1Il_fkR2N0wV5i8WhZzz1hN9NX9CIy&code=A-MnH59pHJdXTB_uaE_xG20gNJwWB31CioYQLFluS-JAs&redirect_uri=http://localhost:8080/login/oauth2/code/auth0'
+
+curl --request POST \
+  --url 'https://dev-ru75shw6v5e3ddlq.us.auth0.com/oauth/token' \
+  --header 'content-type=application/x-www-form-urlencoded' \
+  --data  'grant_type=authorization_code' \
+  --data 'client_id=Q8m4oFmOsTEYMi2APfGKH6zOGyO4f6d2' \
+  --data 'code=Awn3kbJAI6V8td-OwRHxZRTVE8e9_yISTGCb90eLNCmci' \
+  --data 'client_secret=ase3X1M2UBHxN0FW__tgabliwz8KeqprjM2c_N041vDQcSHh4qIYGvCuQAVt9Cz7' \
+  --data 'redirect_uri=http://localhost:8080/callback'
+
+
+
+
+
+
+Auth0 login url :
+
+https://{{domian}}/authorize?redirect_uri={{redirectUri}}&client_id={{clientId}}&scope=openid%20profile%20email&response_type=code&state=ImH6VdyIoEp8AWukOua2EewlSC-kYuImkxXMN-aovd0&audience={{audience}}

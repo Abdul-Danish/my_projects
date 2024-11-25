@@ -1,0 +1,51 @@
+[ {
+  "permission_name" : "publish:workflows",
+  "description" : "publish workflows",
+  "resource_server_name" : "authorize",
+  "resource_server_identifier" : "http://localhost:8080/authorize",
+  "sources" : [ {
+    "source_id" : "rol_vJWSWi772Vfsr4o7",
+    "source_name" : "Admin",
+    "source_type" : "ROLE"
+  } ]
+}, {
+  "permission_name" : "read:messages",
+  "description" : "Read Messages",
+  "resource_server_name" : "bank",
+  "resource_server_identifier" : "http://localhost:3000/swagger-ui.html",
+  "sources" : [ {
+    "source_id" : "rol_vJWSWi772Vfsr4o7",
+    "source_name" : "Admin",
+    "source_type" : "ROLE"
+  } ]
+}, {
+  "permission_name" : "read:messages",
+  "description" : "Read Messages",
+  "resource_server_name" : "authorize",
+  "resource_server_identifier" : "http://localhost:8080/authorize",
+  "sources" : [ {
+    "source_id" : "rol_vJWSWi772Vfsr4o7",
+    "source_name" : "Admin",
+    "source_type" : "ROLE"
+  } ]
+}, {
+  "permission_name" : "write:messages",
+  "description" : "write message",
+  "resource_server_name" : "bank",
+  "resource_server_identifier" : "http://localhost:3000/swagger-ui.html",
+  "sources" : [ {
+    "source_id" : "rol_vJWSWi772Vfsr4o7",
+    "source_name" : "Admin",
+    "source_type" : "ROLE"
+  } ]
+}, {
+  "permission_name" : "write:messages",
+  "description" : "write messages",
+  "resource_server_name" : "authorize",
+  "resource_server_identifier" : "http://localhost:8080/authorize",
+  "sources" : [ {
+    "source_id" : "rol_vJWSWi772Vfsr4o7",
+    "source_name" : "Admin",
+    "source_type" : "ROLE"
+  } ]
+} ]
