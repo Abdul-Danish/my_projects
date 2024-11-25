@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "731cd540-e012-43b3-b851-2fc1e324a67f",
+		"name": "DD-Studio_Engine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "getDeploymentSummary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/api/process-deploy-metrics/1111",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"api",
+						"process-deploy-metrics",
+						"1111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDeploymentStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/api/process-deploy-metrics/1111/223476",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"api",
+						"process-deploy-metrics",
+						"1111",
+						"223476"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDeploymentDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/api/process-deploy-metrics/1111/111/instance-details",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"api",
+						"process-deploy-metrics",
+						"1111",
+						"111",
+						"instance-details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDeploymentInstance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_HOST}}/api/process-instance-metrics?instanceId=5f195a2d73706a28c7981638",
+					"host": [
+						"{{SERVER_HOST}}"
+					],
+					"path": [
+						"api",
+						"process-instance-metrics"
+					],
+					"query": [
+						{
+							"key": "instanceId",
+							"value": "5f195a2d73706a28c7981638"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SERVER_HOST",
+			"value": "http://process-engine.enterprise.digitaldots.ai"
+		},
+		{
+			"key": "AUTH_TOKEN",
+			"value": ""
+		}
+	]
+}

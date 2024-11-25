@@ -1,0 +1,2474 @@
+{
+	"info": {
+		"_postman_id": "2f863cc8-ffbf-4ee3-85ba-36307343b948",
+		"name": "Quickbooks Payments API Collections OAuth2",
+		"description": "RESTful API to process payments through credit cards, bank accounts and eChecks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "BankAccounts",
+			"item": [
+				{
+					"name": "BankAccounts-Create",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\": \"My Checking\",\n   \"routingNumber\": \"091000019\",\n   \"accountNumber\": \"120895674534\",\n   \"accountType\": \"PERSONAL_CHECKING\",\n   \"phone\": \"6047296480\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/customers/<enter_your_customer-id>/bank-accounts",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"customers",
+								"<enter_your_customer-id>",
+								"bank-accounts"
+							]
+						},
+						"description": "Create and store a bank account with customer ID (query parameter)  cust1111 and request ID req1111 (header parameter)."
+					},
+					"response": []
+				},
+				{
+					"name": "BankAccounts-RetrieveById",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/customers/<enter_your_customer-id>/bank-accounts/<enter_your_bank-account-id>",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"customers",
+								"<enter_your_customer-id>",
+								"bank-accounts",
+								"<enter_your_bank-account-id>"
+							]
+						},
+						"description": "Get Bank Account 200146652444139196904534 for customer cust1111"
+					},
+					"response": []
+				},
+				{
+					"name": "BankAccount-Delete",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/customers/<enter_your_customer-id>/bank-accounts/<enter_your_bank-account-id>",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"customers",
+								"<enter_your_customer-id>",
+								"bank-accounts",
+								"<enter_your_bank-account-id>"
+							]
+						},
+						"description": "Delete Bank Account 200146652444139196904534 for customer with ID cust1111 and request id req1115"
+					},
+					"response": []
+				},
+				{
+					"name": "BankAccounts-RetrieveAll",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/customers/<enter_your_customer-id>/bank-accounts/",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"customers",
+								"<enter_your_customer-id>",
+								"bank-accounts",
+								""
+							]
+						},
+						"description": "Get all Bank Accounts associated with Customer with customer ID cust1111."
+					},
+					"response": []
+				},
+				{
+					"name": "BankAccounts-CreateFromToken",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"value\": \"25374d18-cc83-41b5-9616-ddf9cdd9df09\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/customers/<enter_your_customer-id>/bank-accounts/createFromToken",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"customers",
+								"<enter_your_customer-id>",
+								"bank-accounts",
+								"createFromToken"
+							]
+						},
+						"description": "Add a Bank Account form token, request ID req1112, customer ID cust1111"
+					},
+					"response": []
+				}
+			],
+			"description": "Store bank accounts for processing future payments."
+		},
+		{
+			"name": "Cards",
+			"item": [
+				{
+					"name": "Cards-Create",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"number\": \"4408041234567893\",\n   \"expMonth\": \"12\",\n   \"expYear\": \"2026\",\n   \"name\": \"Test User\",\n   \"address\": {\n       \"streetAddress\": \"1245 Hana Rd\",\n       \"city\": \"Richmond\",\n       \"region\": \"VA\",\n       \"country\": \"US\",\n       \"postalCode\": \"44112\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/customers/<enter_your_customer-id>/cards",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"customers",
+								"<enter_your_customer-id>",
+								"cards"
+							]
+						},
+						"description": "Create credit card for customer cust1112 and request id req1113."
+					},
+					"response": []
+				},
+				{
+					"name": "Cards-GetCard",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"number\": \"4408041234567893\",\n   \"expMonth\": \"12\",\n   \"expYear\": \"2026\",\n   \"name\": \"Test User\",\n   \"address\": {\n       \"streetAddress\": \"1245 Hana Rd\",\n       \"city\": \"Richmond\",\n       \"region\": \"VA\",\n       \"country\": \"US\",\n       \"postalCode\": \"44112\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/customers/<enter_your_customer-id>/cards/<card-id>",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"customers",
+								"<enter_your_customer-id>",
+								"cards",
+								"<card-id>"
+							]
+						},
+						"description": "Get credit card with id 101118200514139196947893."
+					},
+					"response": []
+				},
+				{
+					"name": "Cards-Delete",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/customers/<enter_your_customer-id>/cards/<enter_your_card-id>",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"customers",
+								"<enter_your_customer-id>",
+								"cards",
+								"<enter_your_card-id>"
+							]
+						},
+						"description": "Delete credit card with id 101118200514139196947893 and request id req1115."
+					},
+					"response": []
+				},
+				{
+					"name": "Cards-GetAllCards",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"number\": \"4408041234567893\",\n   \"expMonth\": \"12\",\n   \"expYear\": \"2026\",\n   \"name\": \"Test User\",\n   \"address\": {\n       \"streetAddress\": \"1245 Hana Rd\",\n       \"city\": \"Richmond\",\n       \"region\": \"VA\",\n       \"country\": \"US\",\n       \"postalCode\": \"44112\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/customers/<enter_your_customer-id>/cards",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"customers",
+								"<enter_your_customer-id>",
+								"cards"
+							]
+						},
+						"description": "Get all cards for customer cust1112."
+					},
+					"response": []
+				},
+				{
+					"name": "Cards-CreateCardFromToken",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"value\": \"2e337998-2e77-488e-b15a-9fb0bbfc9312\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/customers/<enter_your_customer-id>/cards/createFromToken",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"customers",
+								"<enter_your_customer-id>",
+								"cards",
+								"createFromToken"
+							]
+						},
+						"description": "Create card from token with Request id req1114 and customer id cust1112."
+					},
+					"response": []
+				}
+			],
+			"description": "Store credit cards for processing future payments. Note that storing cards for swiped transactions is not currently supported by the payments API."
+		},
+		{
+			"name": "Charges",
+			"item": [
+				{
+					"name": "Charges-Create",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": \"10.55\",\n  \"card\": {\n    \"expYear\": \"2020\",\n    \"expMonth\": \"02\",\n    \"address\": {\n      \"region\": \"CA\",\n      \"postalCode\": \"94086\",\n      \"streetAddress\": \"1130 Kifer Rd\",\n      \"country\": \"US\",\n      \"city\": \"Sunnyvale\"\n    },\n    \"name\": \"emulate=0\",\n    \"cvc\": \"123\",\n    \"number\": \"4111111111111111\"\n  },\n  \"currency\": \"USD\",\n  \"context\": {\n\t\t\"mobile\": \"false\",\n\t\t\"isEcommerce\": \"true\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/charges",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"charges"
+							]
+						},
+						"description": "To charge a credit card, you create a new charge object with req id req1116."
+					},
+					"response": []
+				},
+				{
+					"name": "Charges-Retrieve",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/charges/<enter_your_charge-id>",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"charges",
+								"<enter_your_charge-id>"
+							]
+						},
+						"description": "Retrieves the details of a charge that has been previously created. Supply the id EF8LDH367ETK as returned in the charges response body from the previous create operation."
+					},
+					"response": []
+				},
+				{
+					"name": "Charges-CaptureCharge",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 10.55,\n  \"context\": {\n\t\t\"mobile\": \"false\",\n\t\t\"isEcommerce\": \"true\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/charges/<enter_your_charge-id>/capture",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"charges",
+								"<enter_your_charge-id>",
+								"capture"
+							]
+						},
+						"description": "Capture charge with charge id EF8LDH367ETK and request id req1117."
+					},
+					"response": []
+				},
+				{
+					"name": "Charges-RefundCharge",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 5.00,\n  \"context\": {\n    \"tax\": 0,\n    \"deviceInfo\": {\n      \"id\": \"\",\n      \"type\": \"\",\n      \"longitude\": \"\",\n      \"latitude\": \"\",\n      \"phoneNumber\": \"\",\n      \"macAddress\": \"\",\n      \"ipAddress\": \"\"\n    },\n    \"mobile\": \"false\",\n\t\"isEcommerce\": \"true\"\n  },\n  \"description\": \"first refund\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/charges/<enter_your_charge-id>/refunds",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"charges",
+								"<enter_your_charge-id>",
+								"refunds"
+							]
+						},
+						"description": "Full or partial refund an existing charge with id EF8LDH367ETK and request id req1118."
+					},
+					"response": []
+				},
+				{
+					"name": "Charges-ReadRefundCharge",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/charges/<enter_your_charge-id>/refunds/<enter_your_refund-id>",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"charges",
+								"<enter_your_charge-id>",
+								"refunds",
+								"<enter_your_refund-id>"
+							]
+						},
+						"description": "Read refund by charge id EF8LDH367ETK and refund id EWQ3X2QK4D6Y."
+					},
+					"response": []
+				}
+			],
+			"description": "Send and receive payments using credit cards."
+		},
+		{
+			"name": "Create a ReceivePayment against a Customer's Invoice and Charge Customer Credit Card",
+			"item": [
+				{
+					"name": "Customer-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"",
+									"  try {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    CustomerId = jsonData.Customer.Id;",
+									"    CustomerName = jsonData.Customer.DisplayName;",
+									"  } catch (e) {",
+									"    console.log(e);",
+									"  }",
+									"",
+									"  console.log('New Customer Created CustomerId is ' + CustomerId + \" the new customer name is \" + CustomerName);",
+									"",
+									"  postman.setGlobalVariable(\"CustomerId\", CustomerId);",
+									"  postman.setGlobalVariable(\"CustomerName\", CustomerName);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DisplayName\": \"CustomerName - {{$guid}}\"\n}\n"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/customer?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"customer"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create a customer\nMethod : POST"
+					},
+					"response": []
+				},
+				{
+					"name": "Item-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// function makeid()",
+									"// {",
+									"//     var text = \"Item \";",
+									"//     var possible = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";",
+									"",
+									"//     for( var i=0; i < 5; i++ )",
+									"//         text += possible.charAt(Math.floor(Math.random() * possible.length));",
+									"",
+									"//     return text;",
+									"// }",
+									"// postman.setEnvironmentVariable(\"name\", makeid());",
+									"",
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        ItemId = jsonData.Item.Id;",
+									"        ItemName = jsonData.Item.Name;",
+									"    }",
+									"    ",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log(\"New Item has been created, ItemID is \" + ItemId + \" and the ItemName is \"+ ItemName);",
+									"    ",
+									"    postman.setGlobalVariable(\"ItemId\", ItemId);",
+									"    postman.setGlobalVariable(\"ItemName\", ItemName);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Name\": \"SerivceItem - {{$guid}}\",\n  \"IncomeAccountRef\": {\n    \"value\": \"1\",\n    \"name\": \"Services\"\n  },\n  \"Type\": \"Service\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/item?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"item"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "POST: Create an Item"
+					},
+					"response": []
+				},
+				{
+					"name": "Invoice-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    try {",
+									"        //var responseBody = JSON.parse(responseBody),",
+									"        InvoiceId = jsonData.Invoice.Id;",
+									"        InvoiceAmount = jsonData.Invoice.TotalAmt;",
+									"        InvoiceCurrency = jsonData.Invoice.CurrencyRef.value;",
+									"    }",
+									"    ",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Invoice Created InvoiceID is ' + InvoiceId);",
+									"    console.log('New Invoice Created TotalAmount is ' + InvoiceAmount);",
+									"    console.log('New Invoice Created InvoiceCurrency is ' + InvoiceCurrency)",
+									"    ",
+									"    postman.setGlobalVariable(\"InvoiceId\", InvoiceId);",
+									"    postman.setGlobalVariable(\"InvoiceAmount\", InvoiceAmount);",
+									"    postman.setGlobalVariable(\"InvoiceCurrency\", InvoiceCurrency);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Line\": [\n    {\n      \"Amount\": 100.00,\n      \"DetailType\": \"SalesItemLineDetail\",\n      \"SalesItemLineDetail\": {\n        \"ItemRef\": {\n          \"value\": \"{{ItemId}}\",\n          \"name\": \"{{ItemName}}\"\n        },\n        \"Qty\": 1\n      }\n    }\n  ],\n  \"CustomerRef\": {\n    \"value\": \"{{CustomerId}}\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/invoice?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"invoice"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "POST: Create an Invoice"
+					},
+					"response": []
+				},
+				{
+					"name": "Tokens-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 201'] = (responseCode.code === 201);",
+									"",
+									"if (responseCode.code === 201) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    try {",
+									"        ",
+									"        TokenValue = jsonData.value;",
+									"    }",
+									"    ",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Token is Created token is ' + TokenValue);",
+									"    ",
+									"    postman.setGlobalVariable(\"TokenValue\", TokenValue);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"card\": {\n    \"expYear\": \"2020\",\n    \"expMonth\": \"02\",\n    \"address\": {\n      \"region\": \"CA\",\n      \"postalCode\": \"94086\",\n      \"streetAddress\": \"1130 Kifer Rd\",\n      \"country\": \"US\",\n      \"city\": \"Sunnyvale\"\n    },\n    \"name\": \"emulate=0\",\n    \"cvc\": \"123\",\n    \"number\": \"4111111111111111\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/tokens",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"tokens"
+							]
+						},
+						"description": "Create token"
+					},
+					"response": []
+				},
+				{
+					"name": "Charges-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200) || (responseCode.code === 201);",
+									"",
+									"if (responseCode.code === 200  || responseCode.code === 201) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    try {",
+									"        ChargeStatus = jsonData.status;",
+									"        ChargeId = jsonData.id;",
+									"    }",
+									"    ",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Charge Created ChargeStatus is ' + ChargeStatus);",
+									"    console.log('New Charge Creaged ChargeId is ' + ChargeId)",
+									"    ",
+									"    postman.setGlobalVariable(\"ChargeStatus\", ChargeStatus);",
+									"    postman.setGlobalVariable(\"ChargeId\", ChargeId);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"{{InvoiceAmount}}\",\n    \"token\": \"{{TokenValue}}\",\n    \"currency\": \"{{InvoiceCurrency}}\",\n    \"context\": {\n\t\t\"mobile\": \"false\",\n\t\t\"isEcommerce\": \"true\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/charges",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"charges"
+							]
+						},
+						"description": "To charge a credit card, you create a new charge object with req id req1116."
+					},
+					"response": []
+				},
+				{
+					"name": "Payment-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    try {",
+									"        //var responseBody = JSON.parse(responseBody),",
+									"        PaymentId = jsonData.Payment.Id;",
+									"    }",
+									"    ",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Payment Created PaymentId is ' + PaymentId);",
+									"    ",
+									"    postman.setGlobalVariable(\"PaymentId\", PaymentId);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"CustomerRef\":\n    {\n        \"value\": \"{{CustomerId}}\",\n        \"name\": \"{{CustomerName}}\"\n    },\n    \"TotalAmt\": 100.00,\n    \"Line\": [\n    {\n        \"Amount\": 100.00,\n        \"LinkedTxn\": [\n        {\n            \"TxnId\": \"{{InvoiceId}}\",\n            \"TxnType\": \"Invoice\"\n        }]\n    }]\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurl}}/v3/company/{{companyid}}/payment?minorversion={{minorversion}}",
+							"protocol": "https",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"v3",
+								"company",
+								"{{companyid}}",
+								"payment"
+							],
+							"query": [
+								{
+									"key": "minorversion",
+									"value": "{{minorversion}}"
+								}
+							]
+						},
+						"description": "Create an payment object\nMethod : POST\n"
+					},
+					"response": []
+				}
+			],
+			"description": "Create a ReceivePayment against a Customer's Invoice - This orchestration contains the following flow of calls.  1. Create a customer 2.  Create an item  3. Create an invoice for a transaction between the customer and the item.  4.  Create a token for a Credit Card  5. Use a token to charge the credit card for the amount of the invoice  6. Create payment for the amount owed on invoice"
+		},
+		{
+			"name": "Create a credit card token, authorize a charge, and then capture the charge",
+			"item": [
+				{
+					"name": "Tokens-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 201'] = (responseCode.code === 201);",
+									"",
+									"if (responseCode.code === 201) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        ccToken = jsonData.value;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Token Created Token value is ' + ccToken );",
+									"    ",
+									"    postman.setGlobalVariable(\"ccToken\", ccToken);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"card\": {\n    \"expYear\": \"2020\",\n    \"expMonth\": \"02\",\n    \"address\": {\n      \"region\": \"CA\",\n      \"postalCode\": \"94086\",\n      \"streetAddress\": \"1130 Kifer Rd\",\n      \"country\": \"US\",\n      \"city\": \"Sunnyvale\"\n    },\n    \"name\": \"emulate=0\",\n    \"cvc\": \"123\",\n    \"number\": \"4111111111111111\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/tokens",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"tokens"
+							]
+						},
+						"description": "Create token"
+					},
+					"response": []
+				},
+				{
+					"name": "Charges-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 201'] = (responseCode.code === 201);",
+									"",
+									"if (responseCode.code === 201) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        ChargeId = jsonData.id;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Charge Created ChargeId is ' + ChargeId );",
+									"    ",
+									"    postman.setGlobalVariable(\"ChargeId\", ChargeId);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"10.55\",\n    \"currency\": \"USD\",\n    \"capture\": \"false\",\n    \"token\": \"{{ccToken}}\",\n    \"context\": {\n\t\t\"mobile\": \"false\",\n\t\t\"isEcommerce\": \"true\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/charges",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"charges"
+							]
+						},
+						"description": "To charge a credit card, you create a new charge object with req id req1116."
+					},
+					"response": []
+				},
+				{
+					"name": "Charges-CaptureCharge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 200'] = (responseCode.code === 200);",
+									"",
+									"if (responseCode.code === 200) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        ChargeStatus = jsonData.status;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('ChargeStatus has been updated to ' + ChargeStatus );",
+									"    ",
+									"    postman.setGlobalVariable(\"ChargeStatus\", ChargeStatus);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 10.55,\n  \"context\": {\n\t\t\"mobile\": \"false\",\n\t\t\"isEcommerce\": \"true\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/charges/{{ChargeId}}/capture",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"charges",
+								"{{ChargeId}}",
+								"capture"
+							]
+						},
+						"description": "Capture charge with charge id EF8LDH367ETK and request id req1117."
+					},
+					"response": []
+				}
+			],
+			"description": "In this flow, we create a token for a credit card, use the token to create a charge that is authorized. We then capture the charge."
+		},
+		{
+			"name": "Create a credit card token, create a charge, then create a refund for the charge",
+			"item": [
+				{
+					"name": "Tokens-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 201'] = (responseCode.code === 201);",
+									"",
+									"if (responseCode.code === 201) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        ccToken = jsonData.value;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Token Created Token value is ' + ccToken );",
+									"    ",
+									"    postman.setGlobalVariable(\"ccToken\", ccToken);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbopayments-postman-collection1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"card\": {\n    \"expYear\": \"2020\",\n    \"expMonth\": \"02\",\n    \"address\": {\n      \"region\": \"CA\",\n      \"postalCode\": \"94086\",\n      \"streetAddress\": \"1130 Kifer Rd\",\n      \"country\": \"US\",\n      \"city\": \"Sunnyvale\"\n    },\n    \"name\": \"emulate=0\",\n    \"cvc\": \"123\",\n    \"number\": \"4111111111111111\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/tokens",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"tokens"
+							]
+						},
+						"description": "Create token"
+					},
+					"response": []
+				},
+				{
+					"name": "Charges-Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 201'] = (responseCode.code === 201);",
+									"",
+									"if (responseCode.code === 201) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        ChargeId = jsonData.id;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Charge Created ID is ' + ChargeId );",
+									"    ",
+									"    postman.setGlobalVariable(\"ChargeId\", ChargeId);",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth1",
+							"oauth1": [
+								{
+									"key": "consumerKey",
+									"value": "{{consumerKey}}",
+									"type": "string"
+								},
+								{
+									"key": "consumerSecret",
+									"value": "{{consumerSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								},
+								{
+									"key": "tokenSecret",
+									"value": "{{accessSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "signatureMethod",
+									"value": "HMAC-SHA1",
+									"type": "string"
+								},
+								{
+									"key": "timestamp",
+									"value": "1496872998",
+									"type": "string"
+								},
+								{
+									"key": "nonce",
+									"value": "0FitnhhhuRG",
+									"type": "string"
+								},
+								{
+									"key": "version",
+									"value": "1.0",
+									"type": "string"
+								},
+								{
+									"key": "realm",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addParamsToHeader",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "addEmptyParamsToSign",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbopayments-postman-collection1"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": \"10.55\",\n  \"token\": \"{{ccToken}}\",\n  \"currency\": \"USD\",\n  \"context\": {\n\t\t\"mobile\": \"false\",\n\t\t\"isEcommerce\": \"true\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/charges",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"charges"
+							]
+						},
+						"description": "To charge a credit card, you create a new charge object with req id req1116."
+					},
+					"response": []
+				},
+				{
+					"name": "Charges-RefundCharge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests['status code is 201'] = (responseCode.code === 201);",
+									"",
+									"if (responseCode.code === 201) {",
+									"    ",
+									"    try {",
+									"        var jsonData = JSON.parse(responseBody);",
+									"        Status = jsonData.status;",
+									"        Id = jsonData.id;",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    ",
+									"    console.log('New Refund, the status is ' + Status + \" The refund id is \" + Id );",
+									" ",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth1",
+							"oauth1": [
+								{
+									"key": "consumerKey",
+									"value": "{{consumerKey}}",
+									"type": "string"
+								},
+								{
+									"key": "consumerSecret",
+									"value": "{{consumerSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								},
+								{
+									"key": "tokenSecret",
+									"value": "{{accessSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "signatureMethod",
+									"value": "HMAC-SHA1",
+									"type": "string"
+								},
+								{
+									"key": "timestamp",
+									"value": "1496873015",
+									"type": "string"
+								},
+								{
+									"key": "nonce",
+									"value": "5IU8Dy2efew",
+									"type": "string"
+								},
+								{
+									"key": "version",
+									"value": "1.0",
+									"type": "string"
+								},
+								{
+									"key": "realm",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addParamsToHeader",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "addEmptyParamsToSign",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Intuit-qbopayments-postman-collection1"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"amount\": \"10.55\",\n    \"context\": {\n\t\t\"mobile\": \"false\",\n\t\t\"isEcommerce\": \"true\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/charges/{{ChargeId}}/refunds",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"charges",
+								"{{ChargeId}}",
+								"refunds"
+							]
+						},
+						"description": "Full or partial refund an existing charge with id EF8LDH367ETK and request id req1118."
+					},
+					"response": []
+				}
+			],
+			"description": "In this orchestration, we create a token from a credit cards, use the token to create a charge, then refund the charge."
+		},
+		{
+			"name": "Tokens",
+			"item": [
+				{
+					"name": "Tokens-Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"card\": {\n    \"expYear\": \"2020\",\n    \"expMonth\": \"02\",\n    \"address\": {\n      \"region\": \"CA\",\n      \"postalCode\": \"94086\",\n      \"streetAddress\": \"1130 Kifer Rd\",\n      \"country\": \"US\",\n      \"city\": \"Sunnyvale\"\n    },\n    \"name\": \"emulate=0\",\n    \"cvc\": \"123\",\n    \"number\": \"4111111111111111\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/tokens",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"tokens"
+							]
+						},
+						"description": "Create token"
+					},
+					"response": []
+				}
+			],
+			"description": "An opaque container that encapsulates a cardholder's credit card information or bank account information. "
+		},
+		{
+			"name": "eChecks",
+			"item": [
+				{
+					"name": "eChecks-Debit",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n  \"amount\":\"1.11\",\n  \"bankAccount\":{  \n      \"name\":\"Fname LName\",\n      \"routingNumber\":\"490000018\",\n      \"accountNumber\":\"11000000333456781\",\n      \"accountType\":\"PERSONAL_CHECKING\",\n      \"phone\":\"1234567890\"\n  },\n  \"context\":{  \n      \"deviceInfo\":{  \n        \"id\":\"1\",\n        \"type\":\"type\",\n        \"longitude\":\"longitude\",\n        \"latitude\":\"\",\n        \"phoneNumber\":\"phonenu\",\n        \"macAddress\":\"macaddress\",\n        \"ipAddress\":\"34\"\n      }\n  },\n  \"paymentMode\":\"WEB\",\n  \"checkNumber\":\"12345678\",\n  \"description\":\"Check Auth test call\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/echecks",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"echecks"
+							]
+						},
+						"description": "Debit eCheck with request id req1118."
+					},
+					"response": []
+				},
+				{
+					"name": "eChecks-Retrieve",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/echecks/<enter_your_echeck-id>",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"echecks",
+								"<enter_your_echeck-id>"
+							]
+						},
+						"description": "Retrieve previously created eCheck with id a06e9di9"
+					},
+					"response": []
+				},
+				{
+					"name": "eChecks-VoidOrRefund",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\":\"1.11\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/echecks/<enter_your_echeck-id>/refunds",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"echecks",
+								"<enter_your_echeck-id>",
+								"refunds"
+							]
+						},
+						"description": "Void or Refund an eCheck with id a06e9di9"
+					},
+					"response": []
+				},
+				{
+					"name": "eChecks-RetrieveRefund",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{UserAgent}}"
+							},
+							{
+								"key": "Request-Id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\":\"1.11\"\n}"
+						},
+						"url": {
+							"raw": "https://{{baseurlpayments}}/quickbooks/v4/payments/echecks/<enter_your_echeck-id>/refunds/<enter_your_echeck-refund-id>",
+							"protocol": "https",
+							"host": [
+								"{{baseurlpayments}}"
+							],
+							"path": [
+								"quickbooks",
+								"v4",
+								"payments",
+								"echecks",
+								"<enter_your_echeck-id>",
+								"refunds",
+								"<enter_your_echeck-refund-id>"
+							]
+						},
+						"description": "Get refund with request id req1121 eCheck id a06e9di9 and Refund id a06e9dib."
+					},
+					"response": []
+				}
+			],
+			"description": "Send and receive payments using EChecks."
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..gBG7O7Cz0XmTbzCGRWbIAQ.qG49__3MQ-LMu1WcNy6T0GEyQCSAVartfeka1F7kjMGvFzYbcwqWj_Bg7VaOSExzkA5bShXN9nxXbk4DZFQTqb4rrRLJhvKcPPvs9y9GSfQqlEacX6_Bs7uCj0ng700YjTwAVmULpFX7yvqJ69nPv8wn673C805Ue68VHMVGDpuZH7hmCL6kwZHfiZaEOmpdufDsIcBhA5OZ9xV-4GGSTrJR9lC_J0wzrPCYV85vEbik1nvoOTd52H8GjHBeL-PYpDrla2B1e5QIRLaoihBgZCXXFXOvfr97Nc-7Y_hBlj-xjyoAqHQJf2MhnKDaAEfQEPPlndQ1JHtkzovC602OdFtvXe2X9D-EhUj69n4FHYw0ZPOb2zM4oWk7qXADG2n6Cg6asL6x1MHPvKjwWjtCRZ7iQlbkeg2wK0D7Roh8fFKgWMcskTZNRjt9KHYhJe1y9vySaWJSpQ2XeNO7rOTEBtDQlqI_yVysMi8Nlpb-ql_lKwwEGtpJ_oMRhUO3PWjDL7JA0r_01Vi-Vietw-4mBehcue7biHFV-L9_b0frBQVKO_HydrBHW24BouMZxgJe60KE460M-fkklglaX-_NFjfUhFJknn7TrZM2vXqQeHghmKB8QB6pSvKak0zoh1A35f325wFHpCNRMsXaCe_SWgdDK_0HHtFU8oELvX-X84V9HGRVdjBSkEUz2k_FfBTG.6d-nvAeFC_T8gIlEok4iPQ",
+				"type": "string"
+			},
+			{
+				"key": "tokenType",
+				"value": "bearer",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

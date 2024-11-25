@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "1443eb8e-53e4-4369-930f-8a37236d04bb",
+		"name": "FHIR - r4.smarthealthit.org",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "/Patient/_search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_count",
+							"value": "25",
+							"type": "text"
+						},
+						{
+							"key": "_format",
+							"value": "json",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{FHIR_HOST}}/Patient/_search",
+					"host": [
+						"{{FHIR_HOST}}"
+					],
+					"path": [
+						"Patient",
+						"_search"
+					]
+				},
+				"description": "Patient/_search"
+			},
+			"response": []
+		},
+		{
+			"name": "/Patient/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_count",
+							"value": "25",
+							"type": "text"
+						},
+						{
+							"key": "_format",
+							"value": "json",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{FHIR_HOST}}/Patient/863432?_format=json",
+					"host": [
+						"{{FHIR_HOST}}"
+					],
+					"path": [
+						"Patient",
+						"863432"
+					],
+					"query": [
+						{
+							"key": "_format",
+							"value": "json"
+						}
+					]
+				},
+				"description": "Patient/_search"
+			},
+			"response": []
+		},
+		{
+			"name": "/Patient/{resourceId}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_count",
+							"value": "25",
+							"type": "text"
+						},
+						{
+							"key": "_format",
+							"value": "json",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{FHIR_HOST}}/Patient/fc200fa2-12c9-4276-ba4a-e0601d424e55?_format=json",
+					"host": [
+						"{{FHIR_HOST}}"
+					],
+					"path": [
+						"Patient",
+						"fc200fa2-12c9-4276-ba4a-e0601d424e55"
+					],
+					"query": [
+						{
+							"key": "_format",
+							"value": "json"
+						}
+					]
+				},
+				"description": "Patient/_search"
+			},
+			"response": []
+		},
+		{
+			"name": "/Patient/{resourceId}/$everything",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_count",
+							"value": "25",
+							"type": "text"
+						},
+						{
+							"key": "_format",
+							"value": "json",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{FHIR_HOST}}/Patient/fc200fa2-12c9-4276-ba4a-e0601d424e55/$everything?_format=json",
+					"host": [
+						"{{FHIR_HOST}}"
+					],
+					"path": [
+						"Patient",
+						"fc200fa2-12c9-4276-ba4a-e0601d424e55",
+						"$everything"
+					],
+					"query": [
+						{
+							"key": "_format",
+							"value": "json"
+						}
+					]
+				},
+				"description": "Patient/_search"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "FHIR_HOST",
+			"value": "r4.smarthealthit.org"
+		}
+	]
+}

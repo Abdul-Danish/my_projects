@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "acb0159a-c547-482f-b7cc-dc53985e3afd",
+		"name": "Del_ME_3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24524204"
+	},
+	"item": [
+		{
+			"name": "store",
+			"item": [
+				{
+					"name": "Get Store",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{basrUrl}}/v1/store"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{basrUrl}}/v1/store"
+					},
+					"response": []
+				},
+				{
+					"name": "Empty URL",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Pet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{basrUrl}}/v1/pet"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Pet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+				"raw": "{{basrUrl}}/v1/pet"
+				}
+			},
+			"response": []
+		}
+	]
+}

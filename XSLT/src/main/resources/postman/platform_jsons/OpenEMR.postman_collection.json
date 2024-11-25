@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "d2708b0a-eeb9-4a12-8e0d-ba8e4da74f33",
+		"name": "OpenEMR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "https://localhost:9300/oauth2/default/registration",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"application_type\": \"private\",\n   \"redirect_uris\":\n     [\"https://client.example.org/callback\"],\n   \"post_logout_redirect_uris\":\n     [\"https://client.example.org/logout/callback\"],\n   \"client_name\": \"A Private App\",\n   \"token_endpoint_auth_method\": \"client_secret_post\",\n   \"contacts\": [\"me@example.org\", \"them@example.org\"],\n   \"scope\": \"openid offline_access api:oemr api:fhir api:port user/allergy.read user/allergy.write user/appointment.read user/appointment.write user/dental_issue.read user/dental_issue.write user/document.read user/document.write user/drug.read user/encounter.read user/encounter.write user/facility.read user/facility.write user/immunization.read user/insurance.read user/insurance.write user/insurance_company.read user/insurance_company.write user/insurance_type.read user/list.read user/medical_problem.read user/medical_problem.write user/medication.read user/medication.write user/message.write user/patient.read user/patient.write user/practitioner.read user/practitioner.write user/prescription.read user/procedure.read user/soap_note.read user/soap_note.write user/surgery.read user/surgery.write user/vital.read user/vital.write user/AllergyIntolerance.read user/CareTeam.read user/Condition.read user/Coverage.read user/Encounter.read user/Immunization.read user/Location.read user/Medication.read user/MedicationRequest.read user/Observation.read user/Organization.read user/Organization.write user/Patient.read user/Patient.write user/Practitioner.read user/Practitioner.write user/PractitionerRole.read user/Procedure.read patient/encounter.read patient/patient.read patient/AllergyIntolerance.read patient/CareTeam.read patient/Condition.read patient/Encounter.read patient/Immunization.read patient/MedicationRequest.read patient/Observation.read patient/Patient.read patient/Procedure.read\"\n  }"
+				},
+				"url": {
+					"raw": "https://localhost:9300/oauth2/default/registration",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9300",
+					"path": [
+						"oauth2",
+						"default",
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:9300/apis/default/fhir/metadata",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9300/openemr/apis/default/fhir/metadata",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9300",
+					"path": [
+						"openemr",
+						"apis",
+						"default",
+						"fhir",
+						"metadata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:9300/apis/fhir/Patient",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0b2tlbiI6IjAwNnZ3eGJZYmFrOXlxUjF4U290Y1g4QVVDd3JOcG5yYXZEaFlqaHFjWXJXRGNDQUtFZmJONkh2cElTVkJiaWFobHBqOTBYZmlNRXpiY2FtU01pSHk1UzFlMmgxNmVqZEhcL1ZENlNtaVpTRFRLMmtsWDIyOFRKZzNhQmxMdUloZmNJM3FpMGFKZ003OXdtOGhYT3dpVkx5b3BFRXQ1TlNYNTE3UW5TZ0dsUVdQbG56WjVxOVYwc21tdDlSQ3RvcDV3TEkiLCJzaXRlX2lkIjoiZGVmYXVsdCIsImFwaSI6ImZoaXIifQ=="
+					}
+				],
+				"url": {
+					"raw": "https://localhost:9300/apis/fhir/Patient",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9300",
+					"path": [
+						"apis",
+						"fhir",
+						"Patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/course/post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/course/post",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"course",
+						"post"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

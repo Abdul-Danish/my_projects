@@ -1,0 +1,663 @@
+{
+	"info": {
+		"_postman_id": "26891136-3556-465c-859e-07df474cf1b8",
+		"name": "Twitter Developer Labs",
+		"description": "Twitter Developer Labs allow developers to test and share feedback on previews of new Twitter API features. The endpoints, documentation, and resources for Labs will be updated as we incorporate feedback from the developer community.\n\n# Postman collection for Twitter Developer Labs\nThis is a Postman collection for the developer previews in [Twitter Developer Labs](https://developer.twitter.com/en/labs?utm_source=postman).\n\nFor more details, read the [Twitter Developer Labs documentation](https://developer.twitter.com/en/docs/labs?utm_source=postman).\n\n**Remember:** The endpoints we release in Labs will be previews and are likely to change before they are released broadly, so we encourage you to take that into consideration as you build.\n\n## Quick install\n\nJust click the **Run in Postman** button. You're all set!\n\n## Environment\n\nThis collection includes a environment variables that are needed to authenticate each request. You will need to add values to each variable.\n\n|Name|Description|\n|----|-----------|\n|`consumer_key`|Your OAuth consumer key|\t\n|`consumer_secret`|Your OAuth consumer secret|\n|`access_token`|Your OAuth access token|\n|`token_secret`|Your OAuth access token secret|\n\nTo find these values:\n1. Open your [app dashboard](https://developer.twitter.com/en/apps?utm_source=postman).\n2. Select your app, then click **Details**.\n3. Head over the **Keys and tokens** tab.\n4. Copy the values into each variable.\n\nTo add these values to your Postman environment:\n1. Select the ⚙️ icon next to the **Twitter Developer Labs** environment name.\n2. Click **Twitter Developer Labs**.\n3. For each variable, add the values from your app dashboard in the **Current value** column.\n4. When you're done adding all values, click **Update**.\n\nPostman will set up your requests to be authenticated using OAuth 2.0 (Bearer token) authentication.\n\n## Get help\n\nIf you need help, ask a question in the [Labs community forums](https://twittercommunity.com/c/labs).\n\n## Submit feedback\n\nYour ideas matter! Help us develop the next generation of the Twitter API by [sharing your feedback](https://twitterdevfeedback.uservoice.com/).\n\nWe know the best future version of our API will come from creating it together with the people who use it most.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2149654"
+	},
+	"item": [
+		{
+			"name": "Tweets and Users v1",
+			"item": [
+				{
+					"name": "Users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.twitter.com/labs/1/users?ids&usernames&format&tweet.format&user.format&expansions",
+							"protocol": "https",
+							"host": [
+								"api",
+								"twitter",
+								"com"
+							],
+							"path": [
+								"labs",
+								"1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": null,
+									"description": "Required unless using usernames (if you're using this parameter, uncheck usernames). A comma separated list of User IDs. Up to 100 are allowed in a single request."
+								},
+								{
+									"key": "usernames",
+									"value": null,
+									"description": "Required unless using ids (if you're using this parameter, uncheck ids). A comma separated list of User IDs. Up to 100 are allowed in a single request."
+								},
+								{
+									"key": "format",
+									"value": null,
+									"description": "Format for all the objects returned as part of the response, including expansions.\n\nAllowed values: default, compact, detailed\nDefault value: default"
+								},
+								{
+									"key": "tweet.format",
+									"value": null,
+									"description": "Format for all Tweet objects returned in response. Can be used together with other format parameters to expand or reduce Tweet objects only.\n\nAllowed values: default, compact, detailed\n\nDefault value: default"
+								},
+								{
+									"key": "user.format",
+									"value": null,
+									"description": "Format for all User objects returned in response. Can be used together with other format parameters to expand or reduce User objects only.\n\nAllowed values: default, compact, detailed\n\nDefault value: default"
+								},
+								{
+									"key": "expansions",
+									"value": null,
+									"description": "Comma-separated list fo fields to expand. Expansions enable requests to expand an ID into a full object in the includes response object.\n\nAllowed values: most_recent_tweet_id, pinned_tweet_id"
+								}
+							]
+						},
+						"description": "This endpoint returns information about users. You can specify users by their ID or username.\n\nFor full details, see the [API reference](https://developer.twitter.com/en/docs/labs/tweets-and-users/get-users-v1) for this endpoint."
+					},
+					"response": []
+				},
+				{
+					"name": "Tweets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.twitter.com/labs/1/tweets?ids=&format=&tweet.format&user.format&place.format&expansions",
+							"protocol": "https",
+							"host": [
+								"api",
+								"twitter",
+								"com"
+							],
+							"path": [
+								"labs",
+								"1",
+								"tweets"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "",
+									"description": "Required. A comma separated list of Tweet IDs. Up to 100 are allowed in a single request."
+								},
+								{
+									"key": "format",
+									"value": "",
+									"description": "Format for all the objects returned as part of the response, including expansions.\n\nAllowed values: default, compact, detailed\nDefault value: default"
+								},
+								{
+									"key": "tweet.format",
+									"value": null,
+									"description": "Format for all Tweet objects returned in response. Can be used together with other format parameters to expand or reduce Tweet objects only.\n\nAllowed values: default, compact, detailed\nDefault value: default"
+								},
+								{
+									"key": "user.format",
+									"value": null,
+									"description": "Format for all User objects returned in response. Can be used together with other format parameters to expand or reduce User objects only.\n\nAllowed values: default, compact, detailed\nDefault value: default"
+								},
+								{
+									"key": "place.format",
+									"value": null,
+									"description": "Format for all Place objects returned in response. Can be used together with other format parameters to expand or reduce Place objects only.\n\nAllowed values: default, compact, detailed\nDefault value: default"
+								},
+								{
+									"key": "expansions",
+									"value": null,
+									"description": "Comma-separated list fo fields to expand. Expansions enable requests to expand an ID into a full object in the includes response object.\n\nAllowed values: attachments.poll_ids, attachments.media_keys, author_id, geo.place_id, in_reply_to_user_id, referenced_tweets.id\n\nDefault values: none"
+								}
+							]
+						},
+						"description": "This endpoints returns information about the Tweet specified by the requested IDs.\n\nFor full details, see the [API reference](https://developer.twitter.com/en/docs/labs/tweets-and-users/get-tweets-v1) for this endpoint."
+					},
+					"response": []
+				}
+			],
+			"description": "This is a Postman collection for the [Tweets and Users developer preview](https://developer.twitter.com/en/docs/labs/tweets-and-users).\n\nThe endpoints we release in Labs will be previews and are likely to change before they are released broadly, so we encourage you to take that into consideration as you build.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Metrics v1",
+			"item": [
+				{
+					"name": "Tweet metrics (owned/authorized)",
+					"request": {
+						"auth": {
+							"type": "oauth1",
+							"oauth1": [
+								{
+									"key": "tokenSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "consumerSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "consumerKey",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addParamsToHeader",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "signatureMethod",
+									"value": "HMAC-SHA1",
+									"type": "string"
+								},
+								{
+									"key": "version",
+									"value": "1.0",
+									"type": "string"
+								},
+								{
+									"key": "addEmptyParamsToSign",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.twitter.com/labs/1/tweets/metrics/private?ids=",
+							"protocol": "https",
+							"host": [
+								"api",
+								"twitter",
+								"com"
+							],
+							"path": [
+								"labs",
+								"1",
+								"tweets",
+								"metrics",
+								"private"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "",
+									"description": "Required. A comma separated list of Tweet IDs. Up to 50 are allowed in a single request. The Tweets you query must have been created in the last 30 days and cannot be Retweets."
+								}
+							]
+						},
+						"description": "This endpoint returns engagement data for owned/authorized Tweets. You can specify the Tweets you want to query by their ID.\n\nFor full details, see the [API reference](https://developer.twitter.com/en/docs/labs/tweet-metrics/api-reference/get-tweets-metrics-v1) for this endpoint."
+					},
+					"response": []
+				}
+			],
+			"description": "This is a Postman collection for the [Filtered stream developer preview](https://developer.twitter.com/en/docs/labs/tweet-metrics).\n\nThe endpoints we release in Labs will be previews and are likely to change before they are released broadly, so we encourage you to take that into consideration as you build.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Filtered Stream v1",
+			"item": [
+				{
+					"name": "List all rules",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.twitter.com/labs/1/tweets/stream/filter/rules",
+							"protocol": "https",
+							"host": [
+								"api",
+								"twitter",
+								"com"
+							],
+							"path": [
+								"labs",
+								"1",
+								"tweets",
+								"stream",
+								"filter",
+								"rules"
+							]
+						},
+						"description": "Return a list of filter rules currently active on the streaming endpoint, either as a list or individually.\n\nFor full details, see the [API reference](https://developer.twitter.com/en/docs/labs/filtered-stream/api-reference/get-tweets-stream-filter-rules-v1) for this endpoint."
+					},
+					"response": []
+				},
+				{
+					"name": "Stream",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.twitter.com/labs/1/tweets/stream/filter?format=detailed",
+							"protocol": "https",
+							"host": [
+								"api",
+								"twitter",
+								"com"
+							],
+							"path": [
+								"labs",
+								"1",
+								"tweets",
+								"stream",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "detailed"
+								}
+							]
+						},
+						"description": "Streams Tweets in real-time based on a specific set of filter rules.\n\nFor full details, see the [API reference](https://developer.twitter.com/en/docs/labs/filtered-stream/api-reference/get-tweets-stream-filter-v1) for this endpoint."
+					},
+					"response": []
+				},
+				{
+					"name": "Create rule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"add\": [\n\t\t{\"value\": \"\"}\n\t]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.twitter.com/labs/1/tweets/stream/filter/rules?dry_run=true",
+							"protocol": "https",
+							"host": [
+								"api",
+								"twitter",
+								"com"
+							],
+							"path": [
+								"labs",
+								"1",
+								"tweets",
+								"stream",
+								"filter",
+								"rules"
+							],
+							"query": [
+								{
+									"key": "dry_run",
+									"value": "true",
+									"description": "If enabled, the rules in the body will be validated, but not saved. This is useful if you want to test your rule syntax."
+								}
+							]
+						},
+						"description": "Creates filter rules. To create one or more rules, submit an add payload as an array of rules and operators.\n\nFor full details, see the [API reference](https://developer.twitter.com/en/docs/labs/filtered-stream/api-reference/post-tweets-stream-filter-rules-v1) for this endpoint."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete rule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"delete\": {\n\t\t\"values\": [\n\t\t\t\"\"\n\t\t]\n\t}\n}\n ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.twitter.com/labs/1/tweets/stream/filter/rules",
+							"protocol": "https",
+							"host": [
+								"api",
+								"twitter",
+								"com"
+							],
+							"path": [
+								"labs",
+								"1",
+								"tweets",
+								"stream",
+								"filter",
+								"rules"
+							]
+						},
+						"description": "Deletes filter rules. This endpoint can delete multiple rules at a time by specifying an array of IDs or rule values. If one or more rules cannot be deleted (for example, because it does not exist), the operation will not fail. In other words, only existing rules will be deleted.\n\n\nFor full details, see the [API reference](https://developer.twitter.com/en/docs/labs/filtered-stream/api-reference/delete-tweets-stream-filter-rules-v1) for this endpoint."
+					},
+					"response": []
+				},
+				{
+					"name": "Rule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.twitter.com/labs/1/tweets/stream/filter/rules?ids=",
+							"protocol": "https",
+							"host": [
+								"api",
+								"twitter",
+								"com"
+							],
+							"path": [
+								"labs",
+								"1",
+								"tweets",
+								"stream",
+								"filter",
+								"rules"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "",
+									"description": "The ID of the rule."
+								}
+							]
+						},
+						"description": "Return a filter rule currently active on the streaming endpoint. This endpoint is the same as *List all rules*, except it is configured to accept an ID.\n\nFor full details, see the [API reference](https://developer.twitter.com/en/docs/labs/filtered-stream/api-reference/get-tweets-stream-filter-rules-v1) for this endpoint."
+					},
+					"response": []
+				}
+			],
+			"description": "This is a Postman collection for the [Filtered stream developer preview](https://developer.twitter.com/en/docs/labs/filtered-stream).\n\nThe endpoints we release in Labs will be previews and are likely to change before they are released broadly, so we encourage you to take that into consideration as you build.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Sampled Stream v1",
+			"item": [
+				{
+					"name": "Stream",
+					"request": {
+						"auth": {
+							"type": "oauth1",
+							"oauth1": [
+								{
+									"key": "tokenSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "consumerSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "consumerKey",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "signatureMethod",
+									"value": "HMAC-SHA1",
+									"type": "string"
+								},
+								{
+									"key": "version",
+									"value": "1.0",
+									"type": "string"
+								},
+								{
+									"key": "addParamsToHeader",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addEmptyParamsToSign",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Dtab-Local",
+								"type": "text",
+								"value": "/s/datadelivery-staf/proxyapp:https => /srv#/staging2/smf1/datadelivery-staf/proxyapp:https"
+							}
+						],
+						"url": {
+							"raw": "https://api.twitter.com/labs/1/tweets/stream/filter?format=detailed",
+							"protocol": "https",
+							"host": [
+								"api",
+								"twitter",
+								"com"
+							],
+							"path": [
+								"labs",
+								"1",
+								"tweets",
+								"stream",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "detailed"
+								}
+							]
+						},
+						"description": "Streams about 1% of Tweets in real-time.\n\nFor full details, see the [API reference](https://developer.twitter.com/en/docs/labs/sampled-stream/api-reference) for this endpoint."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearer_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"/*",
+					" * This pre-request script retrieves a Bearer token from the client credentials",
+					" * you provide in your environment file.",
+					" */",
+					"",
+					"// Retrieve env variables currently configured",
+					"const env_variables = pm.environment.toObject({",
+					"    excludeDisabled: true",
+					"});",
+					"",
+					"const addToken = () => {",
+					"    pm.sendRequest({",
+					"        url: 'https://api.twitter.com/oauth2/token',",
+					"        method: 'POST',",
+					"        auth: {",
+					"            type: 'basic',",
+					"            basic: {",
+					"                username: env_variables.consumer_key,",
+					"                password: env_variables.consumer_secret",
+					"            }",
+					"        },",
+					"        headers: {",
+					"            'Content-type': 'Content-type: application/x-www-form-urlencoded; charset: utf-8'",
+					"        },",
+					"        body: {",
+					"            mode: 'urlencoded',",
+					"            urlencoded: 'grant_type=client_credentials'",
+					"        }",
+					"    }, (err, res) => {",
+					"        if (err) {",
+					"            console.error('Error while generating a bearer token:', err);",
+					"        } else {",
+					"            const {access_token} = res.json();",
+					"            env_variables.bearer_token = access_token;",
+					"            pm.environment.set('bearer_token', access_token);",
+					"        }",
+					"    });",
+					"}",
+					"",
+					"const prepareBearerToken = () => {",
+					"    // Check if the required variables are set",
+					"    for (const key of ['consumer_key', 'consumer_secret']) {",
+					"        if (typeof env_variables[key] === 'undefined' || !env_variables[key]) {",
+					"            console.error('Missing required env variable:', key);",
+					"            return;",
+					"        }",
+					"    }",
+					"    ",
+					"    // Use an existing Bearer token, if already provided",
+					"    if (typeof env_variables.bearer_token === 'undefined' || env_variables.bearer_token === '') {",
+					"        addToken();",
+					"    }",
+					"}",
+					"",
+					"prepareBearerToken();",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "consumer_key",
+			"value": ""
+		},
+		{
+			"key": "consumer_secret",
+			"value": ""
+		},
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "token_secret",
+			"value": ""
+		},
+		{
+			"key": "bearer_token",
+			"value": ""
+		}
+	]
+}
