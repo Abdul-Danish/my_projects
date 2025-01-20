@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.digitaldots.platform</groupId>
+        <artifactId>platform-core</artifactId>
+        <version>1.5.1-SNAPSHOT</version>
+        <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.digitaldots.connector</groupId>
+    <artifactId>ms-graph-api</artifactId>
+    <version>1.5.1-SNAPSHOT</version>
+    <name>ms-graph-api</name>
+    <description>Connector for Graph API</description>
+
+    <dependencies>
+        <!-- Connector Dependencies -->
+        <dependency>
+            <groupId>com.digitaldots.connector</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.digitaldots.connector</groupId>
+            <artifactId>connector-code-gen</artifactId>
+        </dependency>
+
+        <!-- Other Dependencies -->
+        <dependency>
+            <groupId>com.microsoft.graph</groupId>
+            <artifactId>microsoft-graph</artifactId>
+            <version>${microsoft-graph.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.dataformat</groupId>
+                    <artifactId>jackson-dataformat-xml</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-identity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

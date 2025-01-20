@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.digitaldots.platform</groupId>
+        <artifactId>platform-core</artifactId>
+        <version>1.5.1-SNAPSHOT</version>
+        <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.digitaldots.connector</groupId>
+    <artifactId>elastic-search</artifactId>
+    <version>1.5.1-SNAPSHOT</version>
+    <name>Elastic-Search Connetor</name>
+
+    <properties>
+        <connector.version>1.5.1-SNAPSHOT</connector.version>
+        <java.version>17</java.version>
+    </properties>
+
+    <dependencies>
+        <!-- Connector Dependencies -->
+        <dependency>
+            <groupId>com.digitaldots.connector</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.digitaldots.connector</groupId>
+            <artifactId>connector-code-gen</artifactId>
+        </dependency>
+
+        <!-- Other Dependencies -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>bson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>co.elastic.clients</groupId>
+            <artifactId>elasticsearch-java</artifactId>
+            <version>${elasticsearch.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>${elasticsearch.version}</version>
+        </dependency>
+
+
+        <!-- Dependencies for Connector Tests -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin.external.google</groupId>
+                    <artifactId>android-json</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

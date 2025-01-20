@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	name="Android Application Rules"
+	xmlns="http://pmd.sf.net/ruleset/1.0.0"
+	xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd"
+	xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd">
+
+	<description>
+		This Ruleset will check code for wrong stuff
+	</description>
+
+	<!-- use the entire strings ruleset -->
+	<!-- <rule ref="rulesets/java/strings.xml" /> -->
+
+	<!-- some rules we will specify one at a time -->
+	<rule ref="category/java/bestpractices.xml/UnusedLocalVariable" />
+	<rule ref="category/java/bestpractices.xml/UnusedPrivateField" />
+	<rule ref="category/java/bestpractices.xml/UnusedFormalParameter" />
+
+	<rule ref="category/java/codestyle.xml/DuplicateImports" />
+	<rule ref="category/java/bestpractices.xml/UnusedImports" />
+	<rule ref="category/java/codestyle.xml/UnnecessaryModifier" />
+	<rule
+		ref="category/java/errorprone.xml/UnnecessaryConversionTemporary" />
+
+
+	<!-- We want to customize this rule a bit, change the message and raise 
+		the priority -->
+	<rule ref="category/java/errorprone.xml/EmptyCatchBlock"
+		message="Must handle exceptions">
+		<priority>2</priority>
+	</rule>
+
+	<rule ref="category/java/errorprone.xml/UnusedNullCheckInEquals" />
+	<rule ref="category/java/codestyle.xml/EmptyControlStatement" />
+	<rule ref="category/java/codestyle.xml/UnnecessarySemicolon" />
+	<rule
+		ref="category/java/codestyle.xml/UnnecessaryFullyQualifiedName" />
+	<rule
+		ref="category/java/errorprone.xml/BeanMembersShouldSerialize" />
+
+
+	<!-- Now we'll customize a rule's property value -->
+	<!-- <rule ref="rulesets/java/codesize.xml/CyclomaticComplexity"> <properties> 
+		<property name="reportLevel" value="5" /> </properties> </rule> -->
+
+	<!-- We want everything from braces.xml except WhileLoopsMustUseBraces -->
+
+</ruleset>

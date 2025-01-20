@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.digitaldots.platform</groupId>
+        <artifactId>platform-core</artifactId>
+        <version>1.5.1-SNAPSHOT</version>
+        <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.digitaldots.connector</groupId>
+    <artifactId>ad</artifactId>
+    <version>1.5.1-SNAPSHOT</version>
+    <name>ad</name>
+    <description>Connector for AD</description>
+    <properties>
+        <java.version>17</java.version>
+        <connector.version>1.5.1-SNAPSHOT</connector.version>
+    </properties>
+    <dependencies>
+        <!-- Connector Dependencies -->
+        <dependency>
+            <groupId>com.digitaldots.connector</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.digitaldots.connector</groupId>
+            <artifactId>connector-code-gen</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.digitaldots.connector</groupId>
+            <artifactId>ms-graph-api</artifactId>
+            <version>${connector.version}</version>
+        </dependency>
+
+        <!-- Other Dependencies -->
+        <dependency>
+            <groupId>com.microsoft.graph</groupId>
+            <artifactId>microsoft-graph</artifactId>
+            <version>${microsoft-graph.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.dataformat</groupId>
+                    <artifactId>jackson-dataformat-xml</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <!-- Unused Dependencies -->
+        <!-- <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.14</version>
+        </dependency> -->
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

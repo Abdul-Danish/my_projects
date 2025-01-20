@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.digitaldots.platform</groupId>
+        <artifactId>platform-core</artifactId>
+        <version>1.5.1-SNAPSHOT</version>
+        <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.digitaldots.connector</groupId>
+    <artifactId>connector-execution</artifactId>
+    <version>1.5.1-SNAPSHOT</version>
+    <name>connector-execution</name>
+    <description>process dtos</description>
+
+    <dependencies>
+        <!-- Connector Dependencies -->
+        <dependency>
+            <groupId>com.digitaldots.connector</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.digitaldots.connector</groupId>
+            <artifactId>connector-code-gen</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.digitaldots.connector</groupId>
+            <artifactId>variables</artifactId>
+            <version>${connector.version}</version>
+        </dependency>
+
+        <!-- Dependencies from Platform Libraries -->
+        <dependency>
+            <groupId>com.digitaldots.platform.common</groupId>
+            <artifactId>util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.digitaldots.platform.common</groupId>
+            <artifactId>errors</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.digitaldots.platform.common</groupId>
+            <artifactId>entities</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.digitaldots.platform.common</groupId>
+            <artifactId>secrets</artifactId>
+        </dependency>
+
+    </dependencies>
+</project>
