@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import io.minio.MinioAsyncClient;
 import io.minio.MinioClient;
 
 @Configuration
@@ -21,6 +22,11 @@ public class MinioConfig {
     @Bean
     MinioClient minioClient() {
         return MinioClient.builder().endpoint(minioUrl).credentials(minioAccessKey, minioSecretKey).build();
+    }
+
+    @Bean
+    MinioAsyncClient minioAsyncClient() {
+        return MinioAsyncClient.builder().endpoint(minioUrl).credentials(minioAccessKey, minioSecretKey).build();
     }
 
 }

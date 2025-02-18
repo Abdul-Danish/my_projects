@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.minio.dto.MinioRequestDto;
+import com.minio.dto.MultiPartRequest;
 import com.minio.service.MinioService;
 
 import io.minio.errors.ErrorResponseException;
@@ -40,7 +42,7 @@ public class MinioController {
         return ResponseEntity.ok(minioService.getBucketList());
     }
 
-    @PostMapping("/upload/object")
+    @PostMapping("/upload")
     public void uploadObject(@RequestPart MultipartFile file, @RequestParam String filePath) throws IOException, MinioException {
         minioService.uploadObject(file.getOriginalFilename(), file.getBytes(), filePath);
     }
@@ -60,6 +62,26 @@ public class MinioController {
         throws InvalidKeyException, ErrorResponseException, InsufficientDataException, InternalException, InvalidResponseException,
         NoSuchAlgorithmException, ServerException, XmlParserException, IOException {
         minioService.removeObject(minioRequestDto);
+    }
+
+    @PostMapping("/multipart/upload/alpha")
+    public void uploadObjectAlpha(@RequestPart MultipartFile file, @RequestParam String fileName, @RequestParam int fileSize)
+        throws InvalidKeyException, NoSuchAlgorithmException, InsufficientDataException, ServerException, XmlParserException,
+        ErrorResponseException, InternalException, InvalidResponseException, IOException, InterruptedException, ExecutionException {
+        minioService.multiPartFileUploadAlpha(file.getInputStream(), fileName, fileSize);
+    }
+
+    @PostMapping("/multipart/upload")
+    public void uploadObject(@RequestBody MultiPartRequest multiPartRequest)
+        throws InvalidKeyException, NoSuchAlgorithmException, InsufficientDataException, ServerException, XmlParserException,
+        ErrorResponseException, InternalException, InvalidResponseException, IOException, InterruptedException, ExecutionException {
+        minioService.multiPartFileUpload(multiPartRequest);
+    }
+
+    @GetMapping("/upload/id")
+    public String getUploadId(@RequestBody MultiPartRequest multiPartRequest) throws InvalidKeyException, InsufficientDataException,
+        InternalException, NoSuchAlgorithmException, XmlParserException, IOException, InterruptedException, ExecutionException {
+        return minioService.getUploadId(multiPartRequest);
     }
 
 }
