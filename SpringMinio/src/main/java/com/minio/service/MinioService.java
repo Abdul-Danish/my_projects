@@ -8,7 +8,9 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.minio.config.MinioClientWrapper;
 import com.minio.dto.MinioRequestDto;
 import com.minio.dto.MultiPart;
+import com.minio.dto.MultiPartPresignedResponse;
 import com.minio.dto.MultiPartRequest;
 
 import io.minio.GetObjectArgs;
@@ -46,11 +49,11 @@ public class MinioService {
 
     @Autowired
     private MinioClient minioClient;
-    
+
     @Autowired
     private MinioClientWrapper minioClientWrapper;
 
-    @Value("${minio.buckek.name}")
+    @Value("${minio.bucket.name}")
     private String bucketName;
 
     public List<String> getBucketList() {
@@ -121,60 +124,84 @@ public class MinioService {
             throw new RuntimeException("Exception Occured While Getting Pre-Signed Url for the Object: ", e);
         }
     }
-    
-    public void multiPartFileUploadAlpha(InputStream content, String fileName, int fileSize) throws InvalidKeyException, NoSuchAlgorithmException, InsufficientDataException, ServerException, XmlParserException, ErrorResponseException, InternalException, InvalidResponseException, IOException, InterruptedException, ExecutionException {
+
+    public void multiPartFileUploadAlpha(InputStream content, String fileName, int fileSize)
+        throws InvalidKeyException, NoSuchAlgorithmException, InsufficientDataException, ServerException, XmlParserException,
+        ErrorResponseException, InternalException, InvalidResponseException, IOException, InterruptedException, ExecutionException {
         int partSize = fileSize * 1024 * 1024;
-        log.info("PartSize: {}", partSize);      
+        log.info("PartSize: {}", partSize);
         log.info("Content Length: {}", content.available());
-        
+
         int partArraySize = (int) Math.ceil((double) (content.available() / fileSize) / 1000000);
         log.info("array size: {}", partArraySize);
-        
+
         // Initiating Multi Part Upload
         String uploadId = minioClientWrapper.createMultiPartUpload(fileName);
         log.info("UploadId: {}", uploadId);
-        
-//        List<Part> parts = new ArrayList<>();
-          Part[] parts = new Part[partArraySize];
-//        BufferedReader bufferedReader = new BufferedReader(null);
-//        BufferedReader bf = new BufferedReader(null);
-        
+
+        Part[] parts = new Part[partArraySize];
         byte[] buffer = new byte[partSize];
         int readBytes;
         int partNumber = 1;
-        
-        while ((readBytes = content.read(buffer)) != -1) {            
+
+        while ((readBytes = content.read(buffer)) != -1) {
             log.info("Read Bytes: {}, Part Number: {}", readBytes, partNumber);
             log.info("Buffer Data: {}", buffer);
             ByteArrayInputStream inputStream = new ByteArrayInputStream(buffer);
-            
+
             String etag = minioClientWrapper.uploadPart(fileName, inputStream, readBytes, uploadId, partNumber);
             log.info("eTag: {}", etag);
-            
+
             // upload each part
             parts[partNumber] = new Part(partNumber, etag);
             partNumber++;
         }
-        
+
         // complete upload
         minioClientWrapper.completeMultiPartUpload(null, fileName, uploadId, parts, null, null);
         log.info("Multi Part Upload Completed");
     }
-    
-    public void multiPartFileUpload(MultiPartRequest multiPartFile) throws InvalidKeyException, NoSuchAlgorithmException, InsufficientDataException, ServerException, XmlParserException, ErrorResponseException, InternalException, InvalidResponseException, IOException, InterruptedException, ExecutionException {
+
+    public MultiPartPresignedResponse getMultiPartPresignedUrlAlpha(String objectName, int noOfParts)
+        throws InvalidKeyException, InsufficientDataException, InternalException, NoSuchAlgorithmException, XmlParserException, IOException,
+        InterruptedException, ExecutionException, ErrorResponseException, InvalidResponseException, ServerException {
+        String uploadId = minioClientWrapper.initMultiPartUpload(null, objectName, null, null);
+
+        List<MultiPart> multiParts = new ArrayList<>();
+        Map<String, String> queryParams = new HashMap<>();
+        for (int partNo = 0; partNo < noOfParts; partNo++) {
+            queryParams.put("uploadId", uploadId);
+            queryParams.put("partNumber", String.valueOf(partNo + 1));
+
+            GetPresignedObjectUrlArgs getPresignedObjectUrlArgs = GetPresignedObjectUrlArgs.builder().method(Method.PUT).bucket(bucketName)
+                .object(objectName).extraQueryParams(queryParams).build();
+            String presignedObjectUrl = minioClient.getPresignedObjectUrl(getPresignedObjectUrlArgs);
+
+            multiParts.add(MultiPart.builder().partNo(partNo+1).url(presignedObjectUrl).build());
+        }
+
+        return MultiPartPresignedResponse.builder().filePath(objectName).multiParts(multiParts).uploadId(uploadId).build();
+    }
+
+    // Not In Use
+    public void multiPartFileUpload(MultiPartRequest multiPartFile)
+        throws InvalidKeyException, NoSuchAlgorithmException, InsufficientDataException, ServerException, XmlParserException,
+        ErrorResponseException, InternalException, InvalidResponseException, IOException, InterruptedException, ExecutionException {
         Part[] parts = new Part[multiPartFile.getParts().size()];
-        int i=0;
+        int i = 0;
         for (MultiPart multiPart : multiPartFile.getParts()) {
             parts[i] = new Part(multiPart.getPartNo(), multiPart.getEtag());
             i++;
         }
-        
-        ObjectWriteResponse response = minioClientWrapper.completeMultiPartUpload(null, multiPartFile.getFilePath(), multiPartFile.getUploadId(), parts, null, null);
+
+        ObjectWriteResponse response = minioClientWrapper.completeMultiPartUpload(null, multiPartFile.getFilePath(),
+            multiPartFile.getUploadId(), parts, null, null);
         log.info("MultiPart Response: {}", response);
     }
 
-    public String getUploadId(MultiPartRequest multiPartRequest) throws InvalidKeyException, InsufficientDataException, InternalException, NoSuchAlgorithmException, XmlParserException, IOException, InterruptedException, ExecutionException {
+    public String getUploadId(MultiPartRequest multiPartRequest) throws InvalidKeyException, InsufficientDataException, InternalException,
+        NoSuchAlgorithmException, XmlParserException, IOException, InterruptedException, ExecutionException {
         return minioClientWrapper.initMultiPartUpload(null, multiPartRequest.getFilePath(), null, null);
     }
-    
+
 }

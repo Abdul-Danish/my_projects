@@ -6,5 +6,6 @@ import lombok.Data;
 public class MinioRequestDto {
 
     private String filePath;
+    private int noOfParts;
     
 }

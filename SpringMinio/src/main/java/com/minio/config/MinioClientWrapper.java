@@ -27,17 +27,17 @@ import io.minio.messages.Part;
 @Component
 public class MinioClientWrapper extends MinioAsyncClient {
 
-    @Value("${minio.buckek.name}")
+    @Value("${minio.bucket.name}")
     private String bucketName;
 
     protected MinioClientWrapper(MinioAsyncClient client) {
         super(client);
     }
 
-    public String initMultiPartUpload(String region, String object, Multimap<String, String> headers,
+    public String initMultiPartUpload(String region, String objectName, Multimap<String, String> headers,
         Multimap<String, String> extraQueryParams) throws InvalidKeyException, InsufficientDataException, InternalException,
         NoSuchAlgorithmException, XmlParserException, IOException, InterruptedException, ExecutionException {
-        CompletableFuture<CreateMultipartUploadResponse> response = this.createMultipartUploadAsync(bucketName, region, object, headers,
+        CompletableFuture<CreateMultipartUploadResponse> response = this.createMultipartUploadAsync(bucketName, region, objectName, headers,
             extraQueryParams);
         return response.get().result().uploadId();
     }
@@ -51,14 +51,19 @@ public class MinioClientWrapper extends MinioAsyncClient {
         return response.get();
     }
 
-    public String createMultiPartUpload(String objectNmae) throws InvalidKeyException, InsufficientDataException, InternalException, NoSuchAlgorithmException, XmlParserException, IOException, InterruptedException, ExecutionException {
-        CompletableFuture<CreateMultipartUploadResponse> multipartUploadResponse = this.createMultipartUploadAsync(bucketName, null, objectNmae, null, null);
+    public String createMultiPartUpload(String objectNmae) throws InvalidKeyException, InsufficientDataException, InternalException,
+        NoSuchAlgorithmException, XmlParserException, IOException, InterruptedException, ExecutionException {
+        CompletableFuture<CreateMultipartUploadResponse> multipartUploadResponse = this.createMultipartUploadAsync(bucketName, null,
+            objectNmae, null, null);
         return multipartUploadResponse.get().result().uploadId();
     }
-    
-    public String uploadPart(String objectName, InputStream partStream, int length, String uploadId, int partNumber) throws InvalidKeyException, NoSuchAlgorithmException, InsufficientDataException, ServerException, XmlParserException, ErrorResponseException, InternalException, InvalidResponseException, IOException {
-        UploadPartResponse uploadPartResponse = this.uploadPart(bucketName, null, objectName, partStream, length, uploadId, partNumber, null, null);
+
+    public String uploadPart(String objectName, InputStream partStream, int length, String uploadId, int partNumber)
+        throws InvalidKeyException, NoSuchAlgorithmException, InsufficientDataException, ServerException, XmlParserException,
+        ErrorResponseException, InternalException, InvalidResponseException, IOException {
+        UploadPartResponse uploadPartResponse = this.uploadPart(bucketName, null, objectName, partStream, length, uploadId, partNumber,
+            null, null);
         return uploadPartResponse.etag();
     }
-    
+
 }
