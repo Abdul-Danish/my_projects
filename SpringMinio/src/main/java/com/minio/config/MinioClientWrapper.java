@@ -60,10 +60,9 @@ public class MinioClientWrapper extends MinioAsyncClient {
 
     public String uploadPart(String objectName, InputStream partStream, int length, String uploadId, int partNumber)
         throws InvalidKeyException, NoSuchAlgorithmException, InsufficientDataException, ServerException, XmlParserException,
-        ErrorResponseException, InternalException, InvalidResponseException, IOException {
-        UploadPartResponse uploadPartResponse = this.uploadPart(bucketName, null, objectName, partStream, length, uploadId, partNumber,
-            null, null);
-        return uploadPartResponse.etag();
+        ErrorResponseException, InternalException, InvalidResponseException, IOException, InterruptedException, ExecutionException {
+        CompletableFuture<UploadPartResponse> uploadPartAsyncResponse = this.uploadPartAsync(bucketName, null, objectName, partStream, length, uploadId, partNumber, null, null);
+        return uploadPartAsyncResponse.get().etag();
     }
-
+    
 }

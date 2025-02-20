@@ -57,6 +57,11 @@ public class MinioController {
     public ResponseEntity<String> getPresignedUrl(@RequestBody MinioRequestDto minioRequestDto) {
         return ResponseEntity.ok(minioService.getPresignedUrl(minioRequestDto));
     }
+    
+    @GetMapping("/upload/presigned/url")
+    public ResponseEntity<String> getUploadPresignedUrl(@RequestBody MinioRequestDto minioRequestDto) {
+        return ResponseEntity.ok(minioService.getUploadPresignedUrl(minioRequestDto.getFilePath()));
+    }
 
     @DeleteMapping("/remove")
     public void removeObject(@RequestBody MinioRequestDto minioRequestDto)

@@ -8,7 +8,11 @@ import lombok.Data;
 public class MultiPartRequest {
 
     private String uploadId;
-    private String filePath;
+    // path of local file
+    private String path;
+    // file path for minio
+    private String minioFilePath;
+    private int partSize;
     private List<MultiPart> parts;
     
 }
