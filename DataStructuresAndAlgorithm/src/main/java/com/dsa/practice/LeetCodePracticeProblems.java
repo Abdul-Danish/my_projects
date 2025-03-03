@@ -2,9 +2,12 @@ package com.dsa.practice;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
-public class PracticeProblems {
+public class LeetCodePracticeProblems {
 
 	public static void main(String[] args) {
 
@@ -149,9 +152,8 @@ public class PracticeProblems {
         */
 		
 		/*
-		 * problem - 4: Minimum Cost For Tickets
+		 * problem - 4: Minimum Cost For Tickets (Approach: Dynamic Programming)
 		 */
-	    
 	    
 	    /*
 	    // input
@@ -184,9 +186,80 @@ public class PracticeProblems {
         */
 	    
 	    /*
-         * problem - 5: 
+         * problem - 5: Valid Anagram (Arrays & Hashing)
          */
         
+	    /*
+	    // input
+	    String s = "anagram"; // expected: true
+	    String t = "nagaram";
+	    
+	    // logic
+	    boolean isAnagram = false;
+	    
+	    Map<Character, Integer> inputMap = new HashMap<>();
+	    Map<Character, Integer> targetMap = new HashMap<>();
+	    
+	    if (s.length() == t.length()) {
+    	    
+            int inputLength = s.length();
+            for (int i=0; i<inputLength; i++) {
+                inputMap.put(s.charAt(i) , Integer.valueOf((inputMap.getOrDefault(s.charAt(i) , 0) + 1)));
+            }
+            
+            int targetLength = t.length();
+            for (int i=0; i<targetLength; i++) {
+                targetMap.put(t.charAt(i) , Integer.valueOf((targetMap.getOrDefault(t.charAt(i) , 0) + 1)));
+            }
+            
+            System.out.println(inputMap);
+            System.out.println(targetMap);
+                        
+            for (Entry<Character, Integer> entrySet : inputMap.entrySet()) {
+                Character key = entrySet.getKey();
+                int value = entrySet.getValue();
+                if (targetMap.containsKey(key) && targetMap.get(key) == value) {
+                    continue;
+                } else {
+                    System.out.println(false);                    
+                }
+            }
+            System.out.println(true);
+	    }
+	    System.out.println(false);
+	    */
+	    
+
+	    /*
+         * problem - 6: Group Anagrams (Arrays & Hashing)
+         */
+	    
+	    /*
+	    // input
+	    String[] strs = {"act","pots","tops","cat","stop","hat"}; // expected: [[[act, cat], [pots, tops, stop], [hat]]]
+	    
+	    // logic
+	    Map<String, List<String>> result = new HashMap<>();
+	    
+	    for (String str : strs) {
+            char[] charArray = str.toCharArray();
+            Arrays.sort(charArray);
+            String sortedString = new String(charArray);
+            result.putIfAbsent(sortedString, new ArrayList<>());
+            result.get(sortedString).add(str);
+        }
+	    
+	    System.out.println(Arrays.asList(result.values()));
+	    */
+	    
+	    
+	    /*
+         * problem - 6: Climbing Stairs (Dynamic Programming)
+         */
+	    
+	    int n = 0;
+	    
+	    
 	    
 	}
 
