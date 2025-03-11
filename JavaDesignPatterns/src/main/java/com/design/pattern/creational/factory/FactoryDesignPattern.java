@@ -3,61 +3,103 @@ package com.design.pattern.creational.factory;
 /*
  * This pattern is particularly useful when the exact types of objects to be created may vary or need to be determined at runtime,
  * enabling flexibility and extensibility in object creation.
+ * 
+ * Creates objects directly from the factory
+ * 
+ * Objects are created dynamically (Note: Not pre-created like Strategy Patten)
+ * 
+ * Similar To: Strategy Pattern
  */
 public class FactoryDesignPattern {
 
     public static void main(String[] args) {
-        AnimalFactory catFactory = new CatFactory();
-        Client client = new Client(catFactory);
-        Animal animal = client.getAnimal();
-        animal.printType();
+        // Creating Object directly from Factory
+        PizzaFactory pizzaFactory = new MagharitaPizzaFactory();
+        Pizza pizza = pizzaFactory.createPizza();
+        pizza.prepare();
+        pizza.bake();
+        pizza.cut();
+        pizza.box();
     }
 }
 
-abstract class Animal {
-    public abstract void printType();
+interface Pizza {
+    public static final String PEPPERON = "Pepperon";
+    public static final String MARGHERITA = "Margherita";
+
+    void prepare();
+
+    void bake();
+
+    void cut();
+
+    void box();
 }
 
-class Cat extends Animal {
+class PepperonPizza implements Pizza {
+
     @Override
-    public void printType() {
-        System.out.println("Cat");
+    public void prepare() {
+        System.out.println("Preparing " + PEPPERON + " Pizza");
     }
-}
 
-class Dog extends Animal {
     @Override
-    public void printType() {
-        System.out.println("Dog");
+    public void bake() {
+        System.out.println("Baking " + PEPPERON + " Pizza");
     }
-}
 
-interface AnimalFactory {
-    Animal createAnimal();
-}
-
-class CatFactory implements AnimalFactory {
     @Override
-    public Animal createAnimal() {
-        return new Cat();
+    public void cut() {
+        System.out.println("Cutting...");
     }
-}
 
-class DogFactory implements AnimalFactory {
     @Override
-    public Animal createAnimal() {
-        return new Dog();
+    public void box() {
+        System.out.println("Boxing");
+    }
+
+}
+
+class MargharitaPizza implements Pizza {
+
+    @Override
+    public void prepare() {
+        System.out.println("Preparing " + MARGHERITA + " Pizza");
+    }
+
+    @Override
+    public void bake() {
+        System.out.println("Baking " + MARGHERITA + " Pizza");
+    }
+
+    @Override
+    public void cut() {
+        System.out.println("Cutting...");
+    }
+
+    @Override
+    public void box() {
+        System.out.println("Boxing");
+    }
+
+}
+
+interface PizzaFactory {
+    Pizza createPizza();
+}
+
+class PepperonPizzaFactory implements PizzaFactory {
+
+    @Override
+    public Pizza createPizza() {
+        return new PepperonPizza();
     }
 }
 
-class Client {
-    private Animal animal;
+class MagharitaPizzaFactory implements PizzaFactory {
 
-    public Client(AnimalFactory animalFactory) {
-        animal = animalFactory.createAnimal();
-    }
-
-    public Animal getAnimal() {
-        return animal;
+    @Override
+    public Pizza createPizza() {
+        return new MargharitaPizza();
     }
 }

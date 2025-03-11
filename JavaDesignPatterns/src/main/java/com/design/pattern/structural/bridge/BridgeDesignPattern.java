@@ -1,6 +1,8 @@
 package com.design.pattern.structural.bridge;
 
 /*
+ * Allows the Abstraction and the Implementation to be developed independently.
+ * 
  * Bridge pattern decouple an abstraction from its implementation so that the two can vary independently. 
  */
 public class BridgeDesignPattern {

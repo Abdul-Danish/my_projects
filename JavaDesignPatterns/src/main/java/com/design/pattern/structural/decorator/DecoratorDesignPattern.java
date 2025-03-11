@@ -6,7 +6,7 @@ package com.design.pattern.structural.decorator;
 public class DecoratorDesignPattern {
 
     public static void main(String args[]) {
-        Cofee plainCofee = new PlainCofee("plain cofee with decoraded whipp", 20);
+        Cofee plainCofee = new PlainCofee("plain cofee with decorated whip cream", 20);
         MilkDecorator milkDecorator = new MilkDecorator(plainCofee, 5);
         SugarDecorator sugarDecorator = new SugarDecorator(milkDecorator, 5);
         System.out.println("Description: " + sugarDecorator.getDescription());

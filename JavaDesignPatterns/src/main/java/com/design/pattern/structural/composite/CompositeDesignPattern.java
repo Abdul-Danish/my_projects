@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
+ * If programmers find that they are using multiple objects in the same way, and often have nearly identical code to handle each of them
+ * 
  * The Composite Design Pattern was created to address specific challenges related to the representation and manipulation of hierarchical structures in a uniform way
  */
 public class CompositeDesignPattern {
