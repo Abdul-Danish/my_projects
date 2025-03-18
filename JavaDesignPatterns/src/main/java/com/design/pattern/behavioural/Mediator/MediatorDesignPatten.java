@@ -5,7 +5,9 @@ package com.design.pattern.behavioural.Mediator;
  * Mediator enables the decoupling of objects by introducing a layer in between so that the 
  * interaction between objects happens via the layer
  * 
- * Similar To: -
+ * The facade exposes existing functionality and the mediator adds to the existing functionality.
+ * 
+ * Similar To: Facade Design Pattern
  */
 public class MediatorDesignPatten {
 

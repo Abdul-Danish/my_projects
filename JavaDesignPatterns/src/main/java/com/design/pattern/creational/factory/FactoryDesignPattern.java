@@ -8,7 +8,7 @@ package com.design.pattern.creational.factory;
  * 
  * Objects are created dynamically (Note: Not pre-created like Strategy Patten)
  * 
- * Similar To: Strategy Pattern
+ * Similar To: Strategy Pattern, Abstract Design Pattern
  */
 public class FactoryDesignPattern {
 

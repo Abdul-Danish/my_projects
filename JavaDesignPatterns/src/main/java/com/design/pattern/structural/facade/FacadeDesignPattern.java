@@ -2,6 +2,13 @@ package com.design.pattern.structural.facade;
 
 /*
  * Facade defines a high-level interface that makes the subsystem easier to use.
+ * 
+ * The facade exposes existing functionality and the mediator adds to the existing functionality.
+ * 
+ * (facade does the internal calls to simplify complexcity whereas for mediator the objects responds 
+ *  back to the mediator for additional and so on)
+ * 
+ * Similar To: Mediator Design Pattern 
  */
 public class FacadeDesignPattern {
 

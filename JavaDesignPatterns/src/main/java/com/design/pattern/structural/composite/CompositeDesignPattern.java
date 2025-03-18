@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * If programmers find that they are using multiple objects in the same way, and often have nearly identical code to handle each of them
+ * If programmers find that they are using multiple objects in the same way, and often have nearly 
+ * identical code to handle each of them
  * 
- * The Composite Design Pattern was created to address specific challenges related to the representation and manipulation of hierarchical structures in a uniform way
+ * The Composite Design Pattern was created to address specific challenges related to the 
+ * representation and manipulation of hierarchical structures in a uniform way
+ * 
+ * Similar To: -
  */
 public class CompositeDesignPattern {
 
@@ -21,11 +25,10 @@ public class CompositeDesignPattern {
         TaskList phase1Tasks = new TaskList("Phase 1 Tasks");
         phase1Tasks.addTask(new SimpleTask("Design"));
         phase1Tasks.addTask(new SimpleTask("Implementations"));
-
-        projectLists.addTask(phase1Tasks);
-
         phase1Tasks.display();
         System.out.println();
+
+        projectLists.addTask(phase1Tasks);
         projectLists.display();
     }
 }

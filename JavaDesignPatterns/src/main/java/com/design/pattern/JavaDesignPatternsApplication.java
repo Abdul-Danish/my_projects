@@ -25,6 +25,15 @@ public class JavaDesignPatternsApplication {
      * Interpreter Method Design Pattern
      * 
      */
+    
+    /*
+     * Common Questions:
+     * 
+     * - Diff between mediator and facade design pattern
+     * - Diff between CoS and Filter pattern
+     * - Diff between Factory and Abstract and strategy pattern
+     * - Diff between Bridge and Template pattern
+     */
     public static void main(String[] args) {
         SpringApplication.run(JavaDesignPatternsApplication.class, args);
     }

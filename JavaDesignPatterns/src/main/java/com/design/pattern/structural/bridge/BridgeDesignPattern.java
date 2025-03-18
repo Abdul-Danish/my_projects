@@ -4,6 +4,8 @@ package com.design.pattern.structural.bridge;
  * Allows the Abstraction and the Implementation to be developed independently.
  * 
  * Bridge pattern decouple an abstraction from its implementation so that the two can vary independently. 
+ * 
+ * Similar To: Template Design Pattern
  */
 public class BridgeDesignPattern {
 
@@ -38,9 +40,8 @@ class Car extends Vechicle {
 
     @Override
     public void manufacture() {
-        System.out.println("Car");
-        workshop1.work();
-        workshop2.work();
+        workshop1.work("Car");
+        workshop2.work("Car");
     }
 }
 
@@ -52,28 +53,27 @@ class Bike extends Vechicle {
 
     @Override
     public void manufacture() {
-        System.out.println("Bike");
-        workshop1.work();
-        workshop2.work();
+        workshop1.work("Bike");
+        workshop2.work("Bike");
     }
 }
 
 interface Workshop {
-    void work();
+    void work(String type);
 }
 
 class Produce implements Workshop {
 
     @Override
-    public void work() {
-        System.out.println("produced");
+    public void work(String type) {
+        System.out.println(type + " produced");
     }
 }
 
 class Assemble implements Workshop {
 
     @Override
-    public void work() {
-        System.out.println("Assembled");
+    public void work(String type) {
+        System.out.println(type + " Assembled");
     }
 }

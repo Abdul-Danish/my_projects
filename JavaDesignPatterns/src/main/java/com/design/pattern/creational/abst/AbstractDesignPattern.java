@@ -1,11 +1,14 @@
 package com.design.pattern.creational.abst;
 
 /*
- * Abstract Factory pattern is almost similar to Factory Pattern and is considered as another layer of abstraction over factory pattern.
+ * Abstract Factory pattern is almost similar to Factory Pattern and is considered as another 
+ * layer of abstraction over factory pattern.
  * 
  * Abstract Factory patterns work around a super-factory which creates other factories.
  * 
  * It's an abstraction on top of Factories to create Factory.
+ * 
+ * Similar To: Factory Pattern
  */
 public class AbstractDesignPattern {
 

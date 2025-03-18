@@ -6,6 +6,9 @@ import lombok.Setter;
 /*
  * This pattern is frequently used in the chain of multiple objects, where each object either handles the 
  * request or passes it on to the next object in the chain if it is unable to handle that request.
+ * 
+ * Similar To: Filter Pattern (Diff: COR will stop if the condition is met but Filter pattern will 
+ *             follow it's sequence)
  */
 public class ChainOfRespDesignPattern {
 

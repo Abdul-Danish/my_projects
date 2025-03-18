@@ -33,6 +33,7 @@ class Singleton {
         if (Objects.isNull(obj)) {
             System.out.println("Creating New Singleton Instance");
             obj = new Singleton();
+            return obj;
         }
         System.out.println("Singleton Instance already exists");
         return obj;
