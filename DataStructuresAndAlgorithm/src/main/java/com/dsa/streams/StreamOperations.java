@@ -33,9 +33,15 @@ public class StreamOperations {
 //        filterByGender.forEach(System.out::println);
 
         // Sort
-        List<Employee> sortByAge = employees.stream().sorted(Comparator.comparing(Employee::getAge).thenComparing(Employee::getName))
+        List<Employee> sortByAge1 = employees.stream()
+            .sorted(Comparator.comparing((Employee e) -> e.getAge()).thenComparing((Employee e) -> e.getName()))
             .collect(Collectors.toList());
-//        sortByAge.forEach(System.out::println);
+
+        // (or)
+
+        List<Employee> sortByAge2 = employees.stream().sorted(Comparator.comparing(Employee::getAge).thenComparing(Employee::getName))
+            .collect(Collectors.toList());
+//        sortByAge1.forEach(System.out::println);
 
         // AllMatch
         boolean allMatch = employees.stream().allMatch(emp -> emp.getName().equals("emp3"));
@@ -64,7 +70,21 @@ public class StreamOperations {
         // FlatMap
         List<List<Employee>> nestedEmpList = Arrays.asList(Arrays.asList(employee1, employee2), Arrays.asList(employee3, employee4));
         List<Employee> flatEmpList = nestedEmpList.stream().flatMap(List::stream).collect(Collectors.toList());
-        flatEmpList.forEach(System.out::println);
+//        System.out.println(flatEmpList);
+
+//       Practice:
+        
+        List<Integer> intList = Arrays.asList(1, 2, 3, 5, 4, 5, 3, 7);
+        List<Integer> dubList = new ArrayList<>();
+
+        List<Integer> collect = intList.stream().sorted(Integer::compareTo)
+//        .filter(num -> {
+//            
+//        })
+        .collect(Collectors.toList());
+        
+        System.out.println(collect);
+        
     }
 
 }

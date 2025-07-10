@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 import lombok.ToString;
 
@@ -100,8 +102,42 @@ public class Problems {
         
         // Null as Argument
         
-        foo(null);
+//        foo(null);
         
+        
+        // callback functions
+        
+        
+        ConsumerCallback consumerCallback = new ConsumerCallback();
+        int ageDifference = 10;
+        AtomicInteger newAge1 = new AtomicInteger();
+        int initialAge = 20;
+        String finalRes = "";
+        
+        consumerCallback.getAge(initialAge, finalRes, (getAgeResult) -> {
+            System.out.println("getAgeResult: " + getAgeResult);
+            consumerCallback.increaseAge(initialAge, ageDifference, (increaseAgeResult) -> {
+                System.out.println("result: " + increaseAgeResult);
+            });
+        });
+        
+//        System.out.println("Output: " + newAge1.get());
+//        assertEquals(initialAge + ageDifference, newAge1.get());
+        
+        
+    }
+    
+    public static class ConsumerCallback {
+        public void getAge(int initialAge, String res, Consumer<Integer> callback) {
+            callback.accept(initialAge);
+        }
+
+        public void increaseAge(int initialAge, int ageDifference, Consumer<Integer> callback) {
+            System.out.println("===== Increase age ====");
+
+            int newAge = initialAge + ageDifference;
+            callback.accept(newAge);
+        }
     }
     
     public static void foo(Object o) {
