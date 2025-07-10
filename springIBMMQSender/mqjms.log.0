@@ -1,0 +1,706 @@
+Date: Thu Jun 26 13:40:22 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 17293
+--------------------------------------------------------------------
+June 26, 2025, 1:40:22 PM IST[http-nio-8030-exec-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 26, 2025, 1:40:22 PM IST[http-nio-8030-exec-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Mon Jun 30 15:26:59 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 19530
+--------------------------------------------------------------------
+June 30, 2025, 3:26:59 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:06:21 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 24104
+--------------------------------------------------------------------
+June 30, 2025, 4:06:21 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:06:54 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 24241
+--------------------------------------------------------------------
+June 30, 2025, 4:06:54 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:10:09 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 24632
+--------------------------------------------------------------------
+June 30, 2025, 4:10:09 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:13:47 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 25161
+--------------------------------------------------------------------
+June 30, 2025, 4:13:47 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:17:09 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 25615
+--------------------------------------------------------------------
+June 30, 2025, 4:17:09 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:18:28 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 25835
+--------------------------------------------------------------------
+June 30, 2025, 4:18:28 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:21:35 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 26212
+--------------------------------------------------------------------
+June 30, 2025, 4:21:35 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+June 30, 2025, 4:27:51 PM IST[DispatchThread: [com.ibm.mq.jmqi.remote.impl.RemoteSession[:/6015369a][connectionId=414D5143514D312020202020202020208B37626804560040,traceIdentifier=1,remoteTraceIdentifier=-1]]] com.ibm.msg.client.jakarta.jms.internal.JmsProviderExceptionListener
+An exception has been delivered to the connection's exception listener: '
+                       Message : com.ibm.msg.client.jakarta.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred.
+An error has occurred with the IBM MQ JMS connection.
+Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jakarta.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.jakarta.wmq.common.internal.Reason.reasonToException(Reason.java:595)
+                               : com.ibm.msg.client.jakarta.wmq.common.internal.Reason.createException(Reason.java:215)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQConnection.consumer(WMQConnection.java:982)
+                               : com.ibm.mq.jmqi.remote.api.RemoteHconn.callEventHandler(RemoteHconn.java:3044)
+                               : com.ibm.mq.jmqi.remote.api.RemoteHconn.driveEventsEH(RemoteHconn.java:724)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteDispatchThread.processHconn(RemoteDispatchThread.java:684)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteDispatchThread.run(RemoteDispatchThread.java:223)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:319)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:99)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:343)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:312)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1240)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: IBM MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.jakarta.wmq.common.internal.Reason.createException(Reason.java:203)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQConnection.consumer(WMQConnection.java:982)
+                               : com.ibm.mq.jmqi.remote.api.RemoteHconn.callEventHandler(RemoteHconn.java:3044)
+                               : com.ibm.mq.jmqi.remote.api.RemoteHconn.driveEventsEH(RemoteHconn.java:724)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteDispatchThread.processHconn(RemoteDispatchThread.java:684)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteDispatchThread.run(RemoteDispatchThread.java:223)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:319)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:99)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:343)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:312)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1240)
+'.
+
+EXPLANATION:
+null
+
+ACTION:
+Review the exception details for further information.
+--------------------------------------------------------------------
+Date: Mon Jun 30 18:53:15 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 8192
+--------------------------------------------------------------------
+June 30, 2025, 6:53:15 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Tue Jul 01 12:29:01 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 7681
+--------------------------------------------------------------------
+July 1, 2025, 12:29:01 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Tue Jul 01 16:31:55 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 19305
+--------------------------------------------------------------------
+July 1, 2025, 4:31:55 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Tue Jul 01 18:12:28 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 22130
+--------------------------------------------------------------------
+July 1, 2025, 6:12:28 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 13:54:36 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 16732
+--------------------------------------------------------------------
+July 2, 2025, 1:54:36 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 13:55:51 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 16943
+--------------------------------------------------------------------
+July 2, 2025, 1:55:51 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 14:43:40 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 6046
+--------------------------------------------------------------------
+July 2, 2025, 2:43:40 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:33:50 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 7924
+--------------------------------------------------------------------
+July 2, 2025, 3:33:50 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:34:25 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 8047
+--------------------------------------------------------------------
+July 2, 2025, 3:34:25 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:35:17 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 8161
+--------------------------------------------------------------------
+July 2, 2025, 3:35:17 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:35:47 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 8298
+--------------------------------------------------------------------
+July 2, 2025, 3:35:47 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:36:26 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 8411
+--------------------------------------------------------------------
+July 2, 2025, 3:36:26 PM IST[http-nio-8030-exec-4] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:37:52 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 8626
+--------------------------------------------------------------------
+July 2, 2025, 3:37:52 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:41:13 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 8858
+--------------------------------------------------------------------
+July 2, 2025, 3:41:13 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:43:38 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 9257
+--------------------------------------------------------------------
+July 2, 2025, 3:43:38 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:47:41 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 9458
+--------------------------------------------------------------------
+July 2, 2025, 3:47:41 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:49:09 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 9593
+--------------------------------------------------------------------
+July 2, 2025, 3:49:09 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:50:11 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 9726
+--------------------------------------------------------------------
+July 2, 2025, 3:50:11 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:51:46 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 9929
+--------------------------------------------------------------------
+July 2, 2025, 3:51:46 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:54:52 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 10278
+--------------------------------------------------------------------
+July 2, 2025, 3:54:52 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:57:22 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 10602
+--------------------------------------------------------------------
+July 2, 2025, 3:57:22 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:59:00 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 10824
+--------------------------------------------------------------------
+July 2, 2025, 3:59:00 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 16:00:12 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 11016
+--------------------------------------------------------------------
+July 2, 2025, 4:00:12 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 16:13:02 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 12106
+--------------------------------------------------------------------
+July 2, 2025, 4:13:02 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 16:39:52 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 14472
+--------------------------------------------------------------------
+July 2, 2025, 4:39:52 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 16:41:34 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 14771
+--------------------------------------------------------------------
+July 2, 2025, 4:41:34 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 16:44:57 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 15140
+--------------------------------------------------------------------
+July 2, 2025, 4:44:57 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 18:57:28 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 22303
+--------------------------------------------------------------------
+July 2, 2025, 6:57:28 PM IST[http-nio-8030-exec-4] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 18:58:53 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 22479
+--------------------------------------------------------------------
+July 2, 2025, 6:58:53 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 12:20:59 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 8522
+--------------------------------------------------------------------
+July 3, 2025, 12:20:59 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 12:47:49 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 5092
+--------------------------------------------------------------------
+July 3, 2025, 12:47:49 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 12:48:33 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 5290
+--------------------------------------------------------------------
+July 3, 2025, 12:48:33 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 12:59:50 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 7615
+--------------------------------------------------------------------
+July 3, 2025, 12:59:50 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 13:01:07 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 7896
+--------------------------------------------------------------------
+July 3, 2025, 1:01:07 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 13:01:45 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 8035
+--------------------------------------------------------------------
+July 3, 2025, 1:01:45 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 15:00:33 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 24155
+--------------------------------------------------------------------
+July 3, 2025, 3:00:33 PM IST[http-nio-8030-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 15:02:13 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 24454
+--------------------------------------------------------------------
+July 3, 2025, 3:02:13 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 15:26:42 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 26338
+--------------------------------------------------------------------
+July 3, 2025, 3:26:42 PM IST[http-nio-8030-exec-2] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------

@@ -1,0 +1,1279 @@
+Date: Wed Jun 25 18:38:06 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 37130
+--------------------------------------------------------------------
+June 25, 2025, 6:38:06 PM IST[http-nio-8020-exec-3] com.ibm.msg.client.jakarta.jms.internal.JmsProviderExceptionListener
+An exception has been delivered to the connection's exception listener: '
+                       Message : com.ibm.msg.client.jakarta.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred.
+An error has occurred with the IBM MQ JMS connection.
+Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jakarta.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.jakarta.wmq.common.internal.Reason.reasonToException(Reason.java:595)
+                               : com.ibm.msg.client.jakarta.wmq.common.internal.Reason.createException(Reason.java:215)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:217)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:156)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1858)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1461)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:674)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:1083)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:483)
+                               : com.ibm.mq.jakarta.jms.MQMessageConsumer.receive(MQMessageConsumer.java:212)
+                               : org.springframework.jms.support.destination.JmsDestinationAccessor.receiveFromConsumer(JmsDestinationAccessor.java:138)
+                               : org.springframework.jms.core.JmsTemplate.doReceive(JmsTemplate.java:814)
+                               : org.springframework.jms.core.JmsTemplate.doReceive(JmsTemplate.java:791)
+                               : org.springframework.jms.core.JmsTemplate.lambda$receiveSelected$9(JmsTemplate.java:775)
+                               : org.springframework.jms.core.JmsTemplate.execute(JmsTemplate.java:530)
+                               : org.springframework.jms.core.JmsTemplate.receiveSelected(JmsTemplate.java:773)
+                               : org.springframework.jms.core.JmsTemplate.receive(JmsTemplate.java:749)
+                               : org.springframework.jms.core.JmsTemplate.receiveAndConvert(JmsTemplate.java:855)
+                               : com.ibmmq.receiver.controller.ReceiveMessage.receiveMessage(ReceiveMessage.java:24)
+                               : jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+                               : java.lang.reflect.Method.invoke(Method.java:580)
+                               : org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+                               : org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+                               : org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+                               : org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+                               : org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+                               : org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+                               : org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+                               : org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+                               : org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+                               : org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+                               : jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+                               : org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+                               : jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+                               : org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+                               : org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+                               : org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+                               : org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+                               : org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+                               : org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+                               : org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+                               : org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+                               : org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+                               : org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+                               : org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+                               : org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+                               : org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+                               : org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+                               : org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+                               : org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+                               : org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+                               : org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+                               : org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+                               : org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+                               : org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+                               : org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+                               : org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+                               : org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+                               : org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+                               : org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+                               : org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+                               : org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+                               : org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+                               : org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+                               : org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+                               : org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+                               : java.lang.Thread.run(Thread.java:1583)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: IBM MQ call failed with compcode '2' ('MQCC_FAILED') reason '2195' ('MQRC_UNEXPECTED_ERROR').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.jakarta.wmq.common.internal.Reason.createException(Reason.java:203)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:217)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:156)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1858)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1461)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:674)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:1083)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:483)
+                               : com.ibm.mq.jakarta.jms.MQMessageConsumer.receive(MQMessageConsumer.java:212)
+                               : org.springframework.jms.support.destination.JmsDestinationAccessor.receiveFromConsumer(JmsDestinationAccessor.java:138)
+                               : org.springframework.jms.core.JmsTemplate.doReceive(JmsTemplate.java:814)
+                               : org.springframework.jms.core.JmsTemplate.doReceive(JmsTemplate.java:791)
+                               : org.springframework.jms.core.JmsTemplate.lambda$receiveSelected$9(JmsTemplate.java:775)
+                               : org.springframework.jms.core.JmsTemplate.execute(JmsTemplate.java:530)
+                               : org.springframework.jms.core.JmsTemplate.receiveSelected(JmsTemplate.java:773)
+                               : org.springframework.jms.core.JmsTemplate.receive(JmsTemplate.java:749)
+                               : org.springframework.jms.core.JmsTemplate.receiveAndConvert(JmsTemplate.java:855)
+                               : com.ibmmq.receiver.controller.ReceiveMessage.receiveMessage(ReceiveMessage.java:24)
+                               : jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+                               : java.lang.reflect.Method.invoke(Method.java:580)
+                               : org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+                               : org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+                               : org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+                               : org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+                               : org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+                               : org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+                               : org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+                               : org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+                               : org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+                               : org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+                               : jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+                               : org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+                               : jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+                               : org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+                               : org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+                               : org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+                               : org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+                               : org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+                               : org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+                               : org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+                               : org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+                               : org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+                               : org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+                               : org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+                               : org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+                               : org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+                               : org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+                               : org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+                               : org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+                               : org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+                               : org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+                               : org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+                               : org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+                               : org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+                               : org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+                               : org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+                               : org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+                               : org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+                               : org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+                               : org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+                               : org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+                               : org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+                               : org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+                               : org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+                               : org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+                               : java.lang.Thread.run(Thread.java:1583)
+'.
+
+EXPLANATION:
+null
+
+ACTION:
+Review the exception details for further information.
+--------------------------------------------------------------------
+Date: Fri Jun 27 16:11:22 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 20174
+--------------------------------------------------------------------
+June 27, 2025, 4:11:22 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:11:22 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Fri Jun 27 16:12:05 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 20351
+--------------------------------------------------------------------
+June 27, 2025, 4:12:05 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:12:05 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Fri Jun 27 16:14:04 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 20563
+--------------------------------------------------------------------
+June 27, 2025, 4:14:04 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:14:04 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Fri Jun 27 16:18:03 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 21150
+--------------------------------------------------------------------
+June 27, 2025, 4:18:03 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:18:03 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Fri Jun 27 16:19:15 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 21273
+--------------------------------------------------------------------
+June 27, 2025, 4:19:15 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:19:15 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Fri Jun 27 16:23:24 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 22087
+--------------------------------------------------------------------
+June 27, 2025, 4:23:24 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:23:24 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Fri Jun 27 16:24:03 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 22221
+--------------------------------------------------------------------
+June 27, 2025, 4:24:03 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:24:03 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Fri Jun 27 16:27:47 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 22466
+--------------------------------------------------------------------
+June 27, 2025, 4:27:47 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:27:47 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Fri Jun 27 16:35:27 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 23192
+--------------------------------------------------------------------
+June 27, 2025, 4:35:27 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:35:27 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Fri Jun 27 16:58:56 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 25098
+--------------------------------------------------------------------
+June 27, 2025, 4:58:56 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:58:56 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:01 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:01 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:06 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:06 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:11 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:11 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:16 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:16 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:21 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:21 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:26 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:26 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:31 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:31 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:36 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:36 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:41 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:41 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:46 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 27, 2025, 4:59:46 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Mon Jun 30 12:36:06 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 7682
+--------------------------------------------------------------------
+June 30, 2025, 12:36:06 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:36:06 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:36:11 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:36:11 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:36:16 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:36:16 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Mon Jun 30 12:37:03 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 8499
+--------------------------------------------------------------------
+June 30, 2025, 12:37:03 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:03 PM IST[main] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:08 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:08 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:13 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:13 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:18 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:18 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:23 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:23 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:29 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:29 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:34 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:34 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:39 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:39 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:44 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:44 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:49 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:49 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:54 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CONNECTION_NAME_LIST_INT' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+June 30, 2025, 12:37:54 PM IST[DefaultMessageListenerContainer-1] MQConnectionFactory
+The connection factory property 'XMSC_WMQ_CHANNEL' is not valid for a bindings mode connection to a queue manager.
+
+EXPLANATION:
+The supplied connection factory property is not valid for a bindings mode connection to a queue manager.
+
+ACTION:
+Remove the property from connection factory.
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:06:54 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 24033
+--------------------------------------------------------------------
+June 30, 2025, 4:06:54 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:10:09 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 24516
+--------------------------------------------------------------------
+June 30, 2025, 4:10:09 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:11:10 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 24801
+--------------------------------------------------------------------
+June 30, 2025, 4:11:10 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:12:38 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 24969
+--------------------------------------------------------------------
+June 30, 2025, 4:12:38 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:17:09 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 25505
+--------------------------------------------------------------------
+June 30, 2025, 4:17:09 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:18:28 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 25764
+--------------------------------------------------------------------
+June 30, 2025, 4:18:28 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Mon Jun 30 16:27:50 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 26090
+--------------------------------------------------------------------
+June 30, 2025, 4:27:50 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.jakarta.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jakarta.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred.
+An error has occurred with the IBM MQ JMS connection.
+Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jakarta.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.jakarta.wmq.common.internal.Reason.reasonToException(Reason.java:595)
+                               : com.ibm.msg.client.jakarta.wmq.common.internal.Reason.createException(Reason.java:215)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:217)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:156)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1858)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1461)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:674)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:1083)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:685)
+                               : com.ibm.mq.jakarta.jms.MQMessageConsumer.receive(MQMessageConsumer.java:249)
+                               : org.springframework.jms.support.destination.JmsDestinationAccessor.receiveFromConsumer(JmsDestinationAccessor.java:132)
+                               : org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveMessage(AbstractPollingMessageListenerContainer.java:441)
+                               : org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:316)
+                               : org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:270)
+                               : org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1257)
+                               : org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1247)
+                               : org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:1140)
+                               : java.lang.Thread.run(Thread.java:1583)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: IBM MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.jakarta.wmq.common.internal.Reason.createException(Reason.java:203)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:217)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:156)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1858)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1461)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:674)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:1083)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:685)
+                               : com.ibm.mq.jakarta.jms.MQMessageConsumer.receive(MQMessageConsumer.java:249)
+                               : org.springframework.jms.support.destination.JmsDestinationAccessor.receiveFromConsumer(JmsDestinationAccessor.java:132)
+                               : org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveMessage(AbstractPollingMessageListenerContainer.java:441)
+                               : org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:316)
+                               : org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:270)
+                               : org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1257)
+                               : org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1247)
+                               : org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:1140)
+                               : java.lang.Thread.run(Thread.java:1583)
+'.
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered.
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions.
+--------------------------------------------------------------------
+June 30, 2025, 4:27:51 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.jakarta.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jakarta.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred.
+An error has occurred with the IBM MQ JMS connection.
+Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jakarta.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.jakarta.wmq.common.internal.Reason.reasonToException(Reason.java:595)
+                               : com.ibm.msg.client.jakarta.wmq.common.internal.Reason.createException(Reason.java:215)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQSession.disconnect(WMQSession.java:834)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQSession.close(WMQSession.java:788)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsSessionImpl.close(JmsSessionImpl.java:632)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsSessionImpl.close(JmsSessionImpl.java:355)
+                               : com.ibm.mq.jakarta.jms.MQSession.close(MQSession.java:280)
+                               : org.springframework.jms.support.JmsUtils.closeSession(JmsUtils.java:109)
+                               : org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.clearResources(DefaultMessageListenerContainer.java:1315)
+                               : org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:1155)
+                               : java.lang.Thread.run(Thread.java:1583)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: IBM MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.jakarta.wmq.common.internal.Reason.createException(Reason.java:203)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQSession.disconnect(WMQSession.java:834)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQSession.close(WMQSession.java:788)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsSessionImpl.close(JmsSessionImpl.java:632)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsSessionImpl.close(JmsSessionImpl.java:355)
+                               : com.ibm.mq.jakarta.jms.MQSession.close(MQSession.java:280)
+                               : org.springframework.jms.support.JmsUtils.closeSession(JmsUtils.java:109)
+                               : org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.clearResources(DefaultMessageListenerContainer.java:1315)
+                               : org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:1155)
+                               : java.lang.Thread.run(Thread.java:1583)
+     Caused by [2] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009;AMQ9206: Error sending data to host 'localhost/127.0.0.1:1414 (localhost)'. [1=com.ibm.mq.jmqi.JmqiException[CC=2;RC=2009],3=localhost/127.0.0.1:1414 (localhost),4=TCP,5=RemoteTCPConnection.send(byte [ ],int,int,int,int)]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.impl.RemoteTCPConnection.send(RemoteTCPConnection.java:2090)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteConnection.wrapSend(RemoteConnection.java:3179)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteConnection.sendTSH(RemoteConnection.java:2903)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteSession.sendTSH(RemoteSession.java:800)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteSession.sendTSH(RemoteSession.java:716)
+                               : com.ibm.mq.jmqi.remote.api.RemoteFAP.MQDISC(RemoteFAP.java:1781)
+                               : com.ibm.mq.jmqi.remote.api.RemoteFAP.MQDISC(RemoteFAP.java:1702)
+                               : com.ibm.mq.ese.jmqi.InterceptedJmqiImpl.MQDISC(InterceptedJmqiImpl.java:431)
+                               : com.ibm.mq.ese.jmqi.ESEJMQI.MQDISC(ESEJMQI.java:396)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQSession.disconnect(WMQSession.java:822)
+                               : com.ibm.msg.client.jakarta.wmq.internal.WMQSession.close(WMQSession.java:788)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsSessionImpl.close(JmsSessionImpl.java:632)
+                               : com.ibm.msg.client.jakarta.jms.internal.JmsSessionImpl.close(JmsSessionImpl.java:355)
+                               : com.ibm.mq.jakarta.jms.MQSession.close(MQSession.java:280)
+                               : org.springframework.jms.support.JmsUtils.closeSession(JmsUtils.java:109)
+                               : org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.clearResources(DefaultMessageListenerContainer.java:1315)
+                               : org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:1155)
+                               : java.lang.Thread.run(Thread.java:1583)
+     Caused by [3] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.impl.RemoteConnection.asyncConnectionBroken(RemoteConnection.java:4044)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteConnection.notifyReconnect(RemoteConnection.java:5144)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteRcvThread.run(RemoteRcvThread.java:512)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:319)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:99)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:343)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:312)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1240)
+     Caused by [4] --> Message : com.ibm.mq.jmqi.JmqiException: CC=2;RC=2009;AMQ9524: Remote queue manager unavailable. [3=DEV.APP.SVRCONN]
+                         Class : class com.ibm.mq.jmqi.JmqiException
+                         Stack : com.ibm.mq.jmqi.remote.impl.RemoteConnection.notifyReconnect(RemoteConnection.java:5141)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteRcvThread.run(RemoteRcvThread.java:512)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:319)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:99)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:343)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:312)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1240)
+'.
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered.
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions.
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:54:53 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 7855
+--------------------------------------------------------------------
+July 2, 2025, 3:54:53 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 15:57:22 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 10500
+--------------------------------------------------------------------
+July 2, 2025, 3:57:22 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 16:00:12 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 11089
+--------------------------------------------------------------------
+July 2, 2025, 4:00:12 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 16:13:02 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 12162
+--------------------------------------------------------------------
+July 2, 2025, 4:13:02 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 16:39:52 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 14530
+--------------------------------------------------------------------
+July 2, 2025, 4:39:52 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 16:41:34 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 14841
+--------------------------------------------------------------------
+July 2, 2025, 4:41:34 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 16:44:57 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 15064
+--------------------------------------------------------------------
+July 2, 2025, 4:44:57 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 17:42:50 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 19218
+--------------------------------------------------------------------
+July 2, 2025, 5:42:50 PM IST[http-nio-8020-exec-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Wed Jul 02 18:59:04 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 22531
+--------------------------------------------------------------------
+July 2, 2025, 6:59:04 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 12:21:11 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 8587
+--------------------------------------------------------------------
+July 3, 2025, 12:21:11 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 15:03:41 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 24544
+--------------------------------------------------------------------
+July 3, 2025, 3:03:41 PM IST[DefaultMessageListenerContainer-1] com.ibm.mq.jmqi.remote.impl.RemoteReconnectThread
+Reconnection times (milliseconds) : '[1085, 2262, 4149, 8812, 17042, 25157]'
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 15:07:42 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 24838
+--------------------------------------------------------------------
+July 3, 2025, 3:07:42 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+July 3, 2025, 3:12:33 PM IST[DefaultMessageListenerContainer-1] com.ibm.mq.jmqi.remote.impl.RemoteReconnectThread
+Reconnection times (milliseconds) : '[1018, 2351, 4664, 8709, 16882, 25870]'
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 15:14:03 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 25143
+--------------------------------------------------------------------
+July 3, 2025, 3:14:03 PM IST[DefaultMessageListenerContainer-1] com.ibm.mq.jmqi.remote.impl.RemoteReconnectThread
+Reconnection times (milliseconds) : '[1032, 2175, 4703, 8480, 16432, 25375]'
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 15:15:22 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 25299
+--------------------------------------------------------------------
+July 3, 2025, 3:15:22 PM IST[DefaultMessageListenerContainer-1] com.ibm.mq.jmqi.remote.impl.RemoteReconnectThread
+Reconnection times (milliseconds) : '[1231, 2069, 4159, 8394, 16833, 26323]'
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 15:17:20 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 25424
+--------------------------------------------------------------------
+July 3, 2025, 3:17:20 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
+Date: Thu Jul 03 15:26:54 IST 2025
+Build Level: X.X.X(p942-L250214)
+Java version: 21.0.5(21.0.5+11-LTS)
+Process ID: 26391
+--------------------------------------------------------------------
+July 3, 2025, 3:26:54 PM IST[DefaultMessageListenerContainer-1] com.ibm.msg.client.commonservices.util.SerializationValidator
+No Allow list functionality enabled - either the properties were not set, or the security permissions prevent them being read
+
+EXPLANATION:
+null
+
+ACTION:
+null
+--------------------------------------------------------------------
