@@ -1,0 +1,43 @@
+Running Mongod with replica set:
+
+1. Stop any running MongoDB
+
+	sudo systemctl stop mongod
+	# or
+	pkill mongod
+
+
+2. Start MongoDB with replica set config
+
+	mongod --dbpath /your/db/path --replSet rs0
+
+
+3. Initiate replica set (only once)
+
+	Open new terminal:
+
+	mongo
+
+Then:
+
+	js
+
+	rs.initiate()
+
+	Output should be like:
+
+	Edit
+	{
+	    "ok" : 1
+	}
+
+
+4. Verify it's working
+
+	rs.status()
+
+Should show:
+
+	"set" : "rs0",
+	"ok" : 1
+

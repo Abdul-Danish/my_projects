@@ -1,0 +1,132 @@
+### Camunda & Workflow Automation
+
+**1. How does Camunda work under the hood?**
+Camunda is a lightweight, Java-based BPMN engine that executes workflows defined using the BPMN 2.0 standard. Internally, it maintains the state of each process instance using a persistent data store. It executes tasks based on BPMN elements (like service tasks, user tasks, gateways) and provides APIs for task management, process deployment, and instance control.
+
+**2. What are BPMN elements and how do you use them in Camunda?**
+BPMN elements are the building blocks of workflows:
+
+* **Start/End Events** define the beginning and end of a process.
+* **Service Tasks** are used to call external systems.
+* **User Tasks** require human interaction.
+* **Gateways** control the flow (e.g., exclusive or parallel).
+* **Sequence Flows** define the order of execution.
+  In Camunda, these are modeled via Camunda Modeler and executed by deploying the XML definition to the engine.
+
+**3. How do you handle asynchronous service tasks in Camunda?**
+We use the `asyncBefore="true"` attribute in the service task. This makes the task transactional and allows retry mechanisms. The Java delegate or external task worker can pick up the task, and the engine manages retries and incident creation if it fails.
+
+**4. How do you ensure reliability and idempotency in workflow execution?**
+Reliability is ensured using:
+
+* Camunda retries with exponential backoff.
+* Idempotency is handled by checking for unique transaction IDs or request IDs in service calls to avoid duplicate processing.
+
+**5. How do you implement error handling and retries in workflows?**
+Using Camunda's built-in retry mechanisms (`asyncBefore`, `retryTimeCycle`) and error boundary events. We also log incidents and expose them through a dashboard for operational monitoring.
+
+### Spring Boot & Microservices
+
+**1. How do you structure a Spring Boot microservice?**
+Each microservice is structured into packages like `controller`, `service`, `repository`, `dto`, and `config`. We use `@RestController` for endpoints, `@Service` for business logic, and `@Repository` for database operations.
+
+**2. What is the role of `@Component`, `@Service`, and `@Repository`?**
+
+* `@Component`: Generic stereotype for Spring-managed beans.
+* `@Service`: Indicates business logic and service layer.
+* `@Repository`: Indicates DAO layer, and Spring auto-wraps exceptions into `DataAccessException`.
+
+**3. How do you implement communication between services using Kafka?**
+We use KafkaTemplate for sending messages and KafkaListener for consuming. Messages are serialized as JSON. We use topics for event types and partitioning for scaling consumers.
+
+**4. Explain how you use Spring Security for Role-Based Access Control (RBAC).**
+We define user roles in the JWT token. Spring Security filters validate the token and extract authorities. Access is controlled using `@PreAuthorize("hasRole('ADMIN')")` or in the security config.
+
+**5. What design patterns have you applied in your microservices and why?**
+
+* **Builder Pattern** for DTOs
+* **Factory Pattern** for instantiating strategy classes
+* **Circuit Breaker (Resilience4j)** to handle remote failures
+* **Event-driven architecture** using Kafka for loose coupling
+
+### Kafka
+
+**1. How did you build the Kafka-based communication framework?**
+Created a utility to send/receive messages using common producer/consumer configs. Wrapped KafkaTemplate in a service. Defined standard headers and schema for consistency across microservices.
+
+**2. How do you handle message ordering and retries in Kafka?**
+Ordering is maintained by keying messages consistently. Retries are handled using Dead Letter Topics and retry templates with backoff policies.
+
+**3. What are Kafka consumer groups and why are they important?**
+Consumer groups allow multiple consumers to read from a topic in parallel, each handling different partitions. This enables load balancing and fault tolerance.
+
+### Redis Caching
+
+**1. Which data is cached using Redis and how do you invalidate it?**
+Frequently accessed, read-heavy data like configurations or user sessions. We invalidate using TTL settings or programmatic cache evictions (`CacheEvict`).
+
+**2. How do you prevent stale data or cache stampede problems?**
+
+* TTL for automatic expiration
+* Distributed locks with Redis (e.g., Redisson) to prevent multiple cache reloads
+* Use of background refresh techniques
+
+### Spring Batch & OpenL
+
+**1. What was your use case for Spring Batch?**
+Automated cloning of solutions in the platform. It processed data in steps: read existing data, transform it, and write cloned entries.
+
+**2. How is job execution tracked and managed?**
+Spring Batch provides job repository tables for tracking. We monitored job execution through custom logging and dashboard views.
+
+**3. How did you integrate OpenL into your workflows, and what are the benefits?**
+OpenL was used to manage business rules via decision tables. These rules are invoked as services within workflows to allow business teams to modify rules without code changes.
+
+### Testing & Code Quality
+
+**1. What is your approach to unit testing with Mockito and JUnit?**
+We mock dependencies (like repositories, external APIs) using Mockito and test business logic using JUnit. We aim for 95%+ coverage and test edge cases and failure paths.
+
+**2. How do you ensure 95% code coverage in a realistic way?**
+By writing unit tests for all service methods and controllers, using tools like Jacoco to track uncovered lines, and refactoring complex methods for testability.
+
+**3. What does your CI/CD pipeline look like with SonarLint and Docker/K8s?**
+Code is linted using SonarLint, built with Maven. Docker images are built and pushed to a registry. Kubernetes manifests handle deployment. Jenkins/GitHub Actions manage automation.
+
+### Behavioral
+
+**1. Describe a situation where a workflow you deployed failed in production. How did you handle it?**
+A workflow failed due to an unhandled external API failure. We diagnosed using Camunda incidents, patched with retry logic, and added boundary error events for future prevention.
+
+**2. How do you balance feature delivery and technical debt in a startup-like environment?**
+We prioritize quick wins but maintain backlog tickets for refactoring. Code reviews ensure standards. We schedule "tech-debt sprints" periodically.
+
+**3. How do you mentor junior developers and what has worked best for you?**
+Regular code reviews, pair programming, and knowledge-sharing sessions. I encourage questions and provide context, not just answers. Empowering them with small responsibilities helps them grow.
+
+
+
+
+########################################################################
+
+
+@@ Classic Tell me about yourself:
+
+“I’m a Java Backend Developer with 2 years of experience, currently working at DigitalDots Technologies. I’ve been part of a team building and maintaining a low-code platform called Evolve, which helps automate business workflows using Camunda.
+
+“Most of my work revolves around enhancing the existing platform — adding new features, improving performance, and fixing bugs across services. I use Java, Spring Boot, and Kafka for backend development, and we use MongoDB and PostgreSQL depending on the use case. I’ve also worked with Redis for caching, Minio for file storage, and implemented role-based access control using Spring Security.”
+
+“One of the highlights of my work has been contributing to a reusable Kafka framework for inter-service communication and integrating Spring Batch for automated solution cloning. I also help mentor junior developers on code quality and platform understanding.”
+
+“Now, I’m looking for a backend-focused role where I can deepen my expertise in system design and contribute to scalable, high-impact platforms.”
+
+
+@@ Why are you looking for a new job? :
+
+“I’ve learned a lot in my current role — especially building backend services and workflows using Java, Spring Boot, Kafka, and Camunda. While I’ve contributed to multiple features and helped improve performance and code quality, the product itself hasn’t reached production yet.”
+
+“I’m now looking for a role where I can work on a product that’s live or heading into production, so I can gain real-world experience with production-grade systems. I want to be part of a team where I can both contribute and continue growing by solving real customer problems.”
+
+
+@@ 
+

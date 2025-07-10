@@ -1,0 +1,16 @@
+Generate an SSL certificate in a keystore
+
+	# create PKSC12 keystore:
+
+	keytool -genkeypair -alias securerest -keyalg RSA -keysize 4096 -storetype PKCS12 -keystore securerest.p12 -validity 3650 -storepass p@ssword
+
+	(Alternate for jks):
+
+	keytool -genkeypair -alias securerest -keyalg RSA -keysize 4096 -storetype JKS -keystore securerest.jks -validity 3650 -storepass p@ssword
+
+	(Convert a JKS keystore into PKCS12):
+
+	keytool -importkeystore -srckeystore securerest.jks -destkeystore securerest.p12 -deststoretype pkcs12
+
+
+	# 

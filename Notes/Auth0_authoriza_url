@@ -1,0 +1,1 @@
+https://dev-ru75shw6v5e3ddlq.us.auth0.com/authorize?redirect_uri=http://localhost:9040/api/v1/solutions/677cdf02f6e2414d27a4bba0/callback&client_id=Q8m4oFmOsTEYMi2APfGKH6zOGyO4f6d2&scope=openid%20profile%20email&response_type=code&state=1234ABC&audience=digitaldots-api

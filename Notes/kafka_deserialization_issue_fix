@@ -1,0 +1,66 @@
+@@ props (
+	spring.kafka.consumer.value-deserializer=org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+	spring.kafka.consumer.properties.spring.deserializer.value.delegate.class=com.digitaldots.CustomJsonDeserialiser (with null return value)
+):
+
+	- retry topics (with wrapper) : -
+	- retry topics (without wrapper) : working
+	- non-retry topics (with wrapper): not-working  (works if exception is thrown)
+	- non-retry topics (without wrapper): working
+
+
+@@ props (
+	spring.kafka.consumer.value-deserializer=org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+	spring.kafka.consumer.properties.spring.deserializer.value.delegate.class=com.digitaldots.CustomJsonDeserialiser (by throwing exception)
+):
+
+	- retry topics (with wrapper) : not-working (not retrying but not going to CommonErrorHandler)
+	- retry topics (without wrapper) : not-working
+	- non-retry topics (with wrapper): working
+	- non-retry topics (without wrapper): working (with limit exceeding)
+
+
+@@ props (
+	spring.kafka.consumer.value-deserializer=com.digitaldots.CustomJsonDeserialiser 
+	(by throwing exception)
+):
+
+	- retry topics (with wrapper) : not-working (infinite throws)
+	- retry topics (without wrapper) : -
+	- non-retry topics (with wrapper): -
+	- non-retry topics (without wrapper): not-working (Exception intercepted by handle other func)
+
+
+@@ props (
+	spring.kafka.consumer.value-deserializer=com.digitaldots.CustomJsonDeserialiser 
+	(with null return value)
+):
+
+	- retry topics (with wrapper) : working (with limit exceeding)
+	(doesn't go to CommonErrorHandler) | (fails by throwing NullPponter and reties by itself)
+	- retry topics (without wrapper) : working (with limit exceeding)
+	(doesn't go to CommonErrorHandler) | (fails while listening with null payload and reties by itself)
+	- non-retry topics (with wrapper): not-working 		()
+	(message being consumed) | (on NullPointer goes to CommonErrorHandler) | (manageble)
+	- non-retry topics (without wrapper): working (with limit exceeding)
+
+
+@@ props (
+	spring.kafka.consumer.value-deserializer=com.digitaldots.CustomJsonDeserialiser 
+	(with KafkaNull return value)
+):
+
+	- retry topics (with wrapper) : -
+	- retry topics (without wrapper) : 
+	- non-retry topics (with wrapper): working
+	- non-retry topics (without wrapper): -
+
+
+
+
+
+
+
+retry topics: update solution
+non-rettry topics: create solution
+

@@ -1,0 +1,134 @@
+danish@danish-Latitude-7480:~/Documents/digitaldots/scripts$ cd ../../
+danish@danish-Latitude-7480:~/Documents$ cd digitaldots/
+danish@danish-Latitude-7480:~/Documents/digitaldots$ kubectl apply -f service.yaml
+Warning: Kubernetes default value is insecure, Knative may default this to secure in a future release: spec.template.spec.containers[0].securityContext.allowPrivilegeEscalation, spec.template.spec.containers[0].securityContext.capabilities, spec.template.spec.containers[0].securityContext.runAsNonRoot, spec.template.spec.containers[0].securityContext.seccompProfile
+service.serving.knative.dev/sample-java-spring created
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k get service
+NAME                               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                                              AGE
+kubernetes                         ClusterIP   10.96.0.1       <none>        443/TCP                                              138m
+sample-java-spring-00001           ClusterIP   10.108.52.236   <none>        80/TCP,443/TCP                                       12s
+sample-java-spring-00001-private   ClusterIP   10.101.20.22    <none>        80/TCP,443/TCP,9090/TCP,9091/TCP,8022/TCP,8012/TCP   12s
+danish@danish-Latitude-7480:~/Documents/digitaldots$ kubectl get ksvc sample-java-spring-00001
+Error from server (NotFound): services.serving.knative.dev "sample-java-spring-00001" not found
+danish@danish-Latitude-7480:~/Documents/digitaldots$ kubectl get ksvc sample-java-spring-00001  --output=custom-columns=NAME:.metadata.name,URL:.status.url
+Error from server (NotFound): services.serving.knative.dev "sample-java-spring-00001" not found
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k get pod
+No resources found in default namespace.
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k get deployment
+NAME                                  READY   UP-TO-DATE   AVAILABLE   AGE
+sample-java-spring-00001-deployment   0/0     0            0           4m56s
+danish@danish-Latitude-7480:~/Documents/digitaldots$ minikube service sample-java-spring-00001 --url
+😿  service default/sample-java-spring-00001 has no node port
+❗  Services [default/sample-java-spring-00001] have type "ClusterIP" not meant to be exposed, however for local development minikube allows you to access this !
+danish@danish-Latitude-7480:~/Documents/digitaldots$ kubectl create deployment sample-minikube1 --image=abduldanish/sample_app:latest
+deployment.apps/sample-minikube1 created
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k get deployment
+NAME                                  READY   UP-TO-DATE   AVAILABLE   AGE
+sample-java-spring-00001-deployment   0/0     0            0           23m
+sample-minikube1                      1/1     1            1           8m54s
+danish@danish-Latitude-7480:~/Documents/digitaldots$ kubectl expose deployment sample-minikube1 --type=NodePort --port=8080
+service/sample-minikube1 exposed
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k get service
+NAME                               TYPE           CLUSTER-IP      EXTERNAL-IP                                         PORT(S)                                              AGE
+kubernetes                         ClusterIP      10.96.0.1       <none>                                              443/TCP                                              164m
+sample-java-spring                 ExternalName   <none>          kourier-internal.kourier-system.svc.cluster.local   80/TCP                                               25m
+sample-java-spring-00001           ClusterIP      10.108.52.236   <none>                                              80/TCP,443/TCP                                       26m
+sample-java-spring-00001-private   ClusterIP      10.101.20.22    <none>                                              80/TCP,443/TCP,9090/TCP,9091/TCP,8022/TCP,8012/TCP   26m
+sample-minikube1                   NodePort       10.110.105.63   <none>                                              8080:30923/TCP                                       2m19s
+danish@danish-Latitude-7480:~/Documents/digitaldots$ minikube service sample-minikube1 --url
+http://192.168.59.100:30923
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k delete deployment sample-minikube1
+deployment.apps "sample-minikube1" deleted
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k get service
+NAME                               TYPE           CLUSTER-IP      EXTERNAL-IP                                         PORT(S)                                              AGE
+kubernetes                         ClusterIP      10.96.0.1       <none>                                              443/TCP                                              171m
+sample-java-spring                 ExternalName   <none>          kourier-internal.kourier-system.svc.cluster.local   80/TCP                                               32m
+sample-java-spring-00001           ClusterIP      10.108.52.236   <none>                                              80/TCP,443/TCP                                       32m
+sample-java-spring-00001-private   ClusterIP      10.101.20.22    <none>                                              80/TCP,443/TCP,9090/TCP,9091/TCP,8022/TCP,8012/TCP   32m
+sample-minikube1                   NodePort       10.110.105.63   <none>                                              8080:30923/TCP                                       8m42s
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k delete service sample-minikube1
+service "sample-minikube1" deleted
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k get service
+NAME                               TYPE           CLUSTER-IP      EXTERNAL-IP                                         PORT(S)                                              AGE
+kubernetes                         ClusterIP      10.96.0.1       <none>                                              443/TCP                                              171m
+sample-java-spring                 ExternalName   <none>          kourier-internal.kourier-system.svc.cluster.local   80/TCP                                               32m
+sample-java-spring-00001           ClusterIP      10.108.52.236   <none>                                              80/TCP,443/TCP                                       33m
+sample-java-spring-00001-private   ClusterIP      10.101.20.22    <none>                                              80/TCP,443/TCP,9090/TCP,9091/TCP,8022/TCP,8012/TCP   33m
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k get ksvc
+NAME                 URL                                                   LATESTCREATED              LATESTREADY                READY   REASON
+sample-java-spring   http://sample-java-spring.default.svc.cluster.local   sample-java-spring-00001   sample-java-spring-00001   True    
+danish@danish-Latitude-7480:~/Documents/digitaldots$ kubectl get pods -n knative-serving
+NAME                                      READY   STATUS    RESTARTS   AGE
+activator-8546f5df76-mgl6n                1/1     Running   0          169m
+autoscaler-68fdd6cbc-mr58j                1/1     Running   0          169m
+controller-d566c57c5-2stf5                1/1     Running   0          169m
+net-kourier-controller-74b645875c-4z77j   1/1     Running   0          167m
+webhook-77fcf884f8-6qqd4                  1/1     Running   0          169m
+danish@danish-Latitude-7480:~/Documents/digitaldots$ kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.16.0/serving-default-domain.yaml
+job.batch/default-domain created
+service/default-domain-service created
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k get ksvc
+NAME                 URL                                                   LATESTCREATED              LATESTREADY                READY   REASON
+sample-java-spring   http://sample-java-spring.default.svc.cluster.local   sample-java-spring-00001   sample-java-spring-00001   True    
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k apply -f service.yaml 
+Warning: Kubernetes default value is insecure, Knative may default this to secure in a future release: spec.template.spec.containers[0].securityContext.allowPrivilegeEscalation, spec.template.spec.containers[0].securityContext.capabilities, spec.template.spec.containers[0].securityContext.runAsNonRoot, spec.template.spec.containers[0].securityContext.seccompProfile
+service.serving.knative.dev/sample-java-spring configured
+danish@danish-Latitude-7480:~/Documents/digitaldots$ k get ksvc
+NAME                 URL                                                       LATESTCREATED              LATESTREADY                READY   REASON
+sample-java-spring   http://sample-java-spring.default.10.98.55.245.sslip.io   sample-java-spring-00001   sample-java-spring-00001   True  
+
+
+
+######################################################################################
+
+
+k apply -f KnativeDemoApp_service.yaml
+
+k get service
+
+k get ksvc
+
+k delete -f KnativeDemoApp_service.yaml
+
+
+
+uninstall knative: (1.15.0)
+
+kubectl delete -f https://github.com/knative/serving/releases/download/knative-v1.15.0/serving-hpa.yaml
+
+kubectl delete -f https://github.com/knative/net-kourier/releases/download/knative-v1.15.0/kourier.yaml
+
+kubectl delete -f https://github.com/knative/serving/releases/download/knative-v1.15.0/serving-core.yaml
+
+kubectl delete -f https://github.com/knative/serving/releases/download/knative-v1.15.0/serving-crds.yaml
+
+kubectl delete -f https://github.com/knative/eventing/releases/download/knative-v1.15.0/eventing-core.yaml
+
+kubectl delete -f https://github.com/knative/eventing/releases/download/knative-v1.15.0/eventing-crds.yaml
+
+kubectl delete KnativeServing knative-serving -n knative-serving
+
+kubectl delete KnativeEventing knative-eventing -n knative-eventing
+
+kubectl delete -f https://github.com/knative/operator/releases/download/knative-v1.15.0/operator.yaml
+
+
+uninstall knative: (1.18.0)
+
+kubectl delete -f https://github.com/knative/serving/releases/download/knative-v1.18.0/serving-hpa.yaml
+
+kubectl delete -f https://github.com/knative/net-kourier/releases/download/knative-v1.18.0/kourier.yaml
+
+kubectl delete -f https://github.com/knative/serving/releases/download/knative-v1.18.0/serving-core.yaml
+
+kubectl delete -f https://github.com/knative/serving/releases/download/knative-v1.18.0/serving-crds.yaml
+
+kubectl delete -f https://github.com/knative/eventing/releases/download/knative-v1.18.0/eventing-core.yaml
+
+kubectl delete -f https://github.com/knative/eventing/releases/download/knative-v1.18.0/eventing-crds.yaml
+
+kubectl delete KnativeServing knative-serving -n knative-serving
+
+kubectl delete KnativeEventing knative-eventing -n knative-eventing
+
+kubectl delete -f https://github.com/knative/operator/releases/download/knative-v1.18.0/operator.yaml

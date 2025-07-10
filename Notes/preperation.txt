@@ -1,0 +1,76 @@
+
+
+- Revise all spring concepts (*)
+
+- Revise java concepts (*)
+
+- coding practices (*)
+
+- practice java problems
+
+- servlet basics (*)
+
+- session basics
+
+- minio practice (*)
+
+- Code Documentation (lite)
+
+##################################################################################################################################
+
+- Understand the Basics:
+
+Java Fundamentals: basics of Java, including syntax, data types, control structures, and basic programming concepts. (Done)
+
+Object-Oriented Programming (OOP): Understand OOP principles such as encapsulation, inheritance, polymorphism, and abstraction. (Done)
+
+Collections Framework: Learn about different collection types like List, Set, and Map, and their implementations. (Done)
+
+File IO: various Input and Output File Operations (Done)
+
+Concurrency and Multithreading: Understand the basics of threads, synchronization, and thread-safe programming. (Done)
+
+Exception Handling: try/catch vs throws (Done)
+
+
+##################################################################################################################################
+
+
+- Advanced Topics:
+
+Java Virtual Machine (JVM) Internals: Study how the JVM works, including garbage collection, class loading, and memory management. (Done)
+
+Design Patterns: Familiarize yourself with common design patterns and their usage in Java.
+
+Spring Framework: Understand the basics of Spring, including dependency injection, AOP, and Spring Boot.
+
+Spring Security:
+
+Spring Kafka:
+
+Spring Session:
+
+Dispatcher Servlet:
+
+Hibernate: Learn about ORM (Object-Relational Mapping) and how Hibernate works with data (Opt)
+
+
+##################################################################################################################################
+
+
+- Data Structures and Algorithms:
+
+Data Structures: Study fundamental data structures like arrays, linked lists, stacks, queues, trees, and graphs.
+
+Algorithms: Practice solving problems using sorting, searching, recursion, and dynamic programming.
+
+System Design: Learn about designing scalable and fault-tolerant systems.
+
+
+##################################################################################################################################
+
+
+- Practice Coding Problems:
+
+LeetCode, HackerRank, and CodeSignal: Solve coding problems on these platforms to improve your problem-solving skills.
+

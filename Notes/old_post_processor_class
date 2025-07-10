@@ -1,0 +1,63 @@
+package com.ibmmq.sender.config;
+
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.springframework.jms.core.MessagePostProcessor;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.TextMessage;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class PostProcessor implements MessagePostProcessor {
+    
+    public Map<String, Object> headers;
+
+    public PostProcessor(Map<String, Object> headers) {
+        this.headers = headers;
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public Message postProcessMessage(Message message) throws JMSException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        System.out.println("Post Processing message: " + message);
+        System.out.println();
+
+        Map<String, Object> originalPayload = null;
+        try {
+            if (message instanceof TextMessage) {
+                TextMessage textMessage = ((TextMessage) message);
+                String text = textMessage.getText();
+                System.out.println("Payload: " + text);
+                originalPayload = objectMapper.readValue(text, Map.class);
+            } else {
+                originalPayload = message.getBody(Map.class);
+                System.out.println("Payload (obj): " + originalPayload);
+            }
+
+            Map<String, Object> headers = objectMapper.convertValue(originalPayload.get("headers"),
+                new TypeReference<Map<String, Object>>() {
+                });
+            System.out.println("headers: " + headers);
+            for (Entry<String, Object> header : headers.entrySet()) {
+                if (header.getKey().startsWith("filter_")) {
+                    System.out.println("Adding property: " + header.getKey() + " " + header.getValue());
+                    message.setObjectProperty(header.getKey().replace("filter_", ""), header.getValue());
+                }
+            }
+            originalPayload.remove("headers");
+        } catch (JsonProcessingException e) {
+            log.error("Exception while processing json: ", e);
+        }
+        System.out.println("end: " + message);
+        return message;
+    }
+
+}

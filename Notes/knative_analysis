@@ -1,0 +1,111 @@
+
+revision timeout 5 minutes:
+
+	@ delay mins: 1
+
+	request: knative-demo-app-00002-deployment-6795b75969-p6vlh
+
+	Response: ~ 1:15
+
+	termination period: started ~ 1:00
+
+	error: none
+
+	@ delay mins: 4
+
+	request: knative-demo-app-00002-deployment-6795b75969-kgws7
+
+	Response: ~ 4:09
+
+	termination period: started ~ 0:57
+
+	error: none
+
+	@ delay mins: 9
+
+	request: knative-demo-app-00002-deployment-6795b75969-5d2s2
+
+	Response: none
+
+	termination period: started ~ 0:55
+
+	error: activator request timeout (at ~ 4:57)
+
+
+##################################################################################
+
+revision timeout 10 minutes:
+
+	termination of pod after service creation: ~ 1:10
+	
+	@ delay mins: 1
+
+	request: knative-demo-app-00001-deployment-5c5754b68b-52gdn
+
+	Response: ~ 1:08
+
+	termination period: started ~ 0:59
+
+	error: none
+
+	@ delay mins: 9
+
+	request: 
+
+	Response: ~ 9:09
+
+	termination period: started ~ 0:58
+
+	error: none
+
+	@ delay mins: 1
+
+	request: 
+
+	Response: ~ 
+
+	termination period: started ~ 
+
+	error: 
+
+##################################################################################
+
+revision timeout 15 minutes:
+	
+	termination of pod after service creation: ~ 1:10
+
+	@ delay mins: 1
+
+	request: knative-demo-app-00001-deployment-796d6d6c96-rwlh6
+
+	Response: ~ 1:10
+
+	termination period: started ~ 1:00
+
+	error: none
+
+	@ delay mins: 14
+
+	request: knative-demo-app-00001-deployment-56564fffff-xj79l
+
+	Response: ~ 14:12
+
+	termination period: started ~ 1:04
+
+	error: none
+
+
+##################################################################################
+
+revision timeout 20 minutes:
+
+	@ delay mins: 18
+
+	request: knative-demo-app-00001-deployment-ff488f54d-r2wt7
+
+	Response: ~ 
+
+	termination period: started ~ 
+
+	error: 
+

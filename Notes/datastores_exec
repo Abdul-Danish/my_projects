@@ -1,0 +1,25 @@
+Category: SQL
+	
+	@ Publish:
+
+		- check for build status
+		- check for pod status
+
+	@ Execute:
+		- 
+
+Category: Custom
+	
+	@ Publish:
+		- check for build status
+		- check for pod status
+
+	@ Execute:
+		- Via Kafka
+
+
+Category: NOSQL (No Impl)
+	
+	@ Publish:
+
+	@ Execute:

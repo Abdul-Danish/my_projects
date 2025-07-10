@@ -1,0 +1,49 @@
+
+
+
+@@ Class: HttpAuthenticationFactory | SolutionServiceMap | StoreFactory:
+	Line: 51, -, 35,
+	Strategy Pattern:
+	
+@@ Class: JwtFilter
+	Line: -
+	Filter Pattern
+
+@@ Class: AbstractService
+	Line: -
+	Template Method Pattern
+
+@@ Class: SolutionService
+	Line: 342
+	Command Design Pattern
+
+@@ Class: AuthenticationFacade
+	Line: -
+	Facade Design Pattern
+
+@@ Class: JwtUserDetailsService
+	Line: 58
+	Adapter Design Pattern
+
+@@ Class: SQLRequestImpl
+	Line: -
+	Bridge Design Pattern
+
+@@ Class: RestStore
+	Line: 51
+	Composite Design Pattern
+
+@@ Class: 
+	Line: -
+
+@@ Class: 
+	Line: -
+
+@@ Class: 
+	Line: -
+
+@@ Class: 
+	Line: -
+
+@@ Class: 
+	Line: -
