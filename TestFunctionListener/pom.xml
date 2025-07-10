@@ -54,6 +54,11 @@
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--<dependency>
+			<groupId>com.digitaldots.connector.function</groupId>
+			<artifactId>sample-function</artifactId>
+			<version>1.2.0</version>
+		</dependency>-->
 	</dependencies>
 
 	<build>
