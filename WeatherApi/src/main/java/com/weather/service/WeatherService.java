@@ -32,7 +32,6 @@ public class WeatherService {
 
     public Map<String, Object> getForecast(String city, String state, String country) {
         Map<String, Object> resultMap = new HashMap<>();
-
         Map<String, Object> locationDetails = new HashMap<>();
         Map<String, Object> weatherReport = new HashMap<>();
         Map<String, Object> dailyForecastsMap = new HashMap<>();
@@ -41,7 +40,7 @@ public class WeatherService {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<JsonNode> requestEntity = new HttpEntity<>(headers);
-        // Get location details and coordinates
+        // TODO: Get location details and coordinates
         URI locationUri = UriComponentsBuilder.fromUriString("https://nominatim.openstreetmap.org/search").queryParam("city", city)
             .queryParam("state", state).queryParam("country", country).queryParam("addressdetails", 1).queryParam("format", "json").build()
             .toUri();
@@ -180,6 +179,7 @@ public class WeatherService {
                 category = "Moderate";
             else
                 category = "Unhealthy";
+            break;
         case ("ozone"):
             if (value < 55)
                 category = "Good";
@@ -187,6 +187,7 @@ public class WeatherService {
                 category = "Moderate";
             else
                 category = "Unhealthy";
+            break;
         default:
             category = "Unknown";
         }
