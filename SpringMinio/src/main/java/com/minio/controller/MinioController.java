@@ -71,10 +71,10 @@ public class MinioController {
     }
 
     @PostMapping("/multipart/upload/alpha")
-    public void uploadObjectAlpha(@RequestPart MultipartFile file, @RequestParam String fileName, @RequestParam int fileSize)
+    public void uploadObjectAlpha(@RequestPart MultipartFile file, @RequestParam String fileName, @RequestParam int partSizeMb)
         throws InvalidKeyException, NoSuchAlgorithmException, InsufficientDataException, ServerException, XmlParserException,
         ErrorResponseException, InternalException, InvalidResponseException, IOException, InterruptedException, ExecutionException {
-        minioService.multiPartFileUploadAlpha(file.getInputStream(), fileName, fileSize);
+        minioService.multiPartFileUploadAlpha(file.getInputStream(), fileName, partSizeMb);
     }
 
     @GetMapping("/multipart/presigned/url/alpha")
