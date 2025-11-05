@@ -1,0 +1,56 @@
+
+Best guides for spring boot and java: (***)
+
+- https://www.marcobehler.com/
+
+
+
+TODO:
+
+
+Concurrency → java.util.concurrent.* (Thread pools, Locks, Executors).
+
+Networking → java.net.* (Sockets, HTTP clients).
+
+I/O & NIO → java.io.*, java.nio.* (File handling, channels, buffers).
+
+Database Access → JDBC (java.sql.*).
+
+Security → java.security.* (encryption, digital signatures, key management).
+
+System Design
+
+Time Complexity
+
+
+From Resume:
+
+- Microservices
+
+- Postgresql/Mongodb (@CompoundIndex)
+
+- Design Patterns
+
+- Minio
+
+- Kafka
+
+- Redis
+
+- Spring Security
+
+- OAuth
+
+- GitHub
+
+- JUnit
+
+- Kubernetes
+
+
+
+Q1. doubt about how "ItemReader" in "ExportBatchReaderListener" on export maintains context for current value for multiple exports at same time.  
+
+(res: @stepScope isolates the sharing of batchId's between plarallel job executions)
+
+

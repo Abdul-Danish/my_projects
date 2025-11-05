@@ -1,0 +1,56 @@
+steps enable authentication in mongodb:
+
+
+@ open mongo shell using "mongosh" command:
+
+
+@ create a user with username/password with root access to admin db (i.e; Access to All Databases)
+
+db.createUser({
+  user: "mongo",
+  pwd: "mongo",
+  roles: [ { role: "root", db: "admin" } ]
+})
+
+
+@ navigate to "mongod.conf" file (probably in "/etc/mongod.conf")
+
+
+security:
+  authorization: enabled
+
+
+@ restart mongod:
+
+	- sudo systemctl restart mongod
+
+
+## If using with replicaset then create a key file and add to security:
+
+
+@ Run this command as root or with sudo — this will actually create /etc/mongo-keyfile:
+
+	- sudo openssl rand -base64 756 | sudo tee /etc/mongo-keyfile > /dev/null
+
+	(generates a random 756-byte key and writes it to /etc/mongo-keyfile.)
+
+
+@ Set correct ownership and permissions:
+
+	- sudo chown mongodb:mongodb /etc/mongo-keyfile
+	- sudo chmod 400 /etc/mongo-keyfile
+
+	(The mongodb user must own it. Permissions must be 400 (read-only).
+	( To Verify: "ls -l /etc/mongo-keyfile" )
+
+
+@ Add key file to security:
+
+security:
+  authorization: enabled
+  keyFile: /etc/mongo-keyfile
+
+
+@ restart mongod:
+
+	- sudo systemctl restart mongod 

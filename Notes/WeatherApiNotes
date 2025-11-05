@@ -1,0 +1,127 @@
+Steps For Forcast: 
+	
+	-> https://nominatim.openstreetmap.org/search?city=Austin&state=Texas&country=USA&format=json
+		(To get the lat and lon of the location)
+
+	-> /points/{latitude},{longitude}
+		()
+
+	-> /gridpoints/{wfo}/{x},{y}/forecast
+		(EWX, 156, 91)
+
+
+Steps for Current Weather:
+
+	-> /gridpoints/{wfo}/{x},{y}/stations?limit=100
+		(select first 'stationIdentifier' a.k.a 'stationId' (probably the nearest)) ('KAUS')
+
+	-> /stations/{stationId}/observations/latest
+		(get the latest weather from stationId)
+
+
+Steps for Air Pollen:
+		
+	->
+
+Steps for Air Quality:
+
+	-> https://air-quality-api.open-meteo.com/v1/air-quality?latitude=30.2672&longitude=-97.7431&current=pm10,pm2_5,carbon_monoxide,ozone
+
+
+Steps for sunrise sunset: (https://sunrise-sunset.org/api)
+
+	-> https://api.sunrise-sunset.org/json?lat=30.2711286&lng=-97.7436995&date=today (Texas)
+		()
+
+
+
+Response Data:
+
+{
+    "weatherReport": {
+        "Headline": {
+            "Text": "Partly Cloudy"
+        },
+        "DailyForecasts": [
+            {
+                "Temperature": {
+                    "Minimum": {
+                        "value": 22,
+                        "Unit": "C"
+                    },
+                    "Maximun": {
+                        "value": 35,
+                        "Unit": "C"
+                    }
+                },
+                "Daily": {
+                    "Wind": {
+                        "Speed": {
+                            "Value": 0,
+                            "Unit": "km/h"
+                        }
+                    }
+                },
+                "DegreeDaySummary": {
+                    "Heating": {
+                        "Value": 0,
+                        "Unit": "C"
+                    },
+                    "Cooling": {
+                        "Value": 10,
+                        "Unit": "C"
+                    }
+                },
+                "AirAndPollen": [
+                    {
+                        "Units": "μg/m³",
+                        "Category": "Good",
+                        "CategoryValue": 16.6,
+                        "Name": "Particulate Matter"
+                    },
+                    {
+                        "Units": "μg/m³",
+                        "Category": "Moderate",
+                        "CategoryValue": 16.1,
+                        "Name": "Fine Particulate Matter"
+                    },
+                    {
+                        "Units": "μg/m³",
+                        "Category": "Good",
+                        "CategoryValue": 207.0,
+                        "Name": "Carbon Monoxide"
+                    },
+                    {
+                        "Units": "μg/m³",
+                        "Category": "Unhealthy",
+                        "CategoryValue": 92.0,
+                        "Name": "Ozone"
+                    }
+                ],
+                "Sun": {
+                    "Set": "12:32:22 AM",
+                    "Rise": "12:16:45 PM"
+                }
+            }
+        ]
+    },
+    "locationDetails": {
+        "AdministrativeArea": {
+            "EnglishName": "Texas"
+        },
+        "Country": {
+            "EnglishName": "us"
+        },
+        "EnglishName": "Austin"
+    }
+}
+
+
+pm10 (55), pm2_5 (12), carbon_monoxide (5042), ozone (55)
+
+[30, 22, 2000, 80]
+
+-> highRiskCount - 1
+-> midRiskCount - 1+1
+-> lowRiskCount - 1+1
+

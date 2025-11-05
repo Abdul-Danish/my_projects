@@ -1,0 +1,272 @@
+## Missing Types
+
+smallserial, bpchar, bytea Hex Format, bytea Escape Format, bit, bit varing, tsvector, tsquery,
+array, pg_lsn
+
+
+## Create
+
+CREATE TABLE batch.postgres_data_types (
+    -- Numeric Types
+    col_smallint SMALLINT,
+    col_integer INTEGER,
+    col_bigint BIGINT,
+    col_decimal DECIMAL(10, 2),
+    col_numeric NUMERIC(15, 5),
+    col_real REAL,
+    col_double_precision DOUBLE PRECISION,
+    col_smallserial SMALLSERIAL,
+    col_serial SERIAL,
+    col_bigserial BIGSERIAL,
+
+    -- Monetary
+    col_money MONEY,
+
+    -- Character Types
+    col_char CHAR(10),
+    col_varchar VARCHAR(50),
+    col_text TEXT,
+
+    -- Binary Data
+    col_bytea_hex BYTEA,                  -- for hex format
+    col_bytea_escape BYTEA,               -- for escape format
+
+    -- Date/Time Types
+    col_date DATE,
+    col_time TIME,
+    col_time_tz TIME WITH TIME ZONE,
+    col_timestamp TIMESTAMP,
+    col_timestamp_tz TIMESTAMP WITH TIME ZONE,
+    col_interval INTERVAL,
+
+    -- Boolean
+    col_boolean BOOLEAN,
+
+    -- Enumerated Type (requires separate definition)
+    col_mood batch.mood,  -- must define mood ENUM before using
+
+    -- UUID
+    col_uuid UUID,
+
+    -- JSON
+    col_json JSON,
+    col_jsonb JSONB,
+
+    -- Array
+    col_int_array INTEGER[],
+
+    -- Network Address
+    col_inet INET,
+    col_cidr CIDR,
+    col_macaddr MACADDR,
+    col_macaddr8 MACADDR8,
+
+    -- Bit String
+    col_bit_fixed BIT(8),                 -- fixed-length bit string
+    col_bit_varying BIT VARYING(16),      -- variable-length bit string
+
+    -- Text Search Types
+    col_tsvector TSVECTOR,
+    col_tsquery TSQUERY,
+
+    -- Geometric
+    col_point POINT,
+    col_line LINE,
+    col_lseg LSEG,
+    col_box BOX,
+    col_path PATH,
+    col_polygon POLYGON,
+    col_circle CIRCLE,
+    col_point_2 POINT,
+    col_lseg_2 LSEG,
+    col_path_2 PATH,
+
+
+    -- Range Types
+    col_int_range INT4RANGE,
+    col_num_range NUMRANGE,
+    col_ts_range TSRANGE,
+    col_tstz_range TSTZRANGE,
+    col_date_range DATERANGE,
+
+    -- XML
+    col_xml XML,
+
+    -- Object Identifier Types
+    col_oid OID,
+
+    -- pg_lsn
+    col_pg_lsn PG_LSN,
+
+    -- Pseudo Types (cannot be stored, shown for completeness)
+    -- record, void, internal, cstring
+
+    PRIMARY KEY (col_serial)
+);
+
+## create enum
+
+CREATE TYPE batch.mood AS ENUM ('happy', 'sad', 'ok');
+
+
+## Insert
+
+
+INSERT INTO batch.postgres_data_types (
+    col_smallint,
+    col_integer,
+    col_bigint,
+    col_decimal,
+    col_numeric,
+    col_real,
+    col_double_precision,
+    col_smallserial,
+    col_serial,
+    col_bigserial,
+    col_money,
+    col_char,
+    col_varchar,
+    col_text,
+    col_bytea_hex,
+    col_bytea_escape,
+    col_date,
+    col_time,
+    col_time_tz,
+    col_timestamp,
+    col_timestamp_tz,
+    col_interval,
+    col_boolean,
+    col_mood,
+    col_uuid,
+    col_json,
+    col_jsonb,
+    col_int_array,
+    col_inet,
+    col_cidr,
+    col_macaddr,
+    col_macaddr8,
+    col_bit_fixed,
+    col_bit_varying,
+    col_tsvector,
+    col_tsquery,
+    col_point,
+    col_line,
+    col_lseg,
+    col_box,
+    col_path,
+    col_polygon,
+    col_circle,
+    col_point_2,
+    col_lseg_2,
+    col_path_2,
+    col_int_range,
+    col_num_range,
+    col_ts_range,
+    col_tstz_range,
+    col_date_range,
+    col_xml,
+    col_oid,
+    col_pg_lsn
+) VALUES (
+    1,                     -- col_smallint
+    1000,                 -- col_integer
+    1234567890123,        -- col_bigint
+    1234.56,              -- col_decimal
+    7890.12345,           -- col_numeric
+    3.14,                 -- col_real
+    2.718281828,          -- col_double_precision
+    DEFAULT,              -- col_smallserial
+    DEFAULT,              -- col_serial (auto-increment)
+    DEFAULT,              -- col_bigserial (auto-increment)
+    '$99.99',             -- col_money
+    'A         ',         -- col_char
+    'Example Text',       -- col_varchar
+    'This is some long text.', -- col_text
+    E'\\xDEADBEEF',             -- col_bytea_hex (hex format)
+    E'123\\000\\001ABC',        -- col_bytea_escape (escape format)
+    '2025-07-17',         -- col_date
+    '14:30:00',           -- col_time
+    CURRENT_TIMESTAMP,     -- col_time_tz
+    '2025-07-17 14:30:00',-- col_timestamp
+    CURRENT_TIMESTAMP,     -- col_timestamp_tz
+    '2 days 3 hours',     -- col_interval
+    true,                 -- col_boolean
+    'happy',              -- col_mood
+    '550e8400-e29b-41d4-a716-446655440000', -- col_uuid
+    '{"key": "value"}',   -- col_json
+    '{"key": "value"}',   -- col_jsonb
+    '{1,2,3}',            -- col_int_array
+    '192.168.1.1',        -- col_inet
+    '192.168.0.0/16',     -- col_cidr
+    '08:00:2b:01:02:03',  -- col_macaddr
+    '08:00:2b:01:02:03:04:05', -- col_macaddr8
+    B'10101010',                -- col_bit_fixed
+    B'101010101111',            -- col_bit_varying
+    'sample text',     -- col_tsvector (auto converted)
+    'some & text',               -- col_tsquery
+    '(1,2)',              -- col_point
+    '[(-100.0, 40.0),(-105.0, 45.0)]',      -- col_line
+    '[(1,2),(3,4)]',                        -- col_lseg
+    '((-10.0, -10.0),(-10.0, -10.0))',      -- col_box
+    '[(1,2),(2,3),(3,4)]',-- col_path
+    '((30.0, 10.0), (40.0, 40.0), (20.0, 40.0), (10.0, 20.0), (30.0, 10.0))',-- col_polygon
+    '<(3.0,4.0),2.0>',    -- col_circle
+    '1,2',                           -- col_point_2
+    '(-100.0, 40.0),(-105.0, 45.0)', -- col_lseg_2
+    '1,2,2,3,3,4',                   -- col_path_2
+    '[1,10]',             -- col_int_range
+    '[100.5,200.75]',     -- col_num_range
+    '[2025-07-17 12:00, 2025-07-17 14:00]', -- col_ts_range
+    tstzrange(CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '[]'), -- col_tstz_range
+    '[2025-07-17, 2025-07-20]', -- col_date_range
+    '<note>Example XML</note>', -- col_xml
+    12345,                 -- col_oid
+    '0/16B374D0'          -- col_pg_lsn
+);
+
+
+testing geometry structures:
+
+col_point_2:
+
+'1,2'
+
+col_lseg_2:
+
+'(-100.0, 40.0),(-105.0, 45.0)'
+
+col_path_2:
+
+'1,2,2,3,3,4'
+
+
+## Valid values: (type: (geometry type))
+
+
+Points: (Point)
+
+[1,2]
+
+Lines: (LineString)
+
+[[-100.0, 40.0], [-105.0, 45.0], [-110.0, 55.0]]
+
+LineSegments: (LineString)
+
+[[-100.0, 40.0], [-105.0, 45.0], [-110.0, 55.0]] 
+
+Boxes: (Polygon / LineString)
+
+[[-10.0, -10.0],[10.0, -10.0],[10.0, 10.0],[-10.0, 10.0],[-10.0, -10.0]]
+
+Paths: (LineString)
+
+[-100, 40], [-105, 45], [-110, 55]
+
+Polygons:
+
+[[30.0, 10.0], [40.0, 40.0], [20.0, 40.0], [10.0, 20.0], [30.0, 10.0]]
+
+Circles:
+
+<(3.0,4.0),2.0>
