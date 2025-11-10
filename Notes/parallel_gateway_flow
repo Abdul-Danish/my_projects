@@ -1,0 +1,50 @@
+Exclusive Gateway flow:
+
+	- NotificationService (line: 105)
+	- GatewayEventProcessor
+	- 
+
+
+
+parallel Gateway flow:
+
+	- GatewayEventProcessor -> parallelGateWayImpl (returns: null/Flownode)-> processActivity 
+
+			-> publish event (ACTIVITY EVENT) -> EventProcessor (ACTIVITY) -> NodeProcessor (returns) 
+
+			-> AbstractFlowNodeProcessor (returns) 
+
+			-> EventProcessor (sends to: notificationTopic) (ORCHESTRATION EVENT) 
+
+			-> NotificationListener (ORCHESTRATION) -> NotificationService -> ---
+	
+
+	- 
+
+
+
+
+	Redis Repositories:
+
+		@ EndGateWayRepository
+
+			- event.getInstanceId() + ":" + gateWay.getId() 
+			(cache individual gateway tasks/activity response and merge it at end)
+
+		@ EventCacheRepository:
+
+			- event.getInstanceId() + ":" + event.getCurrentActivity() + ":" + event.getIndex()
+			(stores "ProcessParallelGatewayTask(s)")
+
+			- sequenceFlow.getSourceRef() + ":" + RESPONSE
+			(retrieve all the parallel responses)
+
+
+
+
+@ FlowNode:
+
+information about incoming and outgoing nodes/tasks/activities
+
+@ 
+

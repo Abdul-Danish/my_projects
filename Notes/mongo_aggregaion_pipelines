@@ -1,0 +1,291 @@
+@ INSERT:
+
+db.person_agg.insertMany( [
+   {
+      person_id: "6392529400",
+      firstname: "Elise",
+      lastname: "Smith",
+      dateofbirth: new Date("1972-01-13T09:32:07Z"),
+      vocation: "ENGINEER",
+      address: {
+         number: 5625,
+         street: "Tipa Circle",
+         city: "Wojzinmoj",
+      }
+   },
+   {
+      person_id: "1723338115",
+      firstname: "Olive",
+      lastname: "Ranieri",
+      dateofbirth: new Date("1985-05-12T23:14:30Z"),
+      gender: "FEMALE",
+      vocation: "ENGINEER",
+      address: {
+         number: 9303,
+         street: "Mele Circle",
+         city: "Tobihbo",
+      }
+   },
+   {
+      person_id: "8732762874",
+      firstname: "Toni",
+      lastname: "Jones",
+      dateofbirth: new Date("1991-11-23T16:53:56Z"),
+      vocation: "POLITICIAN",
+      address: {
+         number: 1,
+         street: "High Street",
+         city: "Upper Abbeywoodington",
+      }
+   },
+   {
+      person_id: "7363629563",
+      firstname: "Bert",
+      lastname: "Gooding",
+      dateofbirth: new Date("1941-04-07T22:11:52Z"),
+      vocation: "FLORIST",
+      address: {
+         number: 13,
+         street: "Upper Bold Road",
+         city: "Redringtonville",
+      }
+   }
+])
+
+
+@ FILTER:
+
+
+db.person_agg.aggregate([
+	{
+		$match: {"Vocation" : "ENGINEER"}
+	},
+	{
+		$sort: {"dateofbirth": -1}
+	},
+	{
+		$limit: 3
+	},
+	{
+		$unset: ["person_id"]
+	}
+])
+
+
+
+@ GROUP:
+
+
+db.orders.insertMany( [
+   {
+      customer_id: "elise_smith@myemail.com",
+      orderdate: new Date("2020-05-30T08:35:52Z"),
+      value: 231,
+   },
+   {
+      customer_id: "elise_smith@myemail.com",
+      orderdate: new Date("2020-01-13T09:32:07Z"),
+      value: 99,
+   },
+   {
+      customer_id: "oranieri@warmmail.com",
+      orderdate: new Date("2020-01-01T08:25:37Z"),
+      value: 63,
+   },
+   {
+      customer_id: "tj@wheresmyemail.com",
+      orderdate: new Date("2019-05-28T19:13:32Z"),
+      value: 2,
+   },
+   {
+      customer_id: "tj@wheresmyemail.com",
+      orderdate: new Date("2020-11-23T22:56:53Z"),
+      value: 187,
+   },
+   {
+      customer_id: "tj@wheresmyemail.com",
+      orderdate: new Date("2020-08-18T23:04:48Z"),
+      value: 4,
+   },
+   {
+      customer_id: "elise_smith@myemail.com",
+      orderdate: new Date("2020-12-26T08:55:46Z"),
+      value: 4,
+   },
+   {
+      customer_id: "tj@wheresmyemail.com",
+      orderdate: new Date("2021-02-29T07:49:32Z"),
+      value: 1024,
+   },
+   {
+      customer_id: "elise_smith@myemail.com",
+      orderdate: new Date("2020-10-03T13:49:44Z"),
+      value: 102,
+   }
+] )
+
+
+
+db.orders.aggregate([
+	{
+		$match: {
+			"orderdate": {
+				$gte : new Date("2020-01-01T00:00:00Z"),
+				$lt: new Date("2021-01-01T00:00:00Z")
+			}
+		}
+	},
+	{
+		$sort: { "orderdate" : 1 }
+	},
+	{
+		$group: {
+			"_id" : "$customer_id",
+			"first_order_date" : { $first: "$orderdate" },
+			"total_value" : { $sum : "$value" },
+			"total_orders" : { $sum : 1 },
+			"orders" : { $push : {
+				"orderdate" : "$orderdate",
+				"value" : "$value"
+			}
+		}
+	} },
+	{
+		$sort : { "first_order_date" : 1 }
+	},
+	{
+		$set : { "customer_id" : "$_id" }
+	},
+	{
+		$unset : ["_id"]
+	}
+])
+
+
+
+@ UNWIND ARRAY:
+
+
+db.orders.insertMany( [
+   {
+      order_id: 6363763262239,
+      products: [
+         {
+            prod_id: "abc12345",
+            name: "Asus Laptop",
+            price: 431
+         },
+         {
+            prod_id: "def45678",
+            name: "Karcher Hose Set",
+            price: 22
+         }
+      ]
+   },
+   {
+      order_id: 1197372932325,
+      products: [
+         {
+            prod_id: "abc12345",
+            name: "Asus Laptop",
+            price: 429
+         }
+      ]
+   },
+   {
+      order_id: 9812343774839,
+      products: [
+         {
+            prod_id: "pqr88223",
+            name: "Morphy Richards Food Mixer",
+            price: 431
+         },
+         {
+            prod_id: "def45678",
+            name: "Karcher Hose Set",
+            price: 21
+         }
+      ]
+   },
+   {
+      order_id: 4433997244387,
+      products: [
+         {
+            prod_id: "def45678",
+            name: "Karcher Hose Set",
+            price: 23
+         },
+         {
+            prod_id: "jkl77336",
+            name: "Picky Pencil Sharpener",
+            price: 1
+         },
+         {
+            prod_id: "xyz11228",
+            name: "Russell Hobbs Chrome Kettle",
+            price: 16
+         }
+      ]
+   }
+] )
+
+
+db.orders.aggregate([
+	{
+		$unwind: { path : "$products" }
+	},
+	{
+		$match: { "products.price" : { $gt : 15 } }
+	},
+	{
+		$group: {
+			"_id" : "$products.prod_id",
+			"product_name" : { $first : "$products.name" },
+			"total_price" : { $sum : "$products.price" },
+			"total_quantity" : { $sum : 1 }
+		}
+	}
+])
+
+
+@ ONE-TO-ONE JOIN:
+
+
+db.orders.aggregate([
+  {
+    $match: {
+      orderdate: {
+        $gte: new Date("2020-01-01T00:00:00Z"),
+        $lt: new Date("2021-01-01T00:00:00Z")
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: "products",
+      localField: "product_id",
+      foreignField: "p_id",
+      as: "product_mapping"
+    }
+  },
+  // setting "product_mapping" again to convert from list to object
+  {
+    $set: {
+      "product_mapping" : { $first: "$product_mapping" }
+    }
+  },
+  {
+    $set: {
+      "product_name": "$product_mapping.name",
+      "product_category" : "$product_mapping.category"
+    }
+  },
+  {
+    $unset: ["_id", "product_id", "product_mapping"]
+  }
+])
+
+
+@ MULTI-FIELD JOIN:
+
+
