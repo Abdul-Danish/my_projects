@@ -1,9 +1,0 @@
-Backend Java Developer with 2+ years of experience in designing and building scalable applications using Java, Spring Boot, Kafka, mongoDB, and PostgreSQL. Proficient in optimizing API performance, handling large JSON transformations, and implementing distributed caching with Redis. Familiar with cloud-native architectures and Kubernetes.
-
-
-**Professional Summary:**  
-Java Developer with expertise in Core Java and Spring Boot, specializing in building scalable RESTful APIs. Experienced in working with relational (PostgreSQL) and NoSQL (MongoDB) databases to handle diverse data storage needs. Proficient in real-time data streaming with Kafka, XML transformations using XSLT, unit testing with Mockito, high-performance caching with Redis, and object storage with MinIO. Strong understanding of Git for version control and collaboration, ensuring efficient development workflows and team productivity.
-
-
-**Professional Summary:**  
-Backend Java Developer with 2+ years of experience in Core Java and Spring Boot, specializing in building scalable RESTful APIs. Experienced in working with relational (PostgreSQL) and NoSQL (MongoDB) databases to handle diverse data storage needs. Proficient in real-time data streaming with Kafka, XML transformations using XSLT, unit testing with Mockito, high-performance caching with Redis, and object storage with MinIO. Strong understanding of Git for version control and collaboration, ensuring efficient development workflows and team productivity.
