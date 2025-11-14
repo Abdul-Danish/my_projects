@@ -1,0 +1,244 @@
+
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+	{#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+	\item\small{
+    	{#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+	\begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+  	\textbf{#1} & \textbf{\small #2} \\
+  	\textit{\small#3} & \textit{\small #4} \\
+	\end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+	\item
+	\begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+  	\textit{\small#1} & \textit{\small #2} \\
+	\end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+	\item
+	\begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+  	\small#1 & \textbf{\small #4}\\
+	\end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+	{\Huge \scshape ABDUL DANISH} \\ \vspace{1pt}
+	Hyderabad, India. \\ \vspace{1pt}
+	\small \raisebox{-0.1\height}\faPhone\ +91 6300339358 ~ \href{mailto:x@gmail.com}{\raisebox{-0.2\height}\faEnvelope\  \underline{abduldanish109@gmail.com}} ~
+	\href{https://linkedin.com/in//}{\raisebox{-0.2\height}\faLinkedin\ \underline{linkedin.com/in/abdul-danish-120872225}}
+	\vspace{-8pt}
+\end{center}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+	\resumeSubheading
+  	{DigitalDots Technologies Pvt Ltd}{Nov 2022 -- Present}
+  	{Java Backend Developer}{Hyderabad, India}
+  	\resumeItemListStart
+    	\resumeItem{Played a key role in Building the Low code platform (Evolve) aimed at accelerating the Digital Transformation
+         journey for enterprises by infusing AI to power the composite business orchestrations and enable business models on the cloud. }
+        \resumeItem{Active participation in product design thinking sessions to analyze functional specifications and help definition of product user experience and define \textbf{API Swagger} specifications.}
+        \resumeItem{Responsible for Building and maintaining Backend Services, Developing \textbf{Microservices} using \textbf{RESTFul Web Services} utilizing \textbf {Java, Spring Boot}, and relational and/or NoSQL databases \textbf{PostgreSQL/MongoDB} while implementing various \textbf{Design patterns} to improve scalability, maintainability and performance}
+        \resumeItem{Built a reusable framework using \textbf{Kafka} for the microservices to communicate with each other asynchronously.}
+        \resumeItem{Hands-on experience in working with \textbf{Minio} for managing object storage and integrating file handling capabilities within the platform.}
+        \resumeItem{Improved the performance of all microservices using \textbf{Redis Caching} techniques.}
+        \resumeItem{Executed unit tests for various service layers and components of the application using \textbf{JUnit} and \textbf{Mockito} to ensure the correctness of the codebase by maintaining \textbf{95\%} code coverage.}
+        \resumeItem{Developed and integrated custom Authorization Filters using \textbf{Spring Security} to enforce role-based access control (RBAC)
+and secure Platform APIs.}
+        \resumeItem{Mentored a team of 2 Junior developers with development skills and keep up with the fast-paced environment of a startup.}
+	\resumeItemListEnd
+    
+  \resumeSubHeadingListEnd
+\vspace{-10pt}
+
+%-----------PROJECTS-----------
+\section{Projects}
+	\vspace{-5pt}
+	\resumeSubHeadingListStart
+	\resumeProjectHeading
+      	{\textbf{ Workflow Automation Platform for Orchestrations} $|$ \emph
+        {Java, Spring Boot, PostgreSQL, MongoDB} }{}
+      	\resumeItemListStart
+        	\resumeItem{Users can create, modify, and monitor multi-step workflows that integrate with external services such as APIs, databases, and message queues.}
+        	\resumeItem{Built a robust, fault-tolerant orchestration engine that executes workflows with high reliability, ensuring tasks are processed in the correct sequence and with efficient error handling.}
+            \resumeItem{Enabled workflows to trigger based on external events (e.g., API calls, time-based events) and perform a wide variety of automated actions such as sending emails, processing data, or invoking APIs.}
+            \resumeItem{Integrated robust authentication mechanisms (OAuth, JWT) and ensured secure access to sensitive workflows, data storage, and machine learning models, following best practices for user privacy and data protection.}
+            \resumeItem{Implemented Spring Batch based cloning solutions to automate the end-to-end duplication of complete solutions within the platform.}
+            \resumeItem{ Integrated OpenL Decisions to manage business rules and decision tables within workflows, allowing users to automate complex decision-making processes based on real-time data.}
+      	\resumeItemListEnd
+	   \vspace{5pt}
+	\resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%
+%-----------Achievements-----------
+% \section{Achievements [Add all kind of achievements that shows your skills]}
+%  \begin{itemize}[leftmargin=0.15in, label={}]
+% 	\resumeItemListStart
+%     	\resumeItem{Highest rating of \textbf{ xxxx} at Codeforces, which is the top site in terms of participation of programmers across globe.}
+%     	\resumeItem{Ranked under \textbf{xyz} at Codechef which ranks among the top sites for competitive programmers. Highest rating of 2299 and rated \textbf{6*}. }
+%     	\resumeItem{Qualified the prestigious ACM-ICPC regionals \textbf{thrice} and ranked Z in one of the attempts. }
+%     	\resumeItem{Secured all India rank of \textbf{r, s, t} respectively in Codechef's Long Challenge in the month of February, April and May xyzh among 12k+ participants.}
+%     	\resumeItem{Secured all India rank of \textbf{uh} in TCS codevita 2019.}
+%     	\resumeItem{Written over \textbf{0987643} articles at Geeksforgeeks, most of them being on Data Structure and Algorithms}
+%     	\resumeItem{Solved more than 2000+ problems across platforms.}
+%     	\resumeItem{Awarded with Geek of the year accolade from GeeksforGeeks for contribution to the community. \href{https://www.geeksforgeeks.org/geek-of-the-year/}{(Link)} }
+%   	\resumeItemListEnd
+%  \end{itemize}
+%  \vspace{-10pt}
+ 
+ %
+%-----------Profile Links-----------
+\section{Profile Links}
+ \begin{itemize}[leftmargin=0.01in, label={}]
+    \resumeItemListStart
+    \vspace{0pt}
+        \resumeItem 
+            {\href{https://leetcode.com/u/Abdul_Danish/}{Leetcode}}
+        
+    \resumeItemListEnd
+ \end{itemize}
+ \vspace{-12pt}
+
+%
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+	\small{\item{
+ 	\textbf{Languages}{: Java, SQL} \\
+        \vspace{2pt}
+ 	\textbf{Technologies/Frameworks}{: Spring Boot, Spring Security, Spring Data JPA, Spring Batch, Kafka, Redis} \\
+         \vspace{2pt}
+        \textbf{Database}{: MongoDB, PostgreSQL} \\
+        \vspace{2pt}
+        \textbf{Version Control}{: GIT, Github} \\
+        \vspace{2pt}
+        \textbf{Testing tools}{: Postman} }} \\
+        \vspace{2pt}
+        \textbf{Devops}{: Docker, Kubernetes, SonarLint}
+ \end{itemize}
+ \vspace{-10pt}
+
+ 
+
+%-----------EDUCATION-----------
+\section{Education}
+\vspace{4pt}
+  \resumeSubHeadingListStart
+	\resumeSubheading
+  	{Global Institute Of Engineering and Technology }{2018 - 2022}
+  	{Bachelor of Technology in Information Technology (CGPA of 7.03)}{ Hyderabad, Telangana, India}
+    \resumeSubheading
+  	{Narayana Junior College }{2016 - 2018}
+  	{Maths Physics and Chemistry (Percentage of 88.3)}{ Hyderabad, Telangana, India}
+    \resumeSubheading
+  	{Rich Monds High School }{2015 - 2016}
+  	{SSC[X] (CGPA of 7.8)}{ Hyderabad, Telangana, India}
+  \resumeSubHeadingListEnd
+
+
+
+\end{document}
