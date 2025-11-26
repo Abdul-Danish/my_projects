@@ -1,0 +1,74 @@
+## yaml file definition skeleton (must have fields):
+
+apiVersion:
+kind:
+metadata:
+spec:
+
+
+EX:
+
+apiVersion: v1
+kind: Pod
+metadata:
+	name: my-pod
+	labels:
+		app : demo-pod
+spec:
+	containers:
+		name: ngnix
+		image: ngnix:1.0
+
+
+## Cluster vs Node in k8s:
+
+* In Kubernetes, a cluster is a collection of nodes that work together to run containerized applications, serving as the overarching orchestration system. 
+It consists of a control plane (master) that manages the cluster and one or more worker nodes. 
+The control plane handles scheduling, deployment, and management of workloads across the nodes.
+
+
+* A node is an individual machine—either physical or virtual—that acts as a worker unit within the cluster.
+ Nodes provide the computing resources (CPU, memory, storage) necessary to run containerized applications.
+ Each node runs essential services like the kubelet, which communicates with the control plane, a container runtime to manage containers, and kube-proxy to handle networking.
+ Nodes are the actual hosts where pods are scheduled and executed.
+
+
+ * A cluster is the complete system that manages and coordinates multiple nodes, while a node is a single machine within that system responsible for hosting and running workloads.
+
+
+* A cluster enables scalability and fault tolerance by distributing workloads across multiple nodes.
+ If a node fails, Kubernetes can reschedule the pods running on it to other available nodes, ensuring high availability.
+ In contrast, a single node cluster lacks this redundancy and is more vulnerable to failure.
+
+
+## Pod (apiVersion: v1) :
+
+* 
+
+## Service (apiVersion: v1) :
+
+* 
+
+## ReplicaSet (apiVersion: apps/v1) :
+
+* 
+
+## Deployment (apiVersion: apps/v1) :
+
+* 
+
+## ConfigMap (apiVersion: v1) :
+
+*
+
+## Secret (apiVersion: v1) :
+
+* 
+
+## targetPort:
+
+* port where the backend is exposed
+
+## port :
+
+* port where the service is exposed, for other services to connect

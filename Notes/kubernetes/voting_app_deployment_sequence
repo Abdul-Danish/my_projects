@@ -1,0 +1,10 @@
+@@ Deploy sequence for my sample voting application:
+
+- deploy mongo_configmap.yaml
+- deploy mongo_secret.yaml
+- deploy mongo_pod.yaml
+- deploy mongo_service.yaml
+- deploy voting_app_pod.yaml
+- deploy voting_app_service.yaml
+- deploy voting_result_app_pod.yaml
+- deploy voting_result_app_service.yaml

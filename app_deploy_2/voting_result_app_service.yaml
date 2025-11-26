@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-result-service
+  labels:
+    app: voting-result
+    type: backend
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 8030
+      port: 8030
+      nodePort: 30030
+  selector:
+    app: voting-result
+    type: backend

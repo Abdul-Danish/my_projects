@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config
+data:
+  mongo-host: "mongo-service"
+  mongo-port: "27017"
+  mongo-db: "voting_app"
