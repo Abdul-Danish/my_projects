@@ -24,8 +24,6 @@ docker login:
 	
 	- docker login -u abduldanish
 
-	- login with docker token
-
 
 @@ Kubernetes:
 
