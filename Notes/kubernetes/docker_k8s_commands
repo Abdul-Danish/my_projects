@@ -24,7 +24,9 @@ docker login:
 	
 	- docker login -u abduldanish
 
-	- Access Token: dckr_pat_bp_Rhg_Boz5FQeBAu7UA08AV0XI
+	- Generate Token from:
+
+	 - Docker Hub -> Account Settings -> Personal access tokens
 
 
 @@ Kubernetes:
