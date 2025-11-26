@@ -24,7 +24,7 @@ docker login:
 	
 	- docker login -u abduldanish
 
-	 - Docker Hub -> Account Settings -> Personal access tokens
+	- login with docker token
 
 
 @@ Kubernetes:
