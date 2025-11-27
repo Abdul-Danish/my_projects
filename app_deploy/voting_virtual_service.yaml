@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: voting-vs
+spec:
+  hosts:
+    - voting.app.com
+  gateways:
+    - voting-gateway
+  http:
+    - route:
+      - destination:
+          host: voting-app-service
+          port:
+            number: 8020

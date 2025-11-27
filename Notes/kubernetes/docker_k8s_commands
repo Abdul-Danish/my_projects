@@ -65,3 +65,47 @@ edit activator in knative:
 
 @@ Logs
  - kubectl logs -f your_pod_name
+
+
+
+
+@@ Creating Virtual Service:
+
+ install istio: 
+ 
+ - curl -L https://istio.io/downloadIstio | sh -
+
+ - cd istio-x.x.x
+
+ - export PATH=$PWD/bin:$PATH
+
+ verify:
+
+ - istioctl version
+
+ install ingress gateway:
+
+ - istioctl install --set profile=demo -y
+
+ verify
+
+ - k get svc -n istio-system
+
+
+** Now after Deploying the gateway and virtualservice follow below:
+
+	Get minikube IP:
+
+ - minikube ip
+
+ Get the Istio ingress gateway NodePort:	(Get the port will be "80: 32400/TCP")
+
+ - kubectl -n istio-system get svc istio-ingressgateway
+
+ Add Header:
+
+ - Host: voting.app.com
+
+ Call the URL:
+
+ - http://192.168.49.2:32400/api/v1/vote

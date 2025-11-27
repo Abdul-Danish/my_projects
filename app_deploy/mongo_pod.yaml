@@ -3,21 +3,23 @@ kind: Pod
 metadata:
   name: mongo-pod
   labels:
-    name: mongo-pod
-    app: demo-voting-app
-
+    app: mongo
+    type: database
 spec:
   containers:
-    - name: mongo
+    - name: mongo-container
       image: mongo
       ports:
         - containerPort: 27017
       env:
-        - name: ME_CONFIG_MONGODB_URL
-          value: mongodb://localhost:27017/?authSource=admin&retryWrites=false
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-user
 
-      #   - name: MONGO_INITDB_ROOT_USERNAME
-      #     value: root
-      #   - name: MONGO_INITDB_ROOT_PASSWORD
-      #     value: password
-    
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-password

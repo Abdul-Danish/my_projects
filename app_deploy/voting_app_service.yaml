@@ -1,14 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: voting
+  name: voting-app-service
   labels:
-    app: voting
-    spring-boot: "true"
+    app: voting-app
+    type: backend
 spec:
+  type: ClusterIP         ## ClusterIP because it has a gateway and virtual service to access this service
   ports:
-    - name: voting
-      port: 80
-      targetPort: 8080
+    - targetPort: 8020
+      port: 8020
+      
   selector:
-    app: voting
+    app: voting-app
+    type: backend

@@ -1,17 +1,16 @@
 apiVersion: v1
 kind: Service
-metadata:
+metadata: 
   name: mongo-service
-  labels:
-    name: mongo-service
-    app: demo-voting-app
-
+  labels: 
+    app: mongo
+    type: database
 spec:
+  type: ClusterIP       ## can be ClusterIP, NodePort or LoadBalancer
   ports:
-    - port: 27017
-      targetPort: 27017
-      protocol: TCP
-  selector:
-    name: mongo-pod
-    app: demo-voting-app
-    
+    - targetPort: 27017  ## where the backend is exposed
+      port: 27017       ## where the service is exposed
+
+  selector:             ## takes the labels of the pod yaml
+    app: mongo          ## matches all the pods then the service can route to all the pods (an abstraction)
+    type: database

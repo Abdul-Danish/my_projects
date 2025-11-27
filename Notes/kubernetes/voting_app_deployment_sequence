@@ -8,3 +8,9 @@
 - deploy voting_app_service.yaml
 - deploy voting_result_app_pod.yaml
 - deploy voting_result_app_service.yaml
+
+Deploying gateway and virtualservice (continuation):
+
+- deploy voting_app_gateway.yaml	(istio (ingress) gateway)
+- deploy voting_virtual_service.yaml  	
+  (exposes host and forwards request to gateway which inturn forwards to "voting-app-service")
