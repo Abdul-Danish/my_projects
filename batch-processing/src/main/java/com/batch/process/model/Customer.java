@@ -43,7 +43,7 @@ public class Customer {
     @Column(name = "COUNTRY")
     private String country;
     
-    @Column(name = "DOB")
-    private String dob;
+    @Column(name = "BATCH_STEP")
+    private String batchStep;
 	
 }

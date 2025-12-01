@@ -15,9 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.batch.process.model.Customer;
 import com.batch.process.repository.CustomerRepository;
@@ -31,42 +29,23 @@ public class CustomerController {
 
 	@Autowired
 	private JobLauncher jobLauncher;
-	
+
 	@Autowired
 	private CustomerRepository customerRepository;
-	
+
 	@Autowired
-//	@Qualifier("job1")
-	private Job job1;
-	
-//	@Autowired
-//	@Qualifier("job2")
-//	private Job job2;
-//		
-//	@Autowired
-//	@Qualifier("job3")
-//	private Job job3;
-	
+	@Qualifier("batchJob")
+	private Job batchJob;
+
 	@PostMapping("process1")
-	public void startJob1(@RequestBody Customer customer) throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException, InterruptedException {
+	public void startJob1(@RequestBody Customer customer)
+			throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException,
+			JobParametersInvalidException, InterruptedException {
 		Customer savedCustomer = customerRepository.save(customer);
-	    JobParameters jobParameters = new JobParametersBuilder().addLong("id", savedCustomer.getId()).addString("startAt1", UUID.randomUUID().toString()).toJobParameters();
+		JobParameters jobParameters = new JobParametersBuilder().addLong("id", savedCustomer.getId())
+				.addString("startAt1", UUID.randomUUID().toString()).toJobParameters();
 		log.info("Job-1 Started");
-		jobLauncher.run(job1, jobParameters);		
+		jobLauncher.run(batchJob, jobParameters);
 	}
-	
-//	@PostMapping("process2")
-//	public void startJob2() throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
-//		JobParameters jobParameters = new JobParametersBuilder().addString("startAt1", UUID.randomUUID().toString()).toJobParameters();
-//		log.info("Job-2 Started");
-//		jobLauncher.run(job2, jobParameters);		
-//	}
-//
-//	@PostMapping("process3")
-//	public void startJob3() throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
-//		JobParameters jobParameters = new JobParametersBuilder().addLong("startAt3", System.currentTimeMillis()).toJobParameters();
-//		log.info("Job-3 Started");
-//		jobLauncher.run(job3, jobParameters);		
-//	}
-	
+
 }

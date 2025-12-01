@@ -2,17 +2,17 @@ package com.oauth.handler;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class LogoutHandler extends SecurityContextLogoutHandler {
 
     @Override
@@ -22,8 +22,7 @@ public class LogoutHandler extends SecurityContextLogoutHandler {
 
         String logoutUrl = UriComponentsBuilder.fromHttpUrl("https://dev-ru75shw6v5e3ddlq.us.auth0.com/v2/logout").encode().toUriString();
 
-//        log.info("Attempting to redirect to: {}", logoutUrl);
-        System.out.println("Attempting to redirect to: " + logoutUrl);
+        log.info("Attempting to redirect to: {}", logoutUrl);
         try {
             httpServletResponse.sendRedirect(logoutUrl);
         } catch (IOException e) {
