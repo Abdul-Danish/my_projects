@@ -21,6 +21,7 @@ docker push command:
 	- docker push myusername/myapp:1.0
 
 
+
 @@ Kubernetes:
 
 
