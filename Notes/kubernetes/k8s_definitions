@@ -43,27 +43,33 @@ The control plane handles scheduling, deployment, and management of workloads ac
 
 ## Pod (apiVersion: v1) :
 
-* 
+* It is the smallest deployable unit of computing that can be created and managed within a cluster in k8s.
+
+* It is a single instance of a running process and typically encapsulates one or more containers that are tightly coupled and share resources such as storage, networking, and a specification for how to run the containers.
+(it's one container per pod typically)
 
 ## Service (apiVersion: v1) :
 
-* 
+* It is an API object that provides a stable network endpoint for a set of Pods, abstracting away their dynamic IP addresses and enabling reliable communication within or outside the cluster
 
 ## ReplicaSet (apiVersion: apps/v1) :
 
-* 
+* A ReplicaSet's purpose is to maintain a stable set of replica Pods running at any given time. Usually, you define a Deployment and let that Deployment manage ReplicaSets automatically.
 
 ## Deployment (apiVersion: apps/v1) :
 
-* 
+* It ensures the specified number of replicas are running and automatically replaces failed pods, maintaining application reliability and availability
 
 ## ConfigMap (apiVersion: v1) :
 
-*
+* ConfigMaps are designed to store non-sensitive configuration data, such as environment variables, configuration files, or application settings, and the data is stored in plain text format.
+
+* They are commonly used to configure applications by injecting data as environment variables or mounting them as volumes within pods
 
 ## Secret (apiVersion: v1) :
 
-* 
+* Secrets are intended for storing sensitive information like passwords, API keys, tokens, and TLS certificates.
+* While the data in Secrets is also stored as key-value pairs, it is encoded in base64 format, providing a basic level of obfuscation to prevent accidental exposure
 
 ## targetPort:
 

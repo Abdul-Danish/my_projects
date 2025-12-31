@@ -3,10 +3,17 @@ package com.dsa.streams;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.databind.ser.impl.IndexedStringListSerializer;
 
 public class StreamOperations {
 
@@ -33,24 +40,37 @@ public class StreamOperations {
 //        filterByGender.forEach(System.out::println);
 
         // Sort
-        List<Employee> sortByAge1 = employees.stream()
+        List<Employee> sortByAgeAndName1 = employees.stream()
             .sorted(Comparator.comparing((Employee e) -> e.getAge()).thenComparing((Employee e) -> e.getName()))
             .collect(Collectors.toList());
 
         // (or)
 
-        List<Employee> sortByAge2 = employees.stream().sorted(Comparator.comparing(Employee::getAge).thenComparing(Employee::getName))
+        List<Employee> sortByAgeAndName2 = employees.stream().sorted(Comparator.comparing(Employee::getAge).thenComparing(Employee::getName))
             .collect(Collectors.toList());
-//        sortByAge1.forEach(System.out::println);
+//        sortByAgeAndName1.forEach(System.out::println);
 
-        // AllMatch
-        boolean allMatch = employees.stream().allMatch(emp -> emp.getName().equals("emp3"));
+        // AllMatch        
+        boolean allMatch1 = employees.stream().allMatch(emp -> emp.getName().equals("emp3"));
+        
+        // (or)
+        
+        Predicate<Employee> isEmp = emp -> emp.getName().equals("emp3");
+        boolean allMatch2 = employees.stream().allMatch(isEmp);
 //        System.out.println(allMatch);
 
-        // AnyMatch
-        boolean anyMatch = employees.stream().anyMatch(emp -> emp.getName().equals("emp3"));
-//        System.out.println(anyMatch);
+        // AnyMatch        
+        boolean anyMatch1 = employees.stream().anyMatch(emp -> emp.getName().equals("emp3"));
+        
+        // (or)
+        
+        Predicate<Employee> isEmp3 = emp -> emp.getName().equals("emp3");
+        Predicate<Employee> isEmp10 = emp -> emp.getName().equals("emp10");
+        Predicate<Employee> isEmp3OrEmp10 = isEmp3.or(isEmp10);
+        boolean anyMatch2 = employees.stream().anyMatch(isEmp3OrEmp10);
+//        System.out.println(anyMatch2);
 
+        
         // Max
         Optional<Employee> maxAge = employees.stream().max(Comparator.comparing(Employee::getAge));
 //        maxAge.ifPresent(emp -> System.out.println(emp));
@@ -69,22 +89,39 @@ public class StreamOperations {
 
         // FlatMap
         List<List<Employee>> nestedEmpList = Arrays.asList(Arrays.asList(employee1, employee2), Arrays.asList(employee3, employee4));
-        List<Employee> flatEmpList = nestedEmpList.stream().flatMap(List::stream).collect(Collectors.toList());
-//        System.out.println(flatEmpList);
+        List<Employee> flatEmpList = nestedEmpList.stream().flatMap(List::stream).collect(Collectors.toList());        
+        System.out.println(flatEmpList);
 
-//       Practice:
-        
-        List<Integer> intList = Arrays.asList(1, 2, 3, 5, 4, 5, 3, 7);
+//       Practice:        
+        List<Integer> intList = Arrays.asList(1, 2, 3, 5, 4, 5, 3, 7, 0);
         List<Integer> dubList = new ArrayList<>();
 
-        List<Integer> collect = intList.stream().sorted(Integer::compareTo)
-//        .filter(num -> {
-//            
-//        })
-        .collect(Collectors.toList());
+        List<Integer> collect = intList.stream()
+            // (DSC)
+            // .sorted(Comparator.reverseOrder())
+            // (ASC)
+            // .sorted(Integer::compareTo)
+            // (or)
+            // .sorted((i1, i2) -> i1.compareTo(i2))            
+            .collect(Collectors.toList());
         
-        System.out.println(collect);
+        // (or by using collections)
+        // Collections.sort(collect, Collections.reverseOrder());
+        // System.out.println(collect);
         
+        SortedSet<Integer> sortedSet = new TreeSet<>();
+        sortedSet.addAll(intList);
+        // System.out.println(sortedSet);
+        
+        printArray(intList);
     }
+    
+    public static <E, L extends List<E> > void printArray( L inputArray ) {
+        // Display array elements
+        for(E element : inputArray) {
+           System.out.printf("%s ", element);
+        }
+        System.out.println();
+     }
 
 }

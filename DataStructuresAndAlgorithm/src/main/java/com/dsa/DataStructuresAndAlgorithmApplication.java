@@ -1,9 +1,7 @@
 package com.dsa;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,16 +12,15 @@ import org.apache.hc.client5.http.entity.mime.InputStreamBody;
 import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
 import org.apache.hc.client5.http.entity.mime.StringBody;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -66,6 +63,12 @@ public class DataStructuresAndAlgorithmApplication implements CommandLineRunner 
 
     @Override
     public void run(String... args) throws Exception {
+//        JsonNode value = objectMapper.readValue("ok", JsonNode.class);
+//        System.out.println("Converted Value: " + value);
+    }
+    
+//    @Override
+    public void runTmp(String... args) throws Exception {
 //        FileInputStream pamelaIS = new FileInputStream("/home/danish/Downloads/pamela.pdf");
 //        FileInputStream adverseEventIS = new FileInputStream("/home/danish/Downloads/AdverseEvent_4.pdf");
 //        new BufferedReader(new FileInputStream(pamelaIS));
