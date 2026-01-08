@@ -27,18 +27,18 @@ public class MergeSort {
 
         int[] L = new int[n1];
         int[] M = new int[n2];
-        
-        for (int i = 0; i< n1; i++) {
+
+        for (int i = 0; i < n1; i++) {
             L[i] = arr[l + i];
         }
-        for (int j = 0; j< n2; j++) {
+        for (int j = 0; j < n2; j++) {
             M[j] = arr[j + m + 1];
         }
-        
+
         int i = 0;
         int j = 0;
         int k = l;
-        
+
         while (i < n1 && j < n2) {
             if (L[i] < M[j]) {
                 arr[k] = L[i];
@@ -49,7 +49,7 @@ public class MergeSort {
             }
             k++;
         }
-        
+
         while (i < n1) {
             arr[k] = L[i];
             i++;
