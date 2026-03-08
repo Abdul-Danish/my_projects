@@ -1,5 +1,6 @@
 steps enable authentication in mongodb:
 
+NOTE: Create ReplicaSet before enabling authentication.
 
 @ open mongo shell using "mongosh" command:
 
