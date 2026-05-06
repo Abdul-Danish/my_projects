@@ -41,3 +41,8 @@ Should show:
 	"set" : "rs0",
 	"ok" : 1
 
+
+
+@ TO Check mongo logs (if failed):
+
+sudo tail -50 /var/log/mongodb/mongod.log

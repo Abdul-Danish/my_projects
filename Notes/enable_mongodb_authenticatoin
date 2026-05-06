@@ -1,8 +1,12 @@
 steps enable authentication in mongodb:
 
+NOTE: Create ReplicaSet before enabling authentication.
 
 @ open mongo shell using "mongosh" command:
 
+@ switch db to admin to create User:
+
+use admin
 
 @ create a user with username/password with root access to admin db (i.e; Access to All Databases)
 
