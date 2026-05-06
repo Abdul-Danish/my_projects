@@ -14,7 +14,7 @@ public class ThreadLocalExample {
 
     public static void main(String[] args) {
         //
-        threadLocal1 = new ThreadLocal<>() {
+        threadLocal1 = new ThreadLocal<Integer>() {
             @Override
             protected Integer initialValue() {
                 return 0;
