@@ -1,7 +1,7 @@
 package com.design.pattern.structural.decorator;
 
 /*
- * 
+ * Dynamically adds new responsibilities to objects without modifying their code.
  */
 public class DecoratorDesignPattern {
 

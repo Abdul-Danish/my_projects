@@ -9,6 +9,6 @@ package com.design.pattern.behavioural.template;
 public class TemplateDesignPattern {
 
     public static void main(String[] args) {
-        // No Impl Required
+        // No Impl Required, Refer platform AbstractService.class
     }
 }

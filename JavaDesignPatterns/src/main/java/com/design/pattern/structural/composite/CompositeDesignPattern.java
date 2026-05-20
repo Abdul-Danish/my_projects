@@ -29,6 +29,7 @@ public class CompositeDesignPattern {
         System.out.println();
 
         projectLists.addTask(phase1Tasks);
+        // Here the TaskList will call it's display() method & the SimpleTask will call it's own display() method
         projectLists.display();
     }
 }

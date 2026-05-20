@@ -12,7 +12,7 @@ public class SingletonDesignPattern {
     public static void main(String args[]) {
         Singleton instance1 = Singleton.getInstance();
         instance1.exec();
-        instance1.setDummy("tst");
+        instance1.setDummy("dummy string");
         System.out.println(instance1.getDummy());
         Singleton instance2 = Singleton.getInstance();
         instance2.exec();

@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 /*
  * It is possible to select an object's behavior at runtime by utilizing the Strategy Design Pattern.
  * 
- * It is possible to select an object's behavior at runtime by utilizing the Strategy Design Pattern.
  * 
  * Similar To: Factory Design Pattern
  */
@@ -30,7 +29,7 @@ public class StrategyDesignPattern {
 
     @PostConstruct
     public void init() {
-        log.info("Inside Init");
+        log.info("Initializing authType");
         authenticationType.forEach(authType -> authMap.put(authType.getType().name(), authType));
     }
 

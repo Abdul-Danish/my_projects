@@ -22,7 +22,7 @@ public class ObserverDesignPattern {
         weatherStation.registerObserver(subscriber2);
         weatherStation.registerObserver(subscriber3);
 
-        weatherStation.setWeather("cold");
+        weatherStation.setWeather("cool");
         System.out.println();
         weatherStation.setWeather("warm");
     }

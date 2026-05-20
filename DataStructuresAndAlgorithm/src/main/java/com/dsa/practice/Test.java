@@ -33,7 +33,6 @@ public class Test {
     private static classA a;
 
     public static void main(String[] args) throws CloneNotSupportedException, IOException {
-        
         // Static polymorphism (method overloading) / Dynamic polymorphism (method overriding)
         classA ab = new classB();
         classA a = ab;

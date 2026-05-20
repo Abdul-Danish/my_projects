@@ -23,9 +23,9 @@ public class StateDesignPattern {
 }
 
 interface ATMState {
-    void withdraw(int amount);
+    void withdraw(double amount);
 
-    void deposit(int amount);
+    void deposit(double amount);
 }
 
 class Working implements ATMState {
@@ -36,14 +36,14 @@ class Working implements ATMState {
     }
 
     @Override
-    public void withdraw(int amount) {
+    public void withdraw(double amount) {
         boolean isEmpty = false;
-        int availableAmount = atm.getAvailableAmount();
-        int updatedAmount = 0;
+        double availableAmount = atm.getAvailableAmount();
+        double updatedAmount = 0;
         if (amount > availableAmount) {
             updatedAmount = availableAmount;
-            isEmpty = true;
             atm.setAvailableAmount(0);
+            isEmpty = true;
             System.out.println("Partial amount " + updatedAmount + " has been withdrawn");
         } else {
             updatedAmount = availableAmount - amount;
@@ -56,7 +56,7 @@ class Working implements ATMState {
     }
 
     @Override
-    public void deposit(int amount) {
+    public void deposit(double amount) {
         System.out.println(amount + " deposited");
         atm.setAvailableAmount(atm.getAvailableAmount() + amount);
     }
@@ -70,12 +70,12 @@ class OutOfCash implements ATMState {
     }
 
     @Override
-    public void withdraw(int amount) {
+    public void withdraw(double amount) {
         System.out.println("ATM out of cash!");
     }
 
     @Override
-    public void deposit(int amount) {
+    public void deposit(double amount) {
         System.out.println(amount + " deposited");
         atm.setAvailableAmount(atm.getAvailableAmount() + amount);
         atm.setState(new Working(atm));
@@ -84,7 +84,7 @@ class OutOfCash implements ATMState {
 
 class AtmMachine implements ATMState {
     private ATMState currentState;
-    private int availableAmount;
+    private double availableAmount;
 
     public AtmMachine() {
         currentState = new Working(this);
@@ -96,20 +96,20 @@ class AtmMachine implements ATMState {
     }
 
     @Override
-    public void withdraw(int amount) {
+    public void withdraw(double amount) {
         currentState.withdraw(amount);
     }
 
     @Override
-    public void deposit(int amount) {
+    public void deposit(double amount) {
         currentState.deposit(amount);
     }
 
-    public int getAvailableAmount() {
+    public double getAvailableAmount() {
         return this.availableAmount;
     }
 
-    public void setAvailableAmount(int amount) {
+    public void setAvailableAmount(double amount) {
         this.availableAmount = amount;
     }
 }
