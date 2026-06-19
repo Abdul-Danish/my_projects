@@ -2,6 +2,8 @@ package com.dsa.sorting;
 
 public class SelectionSort {
 
+    // find the minimum value in each iteration and swap it
+    // worst case: O(n^2), best case: (n^2)
     public static void main(String[] args) {
         int[] arr = { 4, 1, 3, 9, 7 };
         selectionSort(arr);

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +22,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -75,7 +77,7 @@ public class MinioService {
             }
             return bucketsName;
         } catch (Exception e) {
-            log.error("Exception Occured While get Bucket List ", e);
+            log.error("Exception Occured While Retrieving Bucket List ", e);
             throw new RuntimeException(e);
         }
     }
@@ -114,7 +116,7 @@ public class MinioService {
             byte[] objectBytes = object.readAllBytes();
             return Base64.getEncoder().encodeToString(objectBytes);
         } catch (Exception e) {
-            throw new RuntimeException("Exception Occured While Getting File: ", e);
+            throw new RuntimeException("Exception Occured While Retrieving File: ", e);
         }
     }
 
@@ -143,6 +145,25 @@ public class MinioService {
         } catch (Exception e) {
             throw new RuntimeException("Exception Occured While Getting Pre-Signed Url for the Object: ", e);
         }
+    }
+    
+    public Map<String, Object> uploadViaPresignedUrl(byte[] content, String fileName, String presignedUrl) throws URISyntaxException {
+        
+        String fileExtension = fileName.split("\\.")[1];
+        MediaType contentType = null;
+        if ("pdf".equals(fileExtension)) {
+            contentType = MediaType.APPLICATION_PDF;
+        } else {
+            contentType = MediaType.APPLICATION_JSON;
+        }
+        
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(contentType);
+        URI uri = new URI(presignedUrl);
+        RequestEntity<byte[]> requestEntity = new RequestEntity<>(content, headers, HttpMethod.PUT, uri);
+        ResponseEntity<Void> responseEntity = restTemplate.exchange(requestEntity, Void.class);
+        
+        return Map.of("status", responseEntity.getStatusCode());
     }
 
     public void multiPartFileUploadAlpha(InputStream content, String fileName, int partSizeMb)

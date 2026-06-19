@@ -2,6 +2,12 @@ package com.dsa.sorting;
 
 public class QuickSort {
 
+    /* 
+     *  select a pivot compare each item and swap in a way so that each item on left should be less than the pivot and items on 
+     *  the right should be geater than the pivot.
+     */
+    
+    // worst case: O(n^2), best case: (n * logn)
     public static void main(String[] args) {
         int[] arr = { 4, 1, 3, 9, 7 };
         quickSort(arr, 0, arr.length - 1);
@@ -10,7 +16,7 @@ public class QuickSort {
             System.out.print(i + " ");
         }
     }
-
+    
     private static void quickSort(int[] arr, int lowIndex, int highIndex) {
         if (lowIndex > highIndex) {
             return;
@@ -39,6 +45,7 @@ public class QuickSort {
         quickSort(arr, leftPointer + 1, highIndex);
     }
 
+    
     private static void swap(int[] arr, int leftPointer, int rightPointer) {
         int temp = arr[leftPointer];
         arr[leftPointer] = arr[rightPointer];

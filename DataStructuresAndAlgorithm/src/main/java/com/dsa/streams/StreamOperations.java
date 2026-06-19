@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -21,6 +22,7 @@ public class StreamOperations {
         Employee employee4 = new Employee(4, "emp4", 46, Gender.MALE);
         Employee employee5 = new Employee(5, "emp5", 34, Gender.FEMALE);
         Employee employee6 = new Employee(6, "emp6", 27, Gender.MALE);
+        
 
         List<Employee> employees = new ArrayList<>();
         employees.add(employee1);
@@ -36,15 +38,16 @@ public class StreamOperations {
 //        filterByGender.forEach(System.out::println);
 
         // Sort
-        List<Employee> sortByAgeAndName1 = employees.stream()
+        List<Employee> sortByAgeAndName = employees.stream()
             .sorted(Comparator.comparing((Employee e) -> e.getAge()).thenComparing((Employee e) -> e.getName()))
             .collect(Collectors.toList());
+//        sortByAgeAndName.forEach(System.out::println);
 
         // (or)
 
-        List<Employee> sortByAgeAndName2 = employees.stream()
-            .sorted(Comparator.comparing(Employee::getAge).thenComparing(Employee::getName)).collect(Collectors.toList());
-//        sortByAgeAndName1.forEach(System.out::println);
+        List<Employee> reverseSortByAgeAndName = employees.stream()
+            .sorted(Comparator.comparing(Employee::getAge).thenComparing(Employee::getName).reversed()).collect(Collectors.toList());
+//        reverseSortByAgeAndName.forEach(System.out::println);
 
         // AllMatch
         boolean allMatch1 = employees.stream().allMatch(emp -> emp.getName().equals("emp3"));
@@ -100,23 +103,23 @@ public class StreamOperations {
 //        System.out.println(flatEmpList);
 
         // Partitioning
-        Map<Boolean, List<Employee>> partionedEmployees = employees.stream().collect(Collectors.partitioningBy(emp -> emp.getAge() > 30));
-//         for (Entry<Boolean, List<Employee>> entry : partionedEmployees.entrySet()) {
-//             System.out.println("partioned Emp: " + entry);
-//         }
+        Map<Boolean, List<Employee>> partitionedEmployees = employees.stream().collect(Collectors.partitioningBy(emp -> emp.getAge() > 30));
+         for (Entry<Boolean, List<Employee>> entry : partitionedEmployees.entrySet()) {
+             System.out.println("partitioned Emp: " + entry);
+         }
 
         // Reduce
         Integer reducedAge = employees.stream().map(emp -> emp.getAge()).reduce(0, Integer::sum);
         // (or)
-        // Integer reduceAge = employees.stream().map(emp -> emp.getAge()).reduce(0, (f, s) -> Integer.sum(f, s));
+        // Integer reduceAge = employees.stream().map(emp -> emp.getAge()).reduce(0, (fst, snd) -> Integer.sum(fst, snd));
 
 //        System.out.println("reduced Emp Age: " + reducedAge);
 
         // Count
-        long count = employees.stream().filter(emp -> emp.getAge() > 30).count();
-//        System.out.println("count: " + count);
+        long count = employees.stream().filter(emp -> emp.getAge() > 30).distinct().count();
+        System.out.println("count: " + count);
 
-//       Practice:        
+//       Practice:
         List<Integer> intList = Arrays.asList(1, 2, 3, 5, 4, 5, 3, 7, 0);
         List<Integer> dubList = new ArrayList<>();
 

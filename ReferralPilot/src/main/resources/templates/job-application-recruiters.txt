@@ -1,0 +1,24 @@
+Dear ${contact_name},
+
+I hope you are doing well.
+
+My name is ${sender_name}, and I am writing to express my interest in Backend Java Developer opportunities at ${company_name}.
+
+I have 3.5+ years of experience in backend development, with expertise in Java, Spring Boot, Kafka, Redis, PostgreSQL, MongoDB, and microservices architecture. In my current role, I work on enterprise SaaS and workflow automation platforms, focusing on scalable system design, event-driven systems, REST API development, and performance optimization.
+
+I am particularly interested in opportunities where I can contribute to building scalable and reliable backend systems while continuing to grow my expertise in distributed systems and cloud-native technologies.
+
+I would be grateful if you could consider my profile for any current or upcoming Backend Java Developer positions that match my experience and skills.
+
+Please find my resume attached for your review. I would be happy to provide any additional information if required.
+
+Thank you for your time and consideration. I look forward to hearing from you.
+
+Warm regards,
+${sender_name}
+
+LinkedIn: ${linkedin_link}
+
+Phone: ${contact_number}
+
+Email: ${sender_email}

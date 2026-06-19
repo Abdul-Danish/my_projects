@@ -1,9 +1,11 @@
 package com.minio.controller;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +63,11 @@ public class MinioController {
     @GetMapping("/upload/presigned/url")
     public ResponseEntity<String> getUploadPresignedUrl(@RequestBody MinioRequestDto minioRequestDto) {
         return ResponseEntity.ok(minioService.getUploadPresignedUrl(minioRequestDto.getFilePath()));
+    }
+    
+    @PostMapping("/upload/presigned/url")
+    public ResponseEntity<Map<String, Object>> UploadViaPresignedUrl(@RequestPart("file") MultipartFile file, @RequestParam("presignedUrl") String presignedUrl) throws URISyntaxException, IOException {
+        return ResponseEntity.ok(minioService.uploadViaPresignedUrl(file.getBytes(), file.getOriginalFilename(), presignedUrl));
     }
 
     @DeleteMapping("/remove")

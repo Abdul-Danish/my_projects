@@ -14,25 +14,25 @@ import lombok.extern.slf4j.Slf4j;
 public class SampleService {
 
     @ExecutionTime
-    @ProcessStatus
+    @ProcessStatus(status = "ERROR")
     @LogHelper
-    public Sample execute(Sample sample) {
+    public Sample execute(Sample sample, Object obj) {
         try {
             log.info("obj: {}", sample.toString());
             process1();
             process2();
         } catch (Exception e) {
-//            log.error("Custom Exception");
+            // log.error("Custom Exception");
             throw e;
         }
         return sample;
     }
     
     private void process1() {
-//        throw new RuntimeException("CUSTOM EXCEPTION");
+        // throw new RuntimeException("CUSTOM EXCEPTION");
     }
     
     private void process2() {
-        log.info("continuing processing");
+        log.info("continuing process-2");
     }
 }

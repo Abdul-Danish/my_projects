@@ -1,0 +1,24 @@
+Dear ${contact_name},
+
+I am writing to express my interest in a Backend Java Developer role at ${company_name}. I am a backend engineer with 3.5+ years of experience building scalable, event-driven microservices for enterprise SaaS platforms, and I believe my background aligns well with the kind of engineering challenges your team works on.
+
+In my current role at DigitalDots Technologies, I have been a core contributor to Evolve — a low-code SaaS platform for enterprise workflow orchestration. My key contributions include:
+
+• Designing and optimizing microservices using Java, Spring Boot, Kafka, Redis, PostgreSQL, and MongoDB
+• Reducing synchronous service dependencies across 6 microservices via Kafka-based async communication, improving resilience and throughput
+• Implementing Redis caching strategies that significantly improved API response times
+• Building fine-grained RBAC authorization using Spring Security across multiple APIs and modules
+• Achieving 95%+ unit test coverage with JUnit and Mockito
+• Automating large-scale workflow duplication using Spring Batch, reducing manual effort from hours to minutes
+
+I am passionate about building reliable, high-performance backend systems and thrive in environments that value clean architecture, scalability, and continuous delivery.
+
+I would love the opportunity to bring this experience to ${company_name} and contribute to your engineering goals. Please find my resume attached for your review.
+
+Thank you for your time and consideration. I look forward to hearing from you.
+
+Warm regards,
+${sender_name}
+${contact_number}
+${sender_email}
+${linkedin_link}

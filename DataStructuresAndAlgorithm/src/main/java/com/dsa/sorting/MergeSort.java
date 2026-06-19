@@ -2,6 +2,9 @@ package com.dsa.sorting;
 
 public class MergeSort {
 
+    
+    // divide the arrays into smallest lists and merge it
+    // worst case: O(n * logn), best case: (n * logn)
     public static void main(String[] args) {
         int[] arr = { 4, 1, 3, 9, 7 };
         divide(arr, 0, arr.length - 1);

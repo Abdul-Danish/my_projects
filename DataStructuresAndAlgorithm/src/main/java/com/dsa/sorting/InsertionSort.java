@@ -2,6 +2,12 @@ package com.dsa.sorting;
 
 public class InsertionSort {
     
+    /*
+     * We assume that the first card is already sorted then, we select an unsorted card.
+     * if the card at the left is greater than card in hand then we place it on left orelse we keep it on right
+     */
+    
+    // worst case: O(n * logn), best case: (n * logn)
     public static void main(String[] args) {
         int[] arr = { 4, 1, 3, 9, 7 };
         insertionSort(arr);

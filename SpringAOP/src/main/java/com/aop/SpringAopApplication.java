@@ -1,6 +1,7 @@
 package com.aop;
 
-import org.apache.catalina.startup.ClassLoaderFactory.Repository;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,7 +26,7 @@ public class SpringAopApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Exec...");
-        sampleService.execute(Sample.builder().id("100").title("NA").build());
+        sampleService.execute(Sample.builder().id("100").title("NA").build(), new HashMap<>());
     }
     
     @RestController
@@ -33,7 +34,7 @@ public class SpringAopApplication implements CommandLineRunner {
         
         @PostMapping("/api/exec")
         public ResponseEntity<Sample> execute() {
-            return ResponseEntity.ok(sampleService.execute(Sample.builder().id("100").title("NA").build()));
+            return ResponseEntity.ok(sampleService.execute(Sample.builder().id("100").title("NA").build(), new HashMap<>()));
         }
     }
 

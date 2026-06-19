@@ -14,12 +14,13 @@ public class LeetCodePracticeProblems {
 		 * Problem - 1: 3Sum
 		 */
 
-		/*
+	    /*
 		// inputs
 		int[] nums = { -1, 0, 1, 2, -1, -4 }; 	// expected: [[-1, -1, 2], [-1, 0, 1]]
 //		int[] nums = { -2, 0, 1, 1, 2 };		// expected: [[-2, 0, 2], [-2, 1, 1]]
 
 		// logic
+		// Sorting array
 		int size = nums.length;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size - 1; j++) {
@@ -348,7 +349,7 @@ public class LeetCodePracticeProblems {
 	    // checking each word against input string
 	    boolean canContinue = true;
 	    boolean wordMatched = false;       // to check each word match against input
-        int maxLength = 0;                 // to check biggest matched word
+        int maxLength;                     // length of biggest matched word
         int leftPointer = 0;               // increment pointer on word match
         while (canContinue) {
             wordMatched = false;
@@ -462,15 +463,14 @@ public class LeetCodePracticeProblems {
 	    Set<Entry<Integer, Integer>> entrySet = numberCount.entrySet();
 	    int highestCount = 0;
 	    int key = 0;
-	    for (Entry<Integer, Integer> set: entrySet) {
-	        if (set.getValue() > highestCount) {
-	            highestCount = set.getValue();
-	            key = set.getKey();
+	    for (Entry<Integer, Integer> entry: entrySet) {
+	        if (entry.getValue() > highestCount) {
+	            highestCount = entry.getValue();
+	            key = entry.getKey();
 	        }
 	    }
 	    System.out.println("Key: " + key + " count: " + highestCount);
 	    */
-	    
 	    
 	    
 	    /*
@@ -485,8 +485,8 @@ public class LeetCodePracticeProblems {
 	    
 	    /*
 	    // Input
-        // int[] fruits = new int[]{4,2,5};
-        // int[] baskets = new int[]{3,5,4};
+//         int[] fruits = new int[]{4,2,5};
+//         int[] baskets = new int[]{3,5,4};
         
         int[] fruits = new int[]{3,6,1};
         int[] baskets = new int[]{6,4,7};
@@ -494,7 +494,7 @@ public class LeetCodePracticeProblems {
         int fruitPointer = 0;
         int basketPointer = 0;
         while (fruitPointer <= fruits.length && basketPointer <= baskets.length) {
-            if (basketPointer == baskets.length) {
+            if (basketPointer == baskets.length) {  // if length exceeds baskets length reset basket pointer
                 basketPointer = 0;
                 fruitPointer++;
             } else if(baskets[basketPointer] == -1) {
@@ -608,28 +608,28 @@ public class LeetCodePracticeProblems {
         }
         */
 	    
-	 // Problem - 14: Product of Array Except Self
+	    // Problem - 14: Product of Array Except Self
 
 	    /*
 	    // input
 	    int[] nums = new int[] {1,2,3,4};
-	    int[] res = new int[nums.length];
 	    
 	    // logic
+	    int[] res = new int[nums.length];
 	    int resultIndex = 0;
-	    int sumIndex = 0;
-	    int sum = 1;
+	    int productIndex = 0;
+	    int product = 1;
 	    while (resultIndex < nums.length) {
-	        if (sumIndex < nums.length) {
-	            if (sumIndex!=resultIndex) {	                
-	                sum *= nums[sumIndex];
+	        if (productIndex < nums.length) {
+	            if (productIndex!=resultIndex) {	                
+	                product *= nums[productIndex];
 	            }
-	            sumIndex++;
+	            productIndex++;
 	        } else {
-	            res[resultIndex] = sum;
+	            res[resultIndex] = product;
 	            resultIndex++;
-	            sumIndex=0;
-	            sum = 1;
+	            productIndex=0;
+	            product = 1;
 	        }
 	    }
 	    
@@ -638,7 +638,8 @@ public class LeetCodePracticeProblems {
         }
         */
 	    
-	 // Problem - 15: Minimum Size Subarray Sum
+	    
+	    // Problem - 15: Minimum Size Subarray Sum
 	    
 	    /*
 	    // input
@@ -652,8 +653,8 @@ public class LeetCodePracticeProblems {
         int sum = 0;
         int idx = 0;
         for (int i=0; i<nums.length; i++) {
-            idx++;
             sum += sortedList.get(i);
+            idx++;
             System.out.println("sum: " + sum);
             if (sum == target) {
                 result = idx;
@@ -665,7 +666,8 @@ public class LeetCodePracticeProblems {
         }
         System.out.println(result);
         */
-	    
+        
+        
 	    // Problem - 16: Subsets       (favourite)
 	    
 	    /*
@@ -679,6 +681,7 @@ public class LeetCodePracticeProblems {
 	    
 	    System.out.println("subsets: " + subsets);
 	    */
+	    
 	    
 	    // problem - 17: Subsets II    (favourite)
 	    
@@ -694,10 +697,11 @@ public class LeetCodePracticeProblems {
 	    
 	    System.out.println("Subsets II: " + subsets);
 	    */
+
 	    
-	    /*
 	    // problem - 18: Minimum Size Subarray Sum
 	    
+	    /*
 	    // input
 //	    int[] nums = new int[] {1,2,3,4,5};
 //	    int target = 15;
@@ -784,9 +788,9 @@ public class LeetCodePracticeProblems {
         }
         */
 	    
-	    /*
 	    // problem - 19: Reverse String Prefix
 	    
+	    /*
 	    // input
 	    String s = "abcd";
 	    int k = 2;
@@ -801,13 +805,14 @@ public class LeetCodePracticeProblems {
         }
         System.out.println("Reversed String: " + subString.toString());
         */
-	    
+
+        
 	    // problem - 20: Top K Frequent Elements
 	    
 	    /*
 	    // input
-        int[] nums = new int[] { 1, 1, 1, 2, 2, 3 };  // expected: [1, 2]
-        int k = 2;
+        int[] nums = new int[] { 1, 1, 1, 2, 2, 3, 3, 3, 3, 5 };  // expected: [1, 2]
+        int k = 1;
 //        int[] nums = new int[] {1,2,1,2,1,2,3,1,3,2};     // expected: [1, 2]
 //        int k = 2;
 	    
@@ -824,7 +829,6 @@ public class LeetCodePracticeProblems {
         // Create buckets
         for (int idx = 0; idx <= nums.length; idx++) {
             freqList.add(new ArrayList<>());
-            ;
         }
 
         // add more frequent elements in higher index
@@ -848,17 +852,97 @@ public class LeetCodePracticeProblems {
         for (int n : res) {
             System.out.print(n + " ");
         }
-        */
+	    */
 	    
 	    
-	    // Problem - 21: 
+	    // Problem - 21: Min Cost Climbing Stairs (I tried T-T, not correct)
 	    
+	    /*
 	    // input
+//	    int[] cost = {10,15,20};     // expected: 15
+	    
+	    int[] cost = {1,100,1,1,1,100,1,1,100,1}; // expected: 6
 	    
 	    // logic
+	    
+	    int pointer = cost.length-1;
+	    int totalCost = 0;
+	    
+	    while (pointer >= 0) {
+	        if ((pointer-2) < 0) {
+	            break;
+	        }
+	        
+	        if (cost[pointer] < cost[pointer-1]) {
+	            totalCost += cost[pointer];
+	            pointer -= 1;
+	        } else {
+	            totalCost += cost[pointer-1];
+	            pointer -= 2;
+	        }
+	        
+	    }
+	    System.out.println("totalCost: " + totalCost);
+	    */
+	    
+	    
+	    
+	    /*
+	     * Kadane's Algorithm
+	     * 
+         *   The idea:
+         *   
+         *   Keep track of the best subarray ending at the current position.
+         *   If the running sum becomes negative, start a new subarray.
+	     */
+	    // Problem - 22: Max Sum Contiguous Subarray (using Kadane's Algorithm)
+	    
+	    /*
+	    // input
+//	    List<Integer> A = Arrays.asList(1, 2, 3, 4, -10);                 // expected: 10
+	    List<Integer> A = Arrays.asList(-2, 1, -3, 4, -1, 2, 1, -5, 4);   // expected: 6
+	    
+	    // logic
+	    int currentSum = A.get(0);
+        int maxSum = A.get(0);
+        
+        for (int i=1; i<A.size(); i++) {
+            // either start with new element (if the result of previous sum is worse) i.e; A.get(i)
+            // or combine previous sum
+            currentSum = Math.max(A.get(i), currentSum + A.get(i));
+            maxSum = Math.max(maxSum, currentSum);
+        }
+        
+        System.out.println("Max Sum: " + maxSum);
+        */
+	    
+        
+        // problem- 23: 
+        
+        // input
+        
+        // logic
+        
+        
+        // problem- 24: 
+        
+        // input
+        
+        // logic
+        
+        
+        // problem- 25: 
+        
+        // input
+        
+        // logic
+	    
+	    // problem- 26: 
+        
+        // input
+        
+        // logic
 	}
-	
-	
 	
 	
 	// Util
