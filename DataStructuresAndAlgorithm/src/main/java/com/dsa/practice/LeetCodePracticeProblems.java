@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class LeetCodePracticeProblems {
 
 	public static void main(String[] args) {
-
+	    
 		/*
 		 * Problem - 1: 3Sum
 		 */
@@ -311,7 +311,7 @@ public class LeetCodePracticeProblems {
             result.get(sortedString).add(str);
         }
 	    
-	    System.out.println("Group Anagrams: " + Arrays.asList(result.values()));
+	    System.out.println("Group Anagrams: " + result.values());
 	    */
 	    
 	    
@@ -485,8 +485,8 @@ public class LeetCodePracticeProblems {
 	    
 	    /*
 	    // Input
-//         int[] fruits = new int[]{4,2,5};
-//         int[] baskets = new int[]{3,5,4};
+//        int[] fruits = new int[]{4,2,5};
+//        int[] baskets = new int[]{3,5,4};
         
         int[] fruits = new int[]{3,6,1};
         int[] baskets = new int[]{6,4,7};
@@ -520,6 +520,7 @@ public class LeetCodePracticeProblems {
         
         System.out.println("res: " + spaceLeftCount);
         */
+	    
 	    
         /*
          * Solution - 2 (ArrayList Approach)
@@ -703,12 +704,12 @@ public class LeetCodePracticeProblems {
 	    
 	    /*
 	    // input
-//	    int[] nums = new int[] {1,2,3,4,5};
-//	    int target = 15;
+	    int[] nums = new int[] {1,3,4,5};
+	    int target = 11;
 //	    int[] nums = new int[] {1,2,3,4,5};
 //	    int target = 111;
-	    int[] nums = new int[] {2,3,1,2,4,3};
-	    int target = 7;
+//	    int[] nums = new int[] {2,3,1,2,4,3};
+//	    int target = 7;
 	    
 	    // logic (sliding window) (optimal) (time complexity: O(n)) (ref: leetcode solutions)
 	    int n = nums.length;
@@ -721,6 +722,7 @@ public class LeetCodePracticeProblems {
 	        sum += nums[right];
 	        // once sum greater than target shrink left pointer
 	        while (sum >= target) {
+	            System.out.println("sum: " + sum);
 	            res = Math.min(res, right-left+1);
 	            sum -= nums[left];
 	            left++;
@@ -728,8 +730,9 @@ public class LeetCodePracticeProblems {
 	    }
 	    
 	    System.out.println("Min size Subarray: " + (res == n+1 ? 0 : res));
+	    */
 	    
-	    
+	    /*
 	    // logic (not a sliding window problem) (ref: self)
 	    List<Integer> resList = new ArrayList<>();
 	    List<Integer> subList = new ArrayList<>();       // adding sub result for each matching target
@@ -811,8 +814,8 @@ public class LeetCodePracticeProblems {
 	    
 	    /*
 	    // input
-        int[] nums = new int[] { 1, 1, 1, 2, 2, 3, 3, 3, 3, 5 };  // expected: [1, 2]
-        int k = 1;
+        int[] nums = new int[] { 1, 1, 1, 2, 2, 3, 3, 3, 3, 5 };  // expected: [3, 1]
+        int k = 2;
 //        int[] nums = new int[] {1,2,1,2,1,2,3,1,3,2};     // expected: [1, 2]
 //        int k = 2;
 	    
@@ -820,7 +823,6 @@ public class LeetCodePracticeProblems {
         Map<Integer, Integer> freqCount = new HashMap<>();
         List<List<Integer>> freqList = new ArrayList<>();
         int[] res = new int[k];
-        int i = 0;
         // count all occurrences in map
         for (int num : nums) {
             freqCount.put(num, freqCount.getOrDefault(num, 0) + 1);
@@ -840,6 +842,7 @@ public class LeetCodePracticeProblems {
         // Gather the nested list elements in single list
         List<Integer> flatFreqList = freqList.stream().flatMap(List::stream).collect(Collectors.toList());
         // copy k elements in res list from last to first index (i.e; from more freq elements to less freq elements)
+        int i = 0;
         for (int idx = flatFreqList.size() - 1; idx >= 0; idx--) {
             if (i < k) {
                 res[i] = flatFreqList.get(idx);
@@ -899,16 +902,16 @@ public class LeetCodePracticeProblems {
 	    
 	    /*
 	    // input
-//	    List<Integer> A = Arrays.asList(1, 2, 3, 4, -10);                 // expected: 10
-	    List<Integer> A = Arrays.asList(-2, 1, -3, 4, -1, 2, 1, -5, 4);   // expected: 6
+	    List<Integer> A = Arrays.asList(1, 2, 3, 4, -10);                 // expected: 10
+//	    List<Integer> A = Arrays.asList(-2, 1, -3, 4, -1, 2, 1, -5, 4);   // expected: 6
 	    
 	    // logic
 	    int currentSum = A.get(0);
         int maxSum = A.get(0);
         
         for (int i=1; i<A.size(); i++) {
-            // either start with new element (if the result of previous sum is worse) i.e; A.get(i)
-            // or combine previous sum
+            // if next element or sum of next and previous element is worse (i.e; currentSum), compare 
+            // it again with previous max (i.e; maxSum)
             currentSum = Math.max(A.get(i), currentSum + A.get(i));
             maxSum = Math.max(maxSum, currentSum);
         }
@@ -917,11 +920,24 @@ public class LeetCodePracticeProblems {
         */
 	    
         
-        // problem- 23: 
+        // problem- 23: Prime Number
         
         // input
+	    int num = 5;
         
         // logic
+	    boolean isPrime = true;
+        if (num <= 1) {
+            isPrime = false;
+        }
+	    
+        for (int i=2; i<num; i++) {
+            if (num%i == 0) {
+                isPrime = false;
+            }
+        }
+        
+        System.out.println("isPrime: " + isPrime);
         
         
         // problem- 24: 

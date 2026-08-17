@@ -8,6 +8,9 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -31,10 +34,32 @@ public class Test {
 
     @Autowired
     private static classA a;
+    
+    public static class Parent {
+        void print(Object obj) {
+            System.out.println("print parent obj");
+        }
+    }
+    
+    public static class TestOverride {
+        void print(Object obj) {
+            System.out.println("print child obj");
+        }
+
+        void print(String str) {
+        System.out.println("print str");
+        }
+    }
 
     public static void main(String[] args) throws CloneNotSupportedException, IOException {
+        List<Integer> asList = Arrays.asList(3, 5, 1, 7, 2);
+        Collections.sort(asList);
+        List<Integer> checkedList = Collections.checkedList(asList, Integer.class);
+            //binarySearch(asList, 3);
+        System.out.println("sl: " + checkedList);
         
-        
+        TestOverride test = new TestOverride();
+        test.print(null);
         
         
         // Static polymorphism (method overloading) / Dynamic polymorphism (method overriding)

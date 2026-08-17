@@ -18,23 +18,27 @@ public class QuickSort {
     }
     
     private static void quickSort(int[] arr, int lowIndex, int highIndex) {
-        if (lowIndex > highIndex) {
+        if (lowIndex >= highIndex) {
             return;
         }
 
-        int pivot = highIndex;
+        int pivot = arr[highIndex];
         int leftPointer = lowIndex;
-        int rightPointer = highIndex;
-        while (leftPointer < rightPointer) {
+        int rightPointer = highIndex-1;
+        while (leftPointer <= rightPointer) {
             // while increament / decrement the left / right pointer until it is less than / greater than pivot
-            while (arr[leftPointer] <= arr[pivot] && leftPointer < rightPointer) {
+            while (arr[leftPointer] <= pivot && leftPointer <= rightPointer) {
                 leftPointer++;
             }
-            while (arr[rightPointer] >= arr[pivot] && leftPointer < rightPointer) {
+            while (arr[rightPointer] >= pivot && leftPointer <= rightPointer) {
                 rightPointer--;
             }
             // if num is less than / greater than pivot swap
-            swap(arr, leftPointer, rightPointer);
+            if (leftPointer <= rightPointer) {
+                swap(arr, leftPointer, rightPointer);
+                leftPointer++;
+                rightPointer--;
+            }
         }
         // swap the pivot in between it's shorter and bigger number 
         swap(arr, leftPointer, highIndex);
