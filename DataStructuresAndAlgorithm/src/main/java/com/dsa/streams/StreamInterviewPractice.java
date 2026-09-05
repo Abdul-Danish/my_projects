@@ -1,6 +1,8 @@
 package com.dsa.streams;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +19,8 @@ import lombok.Data;
 public class StreamInterviewPractice {
 
     public static void main(String[] args) {
+        
+        // Day-1
         
         // Q. max number
         List<Integer> numbers = Arrays.asList(10, 25, 3, 47, 18, 52);
@@ -55,7 +60,8 @@ public class StreamInterviewPractice {
             new Employee("John", "HR", 50000),
             new Employee("Mike", "IT", 70000),
             new Employee("Sara", "HR", 55000),
-            new Employee("David", "Finance", 80000)
+            new Employee("David", "Finance", 80000),
+            new Employee("Alto", "IT", 80000)
         );
         
         Map<String, List<String>> groupEmp = employees.stream()
@@ -70,20 +76,53 @@ public class StreamInterviewPractice {
         // without Optional
         Map<String, Employee> deptWithMaxSalary = employees.stream()
             .collect(Collectors.groupingBy(emp -> emp.getDepartment(), 
-                Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(emp -> emp.getSalary())), Optional::get)));
+                Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(emp -> emp.getSalary())), Optional::get)
+                ));
         System.out.println("deptWithMaxSalary: " + deptWithMaxSalary);
         
         // Q. Find the second-highest salary in each department        
-        Map<String, Optional<Employee>> secondHighestSalaryPerDept = employees.stream().collect(Collectors.groupingBy(emp -> emp.getDepartment(), 
+        Map<String, Employee> secondHighestSalaryPerDept = employees.stream().collect(Collectors.groupingBy(emp -> emp.getDepartment(), 
             Collectors.collectingAndThen(Collectors.toList(), list ->
                 list.stream()
                 .distinct().sorted(Comparator.comparingInt(Employee::getSalary).reversed())
-                .skip(1).findFirst()
+                .skip(1).findFirst().get()
                 )
             ));
         System.out.println("secondHighestSalaryPerDept: " + secondHighestSalaryPerDept);
         
-        // Q. 
+        // Day-2
+        
+        // Q. Find the frequency of each word
+        List<String> words = Arrays.asList("java", "spring", "java", "kafka", "spring", "java");
+        
+        Map<String, Long> wordFreq = words.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        System.out.println("word frequency: " + wordFreq);
+        
+        // Q. Find the longest string
+        List<String> names = Arrays.asList("Abdul", "Christopher", "John", "Alexander", "Mike");
+        
+        String maxLenString = names.stream().max(Comparator.comparing(String::length)).get();
+        System.out.println("max length string: " + maxLenString);
+        
+        // Q. Find the department with the highest average salary
+        Map<String, Double> maxDeptAvgSal = employees.stream()
+            .collect(Collectors.groupingBy(Employee::getDepartment, 
+                Collectors.averagingInt(Employee::getSalary)));
+        
+        Entry<String, Double> entry = maxDeptAvgSal.entrySet().stream().max(Comparator.comparingDouble(Entry::getValue)).get();
+        
+        System.out.println("max dept avg sal: " + entry);
+        
+        // Q. Find the top 2 highest-paid employees in each department
+        Map<String, List<Employee>> topTwoHigestSalByDept = employees.stream()
+            .collect(Collectors.groupingBy(Employee::getDepartment, Collectors
+                .collectingAndThen(Collectors.toList(), list ->
+                list.stream()
+                .sorted(Comparator.comparing(Employee::getSalary).reversed()).limit(2)
+                .collect(Collectors.toList())
+                )));
+        
+        System.out.println("grp: " + topTwoHigestSalByDept);
         
     }
     
